@@ -443,7 +443,21 @@
          <form class="form" action="{$fsc->url()}&caca={$fsc->random_string(4)}#avanzado" method="post">
             <div class="container-fluid" style="margin-top: 10px;">
                <div class="row">
-                  <div class="col-md-3 col-sm-4">
+                  <div class="col-md-3 col-sm-6">
+                     <div class="form-group">
+                        {function="\L::admin_home__language"}
+                        <select class="form-control" name="idioma">
+                        {loop="$fsc->get_supported_languages()"}
+                           {if="isset($GLOBALS['config2']['idioma'])"}
+                           <option value="{$key}"{if="$key==$GLOBALS['config2']['idioma']"} selected=""{/if}>{$value}</option>
+                           {else}
+                           <option value="{$key}">{$value}</option>
+                           {/if}
+                        {/loop}
+                        </select>
+                     </div>
+                  </div>
+                  <div class="col-md-3 col-sm-6">
                      <div class="form-group">
                         {function="\L::admin_home__time_zone"}
                         <select class="form-control" name="zona_horaria">

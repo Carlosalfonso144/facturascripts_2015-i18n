@@ -481,6 +481,22 @@ class admin_home extends fs_controller
    }
    
    /**
+    * Languages list
+    * 
+    * @return array
+    */
+   public function get_supported_languages()
+   {
+      $languages_array = array(
+          'es' => "Español (España)",
+          'en' => "English",
+          'ca' => "Català"
+      );
+      
+      return $languages_array;
+   }
+   
+   /**
     * Lista de opciones para NF0
     * @return type
     */

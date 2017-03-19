@@ -55,6 +55,11 @@ if( file_exists('tmp/'.FS_TMP_NAME.'config2.ini') )
 {
    $GLOBALS['config2'] = parse_ini_file('tmp/'.FS_TMP_NAME.'config2.ini');
    
+   if( !isset($GLOBALS['config2']['idioma']) )
+   {
+      $GLOBALS['config2']['idioma'] = 'es';
+   }
+   
    if( !isset($GLOBALS['config2']['cost_is_average']) )
    {
       $GLOBALS['config2']['cost_is_average'] = 1;
@@ -144,6 +149,7 @@ else
 {
    $GLOBALS['config2'] = array(
        'zona_horaria' => 'Europe/Madrid',
+       'idioma' => 'es',
        'nf0' => 2,
        'nf0_art' => 2,
        'nf1' => '.',
