@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2017  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -193,7 +194,7 @@ class fs_user extends \fs_model
       new \agente();
       new \fs_page();
       
-      $this->new_message('Se ha creado el usuario <b>admin</b> con la contraseña <b>admin</b>.');
+      $this->new_message(\L::fs_user__msg_created_default_admin_account);
       if( $this->db->select("SELECT * FROM agentes WHERE codagente = '1';") )
       {
          return "INSERT INTO ".$this->table_name." (nick,password,log_key,codagente,admin)
@@ -385,7 +386,7 @@ class fs_user extends \fs_model
       }
       else
       {
-         $this->new_error_msg('La contraseña debe contener entre 1 y 32 caracteres.');
+         $this->new_error_msg(\L::fs_user__msg_pass_between_1_32_chars);
          return FALSE;
       }
    }
@@ -471,8 +472,7 @@ class fs_user extends \fs_model
       
       if( !preg_match("/^[A-Z0-9_\+\.\-]{3,12}$/i", $this->nick) )
       {
-         $this->new_error_msg("Nick no válido. Debe tener entre 3 y 12 caracteres,
-            valen números o letras, pero no la Ñ ni acentos.");
+         $this->new_error_msg(\L::fs_user__msg_invalid_user_nick);
          return FALSE;
       }
       else

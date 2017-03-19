@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2016  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -162,11 +163,11 @@ class almacen extends \fs_model
       
       if( !preg_match("/^[A-Z0-9]{1,4}$/i", $this->codalmacen) )
       {
-         $this->new_error_msg("Código de almacén no válido.");
+         $this->new_error_msg(\L::almacen__msg_error_invalid_storehouse_code);
       }
       else if( strlen($this->nombre) < 1 OR strlen($this->nombre) > 100 )
       {
-         $this->new_error_msg("Nombre de almacén no válido.");
+         $this->new_error_msg(\L::almacen__msg_error_invalid_storehouse_name);
       }
       else
          $status = TRUE;

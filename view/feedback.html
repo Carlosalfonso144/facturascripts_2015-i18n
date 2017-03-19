@@ -8,24 +8,23 @@
                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                <h4 class="modal-title">
                   <span class="glyphicon glyphicon-question-sign"></span>
-                  ¿Necesitas ayuda?
+                  {function="\L::feedback__needs_help"}
                </h4>
                <p class='help-block'>
-                  Detalla tu duda o problema si quieres que sea contestada.
+				   {function="\L::feedback__help_help"}
                </p>
             </div>
             {if="$fsc->check_for_updates()"}
             <div class="modal-body bg-info">
                <p class='help-block'>
-                  Tienes <a href="updater.php" target="_blank">actualizaciones pendientes</a>.
-                  Las actualizaciones corrigen errores y añaden nuevas características.
-                  No recibirás soporte en la web a menos que actualices.
+                  {function="\L::feedback__you_have"} <a href="updater.php" target="_blank">{function="\L::feedback__pending_updates"}</a>
+                  {function="\L::feedback__help_updates"}
                </p>
             </div>
             {/if}
             <div class="modal-body">
                <div class="form-group">
-                  <textarea class="form-control" name="feedback_text" rows="6" placeholder="Detalla tu duda o problema..."></textarea>
+                  <textarea class="form-control" name="feedback_text" rows="6" placeholder='{function="\L::feedback__placeholder_details"}'></textarea>
                </div>
                <div class="form-group">
                   <div class="input-group">
@@ -33,16 +32,16 @@
                         <span class="glyphicon glyphicon-envelope"></span>
                      </span>
                      {if="$fsc->empresa AND $fsc->user->logged_on"}
-                     <input type="email" class="form-control" name="feedback_email" placeholder="Tu email" value="{$fsc->empresa->email}"/>
+                     <input type="email" class="form-control" name="feedback_email" placeholder='{function="\L::feedback__your_email"}' value="{$fsc->empresa->email}"/>
                      {else}
-                     <input type="email" class="form-control" name="feedback_email" placeholder="Tu email"/>
+                     <input type="email" class="form-control" name="feedback_email" placeholder='{function="\L::feedback__your_email"}'/>
                      {/if}
                   </div>
                </div>
             </div>
             <div class="modal-footer">
                <button type="submit" class="btn btn-sm btn-primary">
-                  <span class="glyphicon glyphicon-send"></span>&nbsp; Enviar
+                  <span class="glyphicon glyphicon-send"></span>&nbsp;{function="\L::common__send"}
                </button>
             </div>
          </div>
@@ -55,7 +54,7 @@
    {if="mt_rand(0,2)>0 AND $fsc->user->logged_on"}
    <iframe src="index.php?page=admin_home&check4updates=TRUE" height="0"></iframe>
    {else}
-   <iframe src="{#FS_COMMUNITY_URL#}/index.php?page=community_stats&add=TRUE&version={$fsc->version()}&plugins={function="join(',', $GLOBALS['plugins'])"}" height="0">
+   <iframe src="{#FS_COMMUNITY_URL#}/index.php?page=community_stats&add=TRUE&version={$fsc->version()}&plugins={function="join(',', $GLOBALS['plugins'])"}' height="0">
    </iframe>
    {/if}
 </div>

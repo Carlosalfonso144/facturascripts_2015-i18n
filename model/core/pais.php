@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2016  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -196,11 +197,11 @@ class pais extends \fs_model
       
       if( !preg_match("/^[A-Z0-9]{1,20}$/i", $this->codpais) )
       {
-         $this->new_error_msg("Código del país no válido: ".$this->codpais);
+         $this->new_error_msg(\L::pais__msg_invalid_country_code . $this->codpais);
       }
       else if( strlen($this->nombre) < 1 OR strlen($this->nombre) > 100 )
       {
-         $this->new_error_msg("Nombre del país no válido.");
+         $this->new_error_msg(\L::pais__msg_invalid_country_name);
       }
       else
          $status = TRUE;

@@ -3,9 +3,9 @@
 <head>
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
    <title>{$fsc->page->title} &lsaquo; {if="$fsc->empresa->nombrecorto"}{$fsc->empresa->nombrecorto}{else}{$fsc->empresa->nombre}{/if}</title>
-   <meta name="description" content="FacturaScripts es un software de facturación y contabilidad para pymes. Es software libre bajo licencia GNU/LGPL." />
+   <meta name="description" content='{function="\L::header__meta_description"}' />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <meta name="generator" content="FacturaScripts" />
+   <meta name="generator" content='{function="\L::common__facturascripts"}' />
    <link rel="shortcut icon" href="{#FS_PATH#}view/img/favicon.ico" />
    <link rel="stylesheet" href="{#FS_PATH#}{$fsc->user->css}" />
    <link rel="stylesheet" href="{#FS_PATH#}view/css/font-awesome.min.css" />

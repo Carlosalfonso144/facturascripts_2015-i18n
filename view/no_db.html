@@ -3,8 +3,9 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
       <title>FacturaScripts</title>
-      <meta name="description" content="FacturaScripts es un software de facturación y contabilidad para pymes. Es software libre bajo licencia GNU/LGPL." />
+      <meta name="description" content='{function="\L::header__meta_description"}' />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="generator" content='{function="\L::common__facturascripts"}' />
       <link rel="shortcut icon" href="{#FS_PATH#}view/img/favicon.ico" />
       <link rel="stylesheet" href="{#FS_PATH#}view/css/bootstrap-yeti.min.css" />
       <link rel="stylesheet" href="{#FS_PATH#}view/css/font-awesome.min.css" />
@@ -19,7 +20,7 @@
                <div class="page-header">
                   <h1>
                      <span class="glyphicon glyphicon-exclamation-sign"></span>
-                     Error
+                     {function="\L::common__error"}
                   </h1>
                   {if="$fsc->get_errors()"}
                   <div class="alert alert-danger hidden-print">
@@ -40,8 +41,7 @@
                   {/if}
                </div>
                <p class="help-block">
-                  Ha sido imposible conectar a la base de datos. Los motivos suelen ser distintos
-                  en función de dónde tengas instalado FacturaScripts.
+                  {function="\L::no_db__help_cant_connect_database"}
                </p>
             </div>
          </div>
@@ -49,35 +49,32 @@
             <div class="col-sm-6">
                <h3>
                   <i class="fa fa-desktop" aria-hidden="true"></i>
-                  Instalado en tu PC...
+                  {function="\L::no_db__question_installed_on_pc"}
                </h3>
                <ul>
                   <li>
-                     Se ha desconectado {#FS_DB_TYPE#}. Para solucionarlo debes reiniciar {#FS_DB_TYPE#}.
-                     Si estás usando FacturaScripts portable, ve a la carpeta de FacturaScripts, haz clic
-                     en <b>xampp-control</b> y pulsa el botón <b>start</b>, al lado de {#FS_DB_TYPE#}.
+                     {function="\L::no_db__answer_1_installed_on_pc_1_4"}{#FS_DB_TYPE#}{function="\L::no_db__answer_1_installed_on_pc_2_4"}{#FS_DB_TYPE#}{function="\L::no_db__answer_1_installed_on_pc_3_4"}{#FS_DB_TYPE#}{function="\L::no_db__answer_1_installed_on_pc_4_4"}
                   </li>
                   <li>
-                     Has cambiado la contraseña de la base de datos. Para solucionarlo debes volver a poner
-                     la contraseña original de la base de datos, o bien poner la nueva contraseña en el archivo
-                     config.php de FacturaScripts.
+                     {function="\L::no_db__answer_2_installed_on_pc"}
                   </li>
                </ul>
             </div>
             <div class="col-sm-6">
                <h3>
                   <i class="fa fa-globe" aria-hidden="true"></i>
-                  Instalado en un hosting...
+                  {function="\L::no_db__question_installed_on_hosting"}
                </h3>
                <ul>
                   <li>
-                     Se ha bloqueado {#FS_DB_TYPE#}. Contacta con tu proveedor para que lo reinicie.
+                     {function="\L::no_db__answer_1_installed_on_hosting_1_2"}{#FS_DB_TYPE#}{function="\L::no_db__answer_1_installed_on_hosting_2_2"}
                   </li>
                   <li>
-                     Has excedido la cuota del hosting. Muchos hostings tienen límites de uso en la base
-                     de datos, y si los excedes te bloquean.
+                     {function="\L::no_db__answer_2_installed_on_hosting"}
                   </li>
-                  <li>Se ha cambiado la contraseña o la configuración de la base de datos.</li>
+                  <li>
+					 {function="\L::no_db__answer_3_installed_on_hosting"}
+                  </li>
                </ul>
             </div>
          </div>
@@ -85,7 +82,7 @@
             <div class="col-sm-12">
                <br/>
                <a href="https://www.facturascripts.com/preguntas" target="_blank" class="btn btn-sm btn-info">
-                  <span class="glyphicon glyphicon-link"></span>&nbsp; Foro de ayuda
+                  <span class="glyphicon glyphicon-link"></span>&nbsp;{function="\L::no_db__help_forum"}
                </a>
             </div>
          </div>

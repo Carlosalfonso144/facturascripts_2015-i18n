@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2016  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -250,11 +251,11 @@ class agente extends \fs_model
       
       if( strlen($this->nombre) < 1 OR strlen($this->nombre) > 50 )
       {
-         $this->new_error_msg("El nombre de empleado no puede superar los 50 caracteres.");
+         $this->new_error_msg(\L::agente__msg_error_employee_name_less_50_chars);
       }
       else if( strlen($this->apellidos) < 1 OR strlen($this->apellidos) > 100 )
       {
-         $this->new_error_msg("Los apellidos del empleado no pueden superar los 100 caracteres.");
+         $this->new_error_msg(\L::agente__msg_error_employee_surname_less_100_chars);
       }
       else
          $status = TRUE;

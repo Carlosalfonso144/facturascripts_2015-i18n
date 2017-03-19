@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2017  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -165,7 +166,7 @@ class fs_controller
       /// comprobamos la versión de PHP
       if( floatval( substr(phpversion(), 0, 3) ) < 5.3 )
       {
-         $this->new_error_msg('FacturaScripts necesita PHP 5.3 o superior, y tú tienes PHP '.phpversion().'.');
+         $this->new_error_msg(\L::fscontroller__msg_required_php_version . phpversion().'.');
       }
       
       if( $this->db->connect() )
@@ -211,21 +212,20 @@ class fs_controller
             if( $this->ip_baneada($ips) )
             {
                $this->banear_ip($ips);
-               $this->new_error_msg('Tu IP ha sido baneada '.$_POST['user'].'. '
-                       . 'Tendrás que esperar 10 minutos antes de volver a intentar entrar.');
+               $this->new_error_msg(\L::fscontroller__msg_ip_baneada_1_2 . $_POST['user'] . \L::fscontroller__msg_ip_baneada_2_2);
             }
             else if($_POST['new_password'] != $_POST['new_password2'])
             {
-               $this->new_error_msg('Las contraseñas no coinciden '.$_POST['user']);
+               $this->new_error_msg(\L::fscontroller__msg_password_diferentes . $_POST['user']);
             }
             else if($_POST['new_password'] == '')
             {
-               $this->new_error_msg('Tienes que escribir una contraseña nueva '.$_POST['user']);
+               $this->new_error_msg(\L::fscontroller__msg_nueva_password . $_POST['user']);
             }
             else if($_POST['db_password'] != FS_DB_PASS)
             {
                $this->banear_ip($ips);
-               $this->new_error_msg('La contraseña de la base de datos es incorrecta '.$_POST['user']);
+               $this->new_error_msg(\L::fscontroller__msg_password_incorrecta . $_POST['user']);
             }
             else
             {
@@ -235,10 +235,10 @@ class fs_controller
                   $suser->set_password($_POST['new_password']);
                   if( $suser->save() )
                   {
-                     $this->new_message('Contraseña cambiada correctamente '.$_POST['user']);
+                     $this->new_message(\L::fscontroller__msg_password_guardada . $_POST['user']);
                   }
                   else
-                     $this->new_error_msg('Imposible cambiar la contraseña del usuario '.$_POST['user']);
+                     $this->new_error_msg(\L::fscontroller__msg_password_no_guardada . $_POST['user']);
                }
             }
             
@@ -296,7 +296,7 @@ class fs_controller
       else
       {
          $this->template = 'no_db';
-         $this->new_error_msg('¡Imposible conectar con la base de datos <b>'.FS_DB_NAME.'</b>!');
+         $this->new_error_msg(\L::fscontroller__msg_not_conected_to_db_1_2 . ' "<b>' . FS_DB_NAME . '</b>"' . \L::fscontroller__msg_not_conected_to_db_2_2);
       }
    }
    
@@ -551,7 +551,7 @@ class fs_controller
       if( $this->ip_baneada($ips) )
       {
          $this->banear_ip($ips);
-         $this->new_error_msg('Tu IP ha sido baneada. Tendrás que esperar 10 minutos antes de volver a intentar entrar.', 'login', TRUE);
+         $this->new_error_msg(\L::fscontroller__msg_ip_baneada, 'login', TRUE);
       }
       else if( isset($_POST['user']) AND isset($_POST['password']) )
       {
@@ -598,7 +598,7 @@ class fs_controller
             }
             else
             {
-               $this->new_error_msg('Email no válido');
+               $this->new_error_msg(\L::fscontroller__msg_email_not_valid);
             }
          }
          else
@@ -618,7 +618,7 @@ class fs_controller
                   
                   if( !$user->admin AND !$this->ip_in_whitelist($user->last_ip) )
                   {
-                     $this->new_error_msg('No puedes acceder desde esta IP.', 'login', TRUE);
+                     $this->new_error_msg(\L::fscontroller__msg_ip_blocked, 'login', TRUE);
                   }
                   else if( $user->save() )
                   {
@@ -631,25 +631,25 @@ class fs_controller
                      $fslog = new fs_log();
                      $fslog->usuario = $user->nick;
                      $fslog->tipo = 'login';
-                     $fslog->detalle = 'Login correcto.';
+                     $fslog->detalle = \L::fscontroller__login_correcto;
                      $fslog->ip = $user->last_ip;
                      $fslog->save();
                   }
                   else
                   {
-                     $this->new_error_msg('Imposible guardar los datos de usuario.');
+                     $this->new_error_msg(\L::fscontroller__msg_user_no_guardado);
                      $this->cache->clean();
                   }
                }
                else
                {
-                  $this->new_error_msg('¡Contraseña incorrecta! ('.$_POST['user'].')', 'login', TRUE);
+                  $this->new_error_msg(\L::fscontroller__msg_password_incorrecta . ' (' . $_POST['user'] . ')', 'login', TRUE);
                   $this->banear_ip($ips);
                }
             }
             else
             {
-               $this->new_error_msg('El usuario '.$_POST['user'].' no existe!');
+               $this->new_error_msg(\L::common__the_user . $_POST['user'] . \L::fscontroller__msg_user_no_existe_2_2);
                $this->user->clean_cache(TRUE);
                $this->cache->clean();
             }
@@ -669,14 +669,13 @@ class fs_controller
             }
             else if( !is_null($user->log_key) )
             {
-               $this->new_message('¡Cookie no válida! Alguien ha accedido a esta cuenta desde otro PC con IP: '
-                       .$user->last_ip.". Si has sido tú, ignora este mensaje.");
+               $this->new_message(\L::fscontroller__msg_cookie_no_valida_1_2 . $user->last_ip . \L::fscontroller__msg_cookie_no_valida_2_2);
                $this->log_out();
             }
          }
          else
          {
-            $this->new_error_msg('¡El usuario '.$_COOKIE['user'].' no existe!');
+            $this->new_error_msg(\L::common__the_user . $_COOKIE['user'] . \L::fscontroller__msg_user_no_existe_2_2);
             $this->log_out(TRUE);
             $this->user->clean_cache(TRUE);
             $this->cache->clean();
@@ -726,7 +725,7 @@ class fs_controller
       /// guardamos el evento en el log
       $fslog = new fs_log();
       $fslog->tipo = 'login';
-      $fslog->detalle = 'El usuario ha cerrado la sesión.';
+      $fslog->detalle = \L::fscontroller__user_cerrado_sesion;
       $fslog->ip = $_SERVER['REMOTE_ADDR'];
       
       if( isset($_COOKIE['user']) )
@@ -943,7 +942,7 @@ class fs_controller
     */
    protected function save_codejercicio($cod)
    {
-      $this->new_error_msg('fs_controller::save_codejercicio() es una función obsoleta.');
+      $this->new_error_msg('fs_controller::save_codejercicio()' . \L::fscontroller__msg_funcion_obsoleta);
    }
    
    /**
@@ -963,7 +962,7 @@ class fs_controller
     */
    protected function save_codcliente($cod)
    {
-      $this->new_error_msg('fs_controller::save_codcliente() es una función obsoleta.');
+      $this->new_error_msg('fs_controller::save_codcliente()' . \L::fscontroller__msg_funcion_obsoleta);
    }
    
    /**
@@ -973,7 +972,7 @@ class fs_controller
     */
    protected function save_coddivisa($cod)
    {
-      $this->new_error_msg('fs_controller::save_coddivisa() es una función obsoleta.');
+      $this->new_error_msg('fs_controller::save_coddivisa()' . \L::fscontroller__msg_funcion_obsoleta);
    }
    
    /**
@@ -983,7 +982,7 @@ class fs_controller
     */
    protected function save_codfamilia($cod)
    {
-      $this->new_error_msg('fs_controller::save_codfamilia() es una función obsoleta.');
+      $this->new_error_msg('fs_controller::save_codfamilia()' . \L::fscontroller__msg_funcion_obsoleta);
    }
    
    /**
@@ -1013,7 +1012,7 @@ class fs_controller
     */
    protected function save_codpais($cod)
    {
-      $this->new_error_msg('fs_controller::save_codpais() es una función obsoleta.');
+      $this->new_error_msg('fs_controller::save_codpais()' . \L::fscontroller__msg_funcion_obsoleta);
    }
    
    /**
@@ -1023,7 +1022,7 @@ class fs_controller
     */
    protected function save_codproveedor($cod)
    {
-      $this->new_error_msg('fs_controller::save_codproveedor() es una función obsoleta.');
+      $this->new_error_msg('fs_controller::save_codproveedor()' . \L::fscontroller__msg_funcion_obsoleta);
    }
    
    /**
@@ -1033,7 +1032,7 @@ class fs_controller
     */
    protected function save_codserie($cod)
    {
-      $this->new_error_msg('fs_controller::save_codserie() es una función obsoleta.');
+      $this->new_error_msg('fs_controller::save_codserie()' . \L::fscontroller__msg_funcion_obsoleta);
    }
    
    /**

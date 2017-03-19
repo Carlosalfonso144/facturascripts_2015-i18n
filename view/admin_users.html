@@ -34,15 +34,15 @@
    <div class="row">
       <div class="col-sm-6 col-xs-7">
          <div class="btn-group">
-            <a class="btn btn-sm btn-default" href="{$fsc->url()}" title="Recargar la página">
+            <a class="btn btn-sm btn-default" href="{$fsc->url()}" title='{function="\L::common__button_reload_page"}'>
                <span class="glyphicon glyphicon-refresh"></span>
             </a>
             {if="$fsc->page->is_default()"}
-            <a class="btn btn-sm btn-default active" href="{$fsc->url()}&amp;default_page=FALSE" title="desmarcar como página de inicio">
+            <a class="btn btn-sm btn-default active" href="{$fsc->url()}&amp;default_page=FALSE" title='{function="\L::common__button_get_out_startpage"}'>
                <span class="glyphicon glyphicon-home"></span>
             </a>
             {else}
-            <a class="btn btn-sm btn-default" href="{$fsc->url()}&amp;default_page=TRUE" title="marcar como página de inicio">
+            <a class="btn btn-sm btn-default" href="{$fsc->url()}&amp;default_page=TRUE" title='{function="\L::common__button_put_on_startpage"}'>
                <span class="glyphicon glyphicon-home"></span>
             </a>
             {/if}
@@ -56,7 +56,7 @@
          </div>
       </div>
       <div class="col-sm-6 col-xs-5 text-right">
-         <h2 style="margin-top: 0px;">Usuarios</h2>
+         <h2 style="margin-top: 0px;">{function="\L::common__users"}</h2>
       </div>
    </div>
 </div>
@@ -66,7 +66,7 @@
       <li role="presentation" class="active">
          <a href="#usuarios" aria-controls="usuarios" role="tab" data-toggle="tab">
             <i class="fa fa-users" aria-hidden="true"></i>
-            <span class="hidden-xs">&nbsp;Usuarios</span>
+            <span class="hidden-xs">&nbsp;{function="\L::common__users"}</span>
             <span class="badge">{function="count($fsc->user->all())"}</span>
          </a>
       </li>
@@ -74,20 +74,20 @@
       <li role="presentation">
          <a href="#permisos" aria-controls="permisos" role="tab" data-toggle="tab">
             <i class="fa fa-check-square" aria-hidden="true"></i>
-            <span class="hidden-xs">&nbsp;Permisos</span>
+            <span class="hidden-xs">&nbsp;{function="\L::admin_users__permissions"}</span>
          </a>
       </li>
       <li role="presentation">
          <a href="#roles" aria-controls="roles" role="tab" data-toggle="tab">
             <i class="fa fa-address-card-o" aria-hidden="true"></i>
-            <span class="hidden-xs">&nbsp;Roles</span>
+            <span class="hidden-xs">&nbsp;{function="\L::common__roles"}</span>
          </a>
       </li>
       {/if}
       <li role="presentation">
          <a href="#historial" aria-controls="historial" role="tab" data-toggle="tab">
             <i class="fa fa-history" aria-hidden="true"></i>
-            <span class="hidden-xs">&nbsp;Historial</span>
+            <span class="hidden-xs">&nbsp;{function="\L::common__history"}</span>
          </a>
       </li>
    </ul>
@@ -99,14 +99,13 @@
                <div class="col-sm-6">
                   <a id="b_nuevo_usuario" class="btn btn-xs btn-success" href="#">
                      <span class="glyphicon glyphicon-plus"></span>
-                     <span class="hidden-xs">&nbsp;Nuevo</span>
+                     <span class="hidden-xs">&nbsp;{function="\L::common__button_new"}</span>
                   </a>
                </div>
                <div class="col-sm-6 text-right">
                   <p class="help-block">
                      <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;
-                     Instala el plugin <b>login_anonimo</b> para que no salga la lista
-                     de usuarios en la pantalla de login.
+                     {function="\L::admin_users__help_anon_login"}
                   </p>
                </div>
             </div>
@@ -115,13 +114,13 @@
             <table class="table table-hover">
                <thead>
                   <tr>
-                     <th class="text-left">Nick</th>
-                     <th class="text-left">Email</th>
-                     <th class="text-left">Empleado</th>
-                     <th class="text-center">Administrador</th>
-                     <th class="text-left">IP</th>
-                     <th class="text-left">Página de inicio</th>
-                     <th class="text-right">Último login</th>
+                     <th class="text-left">{function="\L::common__nick"}</th>
+                     <th class="text-left">{function="\L::common__email"}</th>
+                     <th class="text-left">{function="\L::common__employee"}</th>
+                     <th class="text-center">{function="\L::common__administrator"}</th>
+                     <th class="text-left">{function="\L::common__ip"}</th>
+                     <th class="text-left">{function="\L::admin_users__startpage"}</th>
+                     <th class="text-right">{function="\L::common__last_login"}</th>
                   </tr>
                </thead>
                {loop="$fsc->user->all()"}
@@ -147,10 +146,7 @@
                <div class="col-sm-12">
                   <p class="help-block">
                      <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;
-                     Aquí puedes ver rápidamente qué usuarios tienen permiso para acceder
-                     a cada página. En <span class="label label-warning">destacado</span>
-                     los que tienen permisos para ver, modificar y eliminar, el resto
-                     solamente tienen permisos para ver y modificar.
+                     {function="\L::admin_users__help_permissions"}
                   </p>
                </div>
             </div>
@@ -159,8 +155,8 @@
             <table class="table table-hover">
                <thead>
                   <tr>
-                     <th class="text-left">Página</th>
-                     <th class="text-left">Usuarios con permiso</th>
+                     <th class="text-left">{function="\L::common__page"}</th>
+                     <th class="text-left">{function="\L::admin_users__users_with_permission"}</th>
                   </tr>
                </thead>
                {loop="$fsc->all_pages()"}
@@ -169,11 +165,11 @@
                      <td>
                         {loop="$value->users"}
                            {if="$value2['delete']"}
-                           <a href="index.php?page=admin_user&snick={$key2}" class="label label-warning" title="{$key2} puede ver, modificar y eliminar en {$value1->name}">
+                           <a href="index.php?page=admin_user&snick={$key2}" class="label label-warning" title='{$key2} {function="\L::admin_users__can_view_edit_delete_on"} {$value1->name}'>
                               {$key2}
                            </a>&nbsp;
                            {elseif="$value2['modify']"}
-                           <a href="index.php?page=admin_user&snick={$key2}" class="label label-default" title="{$key2} puede ver y modificar en {$value1->name}, pero no eliminar">
+                           <a href="index.php?page=admin_user&snick={$key2}" class="label label-default" title='{$key2} {function="\L::admin_users__can_view_edit_on"} {$value1->name}{function="\L::admin_users__but_not_delete"}'>
                               {$key2}
                            </a>&nbsp;
                            {/if}
@@ -190,14 +186,13 @@
                <div class="col-sm-6">
                   <a id="b_nuevo_rol" class="btn btn-xs btn-success" href="#">
                      <span class="glyphicon glyphicon-plus"></span>
-                     <span class="hidden-xs">&nbsp;Nuevo</span>
+                     <span class="hidden-xs">&nbsp;{function="\L::common__button_new"}</span>
                   </a>
                </div>
                <div class="col-sm-6 text-right">
                   <p class="help-block">
                      <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;
-                     Los roles permiten definir paquetes de permisos para aplicar rápidamente
-                     a usuarios, en lugar de ir uno por uno.
+                     {function="\L::admin_users__help_roles"}
                   </p>
                </div>
             </div>
@@ -206,8 +201,8 @@
             <table class="table table-hover">
                <thead>
                   <tr>
-                     <th>Código</th>
-                     <th>Descripción</th>
+                     <th>{function="\L::admin_users__code"}</th>
+                     <th>{function="\L::common__description"}</th>
                   </tr>
                </thead>
                {loop="$fsc->rol->all()"}
@@ -219,7 +214,7 @@
                </tr>
                {else}
                <tr class="warning">
-                  <td colspan="2">Sin resultados.</td>
+                  <td colspan="2">{function="\L::common__without_results"}</td>
                </tr>
                {/loop}
             </table>
@@ -232,13 +227,13 @@
                <div class="col-sm-8">
                   <p class="help-block">
                      <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;
-                     Puedes ver más detalles desde Admin &gt; Información del sistema.
+                     {function="\L::admin_users__help_system_info"}
                   </p>
                </div>
                <div class="col-sm-4 text-right">
                   <a href="index.php?page=admin_info" class="btn btn-xs btn-default">
                      <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-                     <span class="hidden-xs">&nbsp; Historial completo</span>
+                     <span class="hidden-xs">&nbsp;{function="\L::common__full_history"}</span>
                   </a>
                </div>
             </div>
@@ -247,11 +242,11 @@
             <table class="table table-hover">
                <thead>
                   <tr>
-                     <th class="text-left">Usuario</th>
+                     <th class="text-left">{function="\L::common__user"}</th>
                      <th></th>
-                     <th class="text-left">Detalle</th>
-                     <th class="text-left">IP</th>
-                     <th class="text-right">Fecha</th>
+                     <th class="text-left">{function="\L::common__detail"}</th>
+                     <th class="text-left">{function="\L::common__ip"}</th>
+                     <th class="text-right">{function="\L::common__date"}</th>
                   </tr>
                </thead>
                {loop="$fsc->historial"}
@@ -259,7 +254,7 @@
                   <td><a href="index.php?page=admin_user&snick={$value->usuario}">{$value->usuario}</a></td>
                   <td class="text-right">
                      {if="$value->alerta"}
-                     <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" title="Podría ser importante"></span>
+                     <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" title='{function="\L::admin_users__title_could_be_important"}'></span>
                      {/if}
                   </td>
                   <td>{$value->detalle}</td>
@@ -268,7 +263,7 @@
                </tr>
                {else}
                <tr class="warning">
-                  <td colspan="5">Sin resultados.</td>
+                  <td colspan="5">{function="\L::common__without_results"}</td>
                </tr>
                {/loop}
             </table>
@@ -284,16 +279,16 @@
             <div class="modal-header">
                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                <h4 class="modal-title">
-                  <i class="fa fa-user" aria-hidden="true"></i>&nbsp; Nuevo usuario
+                  <i class="fa fa-user" aria-hidden="true"></i>&nbsp;{function="\L::admin_user__button_new_user"}
                </h4>
             </div>
             <div class="modal-body">
                <div class="form-group">
-                  Nick:
+                  {function="\L::admin_user__nick"}
                   <input class="form-control" type="text" name="nnick" maxlength="12" autocomplete="off" required=""/>
                   <label class="checkbox-inline">
                      <input type="checkbox" name="nadmin" value="TRUE"/>
-                     Administrador
+                     {function="\L::common__administrator"}
                   </label>
                   {loop="$fsc->rol->all()"}
                   <label class="checkbox-inline">
@@ -303,11 +298,11 @@
                   {/loop}
                </div>
                <div class="form-group">
-                  Contraseña:
+                  {function="\L::admin_user__password"}
                   <input class="form-control" type="password" name="npassword" maxlength="32"/>
                </div>
                <div class="form-group">
-                  Email:
+                  {function="\L::admin_user__email"}
                   <div class="input-group">
                      <span class="input-group-addon">
                         <span class="glyphicon glyphicon-envelope"></span>
@@ -316,23 +311,22 @@
                   </div>
                </div>
                <div class="form-group">
-                  <a target="_blank" href="{$fsc->agente->url()}">Empleado</a>:
+                  <a target="_blank" href="{$fsc->agente->url()}">{function="\L::common__employee"}</a>:
                   <select name="ncodagente" class="form-control">
-                     <option value="">Ninguno</option>
+                     <option value="">{function="\L::common__none_male"}</option>
                      <option value="">------</option>
                      {loop="$fsc->agente->all()"}
                      <option value="{$value->codagente}">{$value->get_fullname()}</option>
                      {/loop}
                   </select>
                   <p class="help-block">
-                     Puedes tener empleados que no tengan acceso a FacturaScripts,
-                     o bien usuarios que no sean empleados, por eso está separado.
+					 {function="\L::admin_users__help_users"}
                   </p>
                </div>
             </div>
             <div class="modal-footer">
                <button class="btn btn-sm btn-primary" type="submit">
-                  <span class="glyphicon glyphicon-floppy-disk"></span>&nbsp; Guardar
+                  <span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;{function="\L::common__button_save"}
                </button>
             </div>
          </form>
@@ -347,22 +341,22 @@
             <div class="modal-header">
                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                <h4 class="modal-title">
-                  <i class="fa fa-address-card-o" aria-hidden="true"></i>&nbsp; Nuevo rol
+                  <i class="fa fa-address-card-o" aria-hidden="true"></i>&nbsp;{function="\L::admin_rol__button_new_role"}
                </h4>
             </div>
             <div class="modal-body">
                <div class="form-group">
-                  Código:
+                  {function="\L::admin_users__code"}
                   <input type="text" name="nrol" class="form-control" maxlength="20" autocomplete="off" required=""/>
                </div>
                <div class="form-group">
-                  Descripcion:
+                  {function="\L::common__description"}
                   <input type="text" name="descripcion" class="form-control" autocomplete="off" required=""/>
                </div>
             </div>
             <div class="modal-footer">
                <button class="btn btn-sm btn-primary" type="submit">
-                  <span class="glyphicon glyphicon-floppy-disk"></span>&nbsp; Guardar
+                  <span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;{function="\L::common__button_save"}
                </button>
             </div>
          </form>

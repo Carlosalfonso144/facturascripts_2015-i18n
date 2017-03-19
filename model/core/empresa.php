@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2016  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -393,11 +394,11 @@ class empresa extends \fs_model
       
       if( strlen($this->nombre) < 1 OR strlen($this->nombre) > 100 )
       {
-         $this->new_error_msg("Nombre de empresa no válido.");
+         $this->new_error_msg(\L::empresa__msg_error_invalid_company_name);
       }
       else if( strlen($this->nombre) < strlen($this->nombrecorto) )
       {
-         $this->new_error_msg("El Nombre Corto debe ser más corto que el Nombre.");
+         $this->new_error_msg(\L::empresa__msg_error_resumed_company_name_less_than_company_name);
       }
       else
       {

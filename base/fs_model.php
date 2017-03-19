@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2017  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -66,7 +67,7 @@ abstract class fs_model
    private static $checked_tables;
    private static $errors;
    private static $messages;
-
+   
    /**
     * 
     * @param type $name nombre de la tabla de la base de datos.
@@ -410,7 +411,7 @@ abstract class fs_model
          {
             if( !$this->db->check_table_aux($table_name) )
             {
-               $this->new_error_msg('Error al convertir la tabla a InnoDB.');
+               $this->new_error_msg(\L::fsmodel__msg_error_to_innodb);
             }
             
             /// eliminamos restricciones
@@ -420,7 +421,7 @@ abstract class fs_model
             {
                if( !$this->db->exec($consulta2) )
                {
-                  $this->new_error_msg('Error al comprobar la tabla '.$table_name);
+                  $this->new_error_msg(\L::fsmodel__msg_error_check_table . $table_name);
                }
             }
             
@@ -443,14 +444,14 @@ abstract class fs_model
          {
             if( !$this->db->exec($consulta) )
             {
-               $this->new_error_msg('Error al comprobar la tabla '.$table_name);
+               $this->new_error_msg(\L::fsmodel__msg_error_check_table . $table_name);
                $done = FALSE;
             }
          }
       }
       else
       {
-         $this->new_error_msg('Error con el xml.');
+         $this->new_error_msg(\L::fsmodel__msg_error_xml);
          $done = FALSE;
       }
       
@@ -517,10 +518,10 @@ abstract class fs_model
             }
          }
          else
-            $this->new_error_msg('Error al leer el archivo '.$filename);
+            $this->new_error_msg(\L::fsmodel__msg_error_reading_file . $filename);
       }
       else
-         $this->new_error_msg('Archivo '.$filename.' no encontrado.');
+         $this->new_error_msg(\L::common__file . $filename . \L::fsmodel__msg_file_not_found_2_2);
       
       return $retorno;
    }

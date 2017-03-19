@@ -6,19 +6,17 @@
             <div class="page-header">
                <h3>
                   <i class="fa fa-question-circle" aria-hidden="true"></i>
-                  ¿Te ha convencido?
+                  {function="\L::footer__did_you_convinced"}
                </h3>
                <p class="help-block">
-                  Esta demo sirve para tener una idea rápida de cómo funciona FacturaScripts,
-                  con un número reducido de plugins activos y muchas opciones desactivadas.
-                  Ten en cuenta que hay docenas de personas usando esta demo a la vez.
+				   {function="\L::footer__help_demo_facturascripts"}
                </p>
             </div>
          </div>
       </div>
       <div class="row">
          <div class="col-sm-3">
-            <b>Plugins instalados:</b>
+            <b>{function="\L::footer__installed_plugins"}</b>
             <ul>
                {loop="$GLOBALS['plugins']"}
                <li>
@@ -28,24 +26,24 @@
             </ul>
          </div>
          <div class="col-sm-6">
-            <b>Ventajas:</b>
+            <b>{function="\L::footer__advantatges"}</b>
             <ul>
-               <li>Trabaja desde cualquier PC, tablet o smartphone.</li>
-               <li>Formularios sencillos con las opciones imprescindibles.</li>
-               <li>Software libre con actualizaciones constantes.</li>
-               <li>Más de 50 plugins con un desarrollo muy activo.</li>
-               <li>Soporte profesional a tu disposición a través de los Partners.</li>
+               <li>{function="\L::footer__list_work_anywhere"}</li>
+               <li>{function="\L::footer__simply_forms"}</li>
+               <li>{function="\L::footer__free_software_and_updates"}</li>
+               <li>{function="\L::footer__a_lot_of_plugins"}</li>
+               <li>{function="\L::footer__professional_support"}</li>
             </ul>
          </div>
          <div class="col-sm-3">
             <a href='https://www.facturascripts.com/descargar?ref={function="base64_encode($fsc->user->email)"}' target="_blank" class="btn btn-lg btn-block btn-primary">
-               <i class="fa fa-download" aria-hidden="true"></i>&nbsp; Descargar
+               <i class="fa fa-download" aria-hidden="true"></i>&nbsp;{function="\L::admin_home__downloads"}
             </a>
             <i class="fa fa-cloud" aria-hidden="true"></i>
             <i class="fa fa-windows" aria-hidden="true"></i>
             <i class="fa fa-linux" aria-hidden="true"></i>
             <i class="fa fa-apple" aria-hidden="true"></i>
-            Disponible para todas las plataformas.
+            {function="\L::footer__multiplatform"}
          </div>
       </div>
       <div class="row">
@@ -63,7 +61,7 @@
             {if="FS_DB_HISTORY"}
                <div class="panel panel-default hidden-print">
                   <div class="panel-heading">
-                     <h3 class="panel-title">Consultas SQL:</h3>
+                     <h3 class="panel-title">{function="\L::footer__sql_queries"}</h3>
                   </div>
                   <div class="panel-body">
                      <ol style="font-size: 11px; margin: 0px; padding: 0px 0px 0px 20px;">
@@ -90,16 +88,16 @@
       <div class="row">
          <div class="col-sm-4 col-xs-6">
             <small>
-               Creado con <a target="_blank" href="https://www.facturascripts.com">FacturaScripts</a>.
+               {function="\L::footer__created_with"} <a target="_blank" href="https://www.facturascripts.com">{function="\L::common__facturascripts"}</a>.
             </small>
          </div>
          <div class="col-sm-4 hidden-xs text-center">
-            <span class="label label-default">Consultas: {$fsc->selects()}</span>
-            <span class="label label-default">Transacciones: {$fsc->transactions()}</span>
+            <span class="label label-default">{function="\L::footer__sql_queries"} {$fsc->selects()}</span>
+            <span class="label label-default">{function="\L::footer__transactions"} {$fsc->transactions()}</span>
          </div>
          <div class="col-sm-4 col-xs-6 text-right">
             <span class="label label-default">
-               <span class="glyphicon glyphicon-time" aria-hidden="true" title="Página procesada en {$fsc->duration()}"></span>
+               <span class="glyphicon glyphicon-time" aria-hidden="true" title='{function="\L::footer__page_processed_in"} {$fsc->duration()}"'></span>
                &nbsp; {$fsc->duration()}
             </span>
          </div>

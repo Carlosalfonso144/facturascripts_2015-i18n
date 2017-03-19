@@ -41,9 +41,9 @@
             <div class="btn-group">
                <a class="btn btn-sm btn-default" href="index.php?page=admin_users#roles">
                   <span class="glyphicon glyphicon-arrow-left"></span>
-                  <span class="hidden-xs">&nbsp; Roles</span>
+                  <span class="hidden-xs">&nbsp; {function="\L::common__roles"}</span>
                </a>
-               <a class="btn btn-sm btn-default" href="{$fsc->rol->url()}" title="recargar la página">
+               <a class="btn btn-sm btn-default" href="{$fsc->rol->url()}" title='{function="\L::common__button_reload_page"}'>
                   <span class="glyphicon glyphicon-refresh"></span>
                </a>
             </div>
@@ -56,19 +56,19 @@
             </div>
          </div>
          <div class="col-sm-6 text-right">
-            <a class="btn btn-sm btn-success" href="index.php?page=admin_users#nuevorol" title="Nuevo rol">
+            <a class="btn btn-sm btn-success" href="index.php?page=admin_users#nuevorol" title='{function="\L::admin_rol__button_new_role"}'>
                <span class="glyphicon glyphicon-plus"></span>
             </a>
             <div class="btn-group">
                {if="$fsc->allow_delete"}
                <a href="#" id="b_eliminar_rol" class="btn btn-sm btn-danger">
                   <span class="glyphicon glyphicon-trash"></span>
-                  <span class="hidden-xs hidden-sm">&nbsp; Eliminar</span>
+                  <span class="hidden-xs hidden-sm">&nbsp;{function="\L::common__button_delete"}</span>
                </a>
                {/if}
                <button class="btn btn-sm btn-primary" type="submit" onclick="this.disabled=true;this.form.submit();">
                   <span class="glyphicon glyphicon-floppy-disk"></span>
-                  <span class="hidden-xs">&nbsp; Guardar</span>
+                  <span class="hidden-xs">&nbsp;{function="\L::common__button_save"}</span>
                </button>
             </div>
          </div>
@@ -81,9 +81,9 @@
                   Rol <small>{$fsc->rol->codrol}</small>
                </h1>
                <a href="{$fsc->rol->url()}&aplicar=TRUE" class="label label-success">
-                  <i class="fa fa-check" aria-hidden="true"></i> Aplicar
+                  <i class="fa fa-check" aria-hidden="true"></i>{function="\L::common__button_apply"}
                </a>
-               &nbsp; pulsa aplicar para regenerar los permisos de los usuarios.
+               &nbsp;{function="\L::admin_rol__press_to_regenerate"}
             </div>
             <div class="form-group">
                <input type="text" name="descripcion" value="{$fsc->rol->descripcion}" class="form-control" autocomplete="off"/>
@@ -95,13 +95,13 @@
       <li role="presentation" class="active">
          <a href="#autorizar" aria-controls="usuarios" role="tab" data-toggle="tab">
             <i class="fa fa-check-square" aria-hidden="true"></i>
-            <span class="hidden-xs">&nbsp;Autorizar</span>
+            <span class="hidden-xs">&nbsp;{function="\L::admin_rol__autorize"}</span>
          </a>
       </li>
       <li role="presentation">
          <a href="#usuarios" aria-controls="usuarios" role="tab" data-toggle="tab">
             <i class="fa fa-users" aria-hidden="true"></i>
-            <span class="hidden-xs">&nbsp;Usuarios</span>
+            <span class="hidden-xs">&nbsp;{function="\L::common__users"}</span>
          </a>
       </li>
    </ul>
@@ -111,11 +111,11 @@
             <table class="table table-hover">
                <thead>
                   <tr>
-                     <th class="text-left">Página</th>
-                     <th class="text-left">Menú</th>
-                     <th class="text-center">Ver / Modificar</th>
+                     <th class="text-left">{function="\L::common__page"}</th>
+                     <th class="text-left">{function="\L::common__menu"}</th>
+                     <th class="text-center">{function="\L::admin_rol__view_modify"}</th>
                      <th></th>
-                     <th class="text-center">Permiso de eliminación</th>
+                     <th class="text-center">{function="\L::admin_rol__delete_perms"}</th>
                   </tr>
                </thead>
                {loop="$fsc->all_pages()"}
@@ -136,17 +136,17 @@
                      <td class="text-center">
                         {if="$counter==0"}
                         <div class="btn-group">
-                           <button class="btn btn-xs btn-default" type="button" onclick="fs_marcar_todo()" title="Marcar todo">
+                           <button class="btn btn-xs btn-default" type="button" onclick="fs_marcar_todo()" title='{function="\L::admin_home__select_all"}'>
                               <span class="glyphicon glyphicon-check"></span>
                            </button>
-                           <button class="btn btn-xs btn-default" type="button" onclick="fs_marcar_nada()" title="Desmarcar todo">
+                           <button class="btn btn-xs btn-default" type="button" onclick="fs_marcar_nada()" title='{function="\L::admin_home__unselect_all"}'>
                               <span class="glyphicon glyphicon-unchecked"></span>
                            </button>
                         </div>
                         {/if}
                      </td>
                      <td class="text-center">
-                        <input type="checkbox" id="allow_delete_{$counter}" name="allow_delete[]" value="{$value->name}"{if="$value->allow_delete"} checked=""{/if} title="el usuario tiene permisos para eliminar en esta página"/>
+                        <input type="checkbox" id="allow_delete_{$counter}" name="allow_delete[]" value="{$value->name}"{if="$value->allow_delete"} checked=""{/if} title='{function="\L::admin_role__user_can_delete_on_page"}'/>
                      </td>
                   </tr>
                {/loop}
@@ -159,9 +159,9 @@
                <thead>
                   <tr>
                      <th width="40"></th>
-                     <th class="text-left">Nick</th>
-                     <th class="text-left">Email</th>
-                     <th class="text-right">Último login</th>
+                     <th class="text-left">{function="\L::common__nick"}</th>
+                     <th class="text-left">{function="\L::common__email"}</th>
+                     <th class="text-right">{function="\L::common__last_login"}</th>
                   </tr>
                </thead>
                {loop="$fsc->all_users()"}
@@ -176,7 +176,7 @@
                      <td>
                         <a href="{$value->url()}">{$value->nick}</a>
                         {if="$value->admin"}
-                        &nbsp; <span class="label label-warning">administrador</span>
+                        &nbsp; <span class="label label-warning">{function="\L::common__administrator"}</span>
                         {/if}
                      </td>
                      <td>{$value->email}</td>

@@ -6,7 +6,7 @@
          <div class="page-header">
             <h1>
                <span class="glyphicon glyphicon-exclamation-sign"></span>
-               Página no encontrada
+               {function="\L::index__page_not_found"}
             </h1>
          </div>
       </div>
@@ -15,69 +15,58 @@
       <div class="col-sm-8">
          <div class="panel panel-danger">
             <div class="panel-heading">
-               <h3 class="panel-title">Ayuda</h3>
+               <h3 class="panel-title">{function="\L::common__help"}</h3>
             </div>
             <div class="panel-body">
                <p class="help-block">
-                  No se encuentra el controlador de esta página.
-                  Consulta con el administrador.
+				   {function="\L::index__help_controller_not_found"}
                </p>
-               <h3>Problemas frecuentes:</h3>
+               <h3>{function="\L::index__common_problems"}</h3>
                <ul>
                   <li>
-                     <b>¿Has actualizado desde FacturaScripts 2014 o anteriores?</b>
+                     <b>{function="\L::index__question_did_you_update_from_facturascripts_2014"}</b>
                      <ul>
                         <li>
-                           El sistema ha cambiado mucho, ahora los plugins tienen un desarrollo
-                           independiente.
+                           {function="\L::index__answer_did_you_update_from_facturascripts_2014_1"}
                         </li>
                         <li>
-                           Elimina los plugins antiguos y sigue el asistente de Admin &gt;
-                           <a href="index.php?page=admin_home">Panel de control</a>.
-                        </li>
-                     </ul>
-                  </li>
-                  <li>
-                     <b>¿Has desactivado un plugin?</b>
-                     <ul>
-                        <li>
-                           Es posible que fallase al eliminar las entradas del menú.
-                           Ve a admin &gt; <a href="index.php?page=admin_home">Panel de control</a>
-                           &gt; Menú y pulsa guardar. Eliminará las entradas del menú de las páginas
-                           que ya no estén activas.
+                           {function="\L::index__answer_did_you_update_from_facturascripts_2014_2"}
+                           <a href="index.php?page=admin_home">{function="\L::admin_home__control_panel"}</a>.
                         </li>
                      </ul>
                   </li>
                   <li>
-                     <b>¿Has reinstalado a lo bestia?</b>
+                     <b>{function="\L::index__question_did_you_disabled_plugins"}</b>
                      <ul>
                         <li>
-                           Tendrás en el menú acceso a páginas de plugins que no están activos.
-                           Ve a admin &gt; <a href="index.php?page=admin_home">Panel de control</a>
-                           &gt; Menú y pulsa guardar. Eliminará las entradas del menú de las páginas
-                           que ya no estén activas.
+                           {function="\L::index__answer_did_you_disabled_plugins_1_2"} <a href="index.php?page=admin_home">{function="\L::admin_home__control_panel"}</a>
+                           {function="\L::index__answer_did_you_disabled_plugins_2_2"}
+                        </li>
+                     </ul>
+                  </li>
+                  <li>
+                     <b>{function="\L::index__question_did_you_reinstall"}</b>
+                     <ul>
+                        <li>
+                           {function="\L::index__answer_did_you_reinstall_1_2"} <a href="index.php?page=admin_home">{function="\L::admin_home__control_panel"}</a>
+                           {function="\L::index__answer_did_you_reinstall_2_2"}
                         </li>
                      </ul>
                   </li>
                   {if="isset($_GET['page'])"}
                   <li>
-                     <b>¿Eres programador y estas intentando hacer un plugin?</b>
+                     <b>{function="\L::index__question_are_you_a_new_developer"}</b>
                      <ul>
                         <li>
-                           Entonces te comento que lo que ha pasado es que no encuentro
-                           el archivo <b>{$_GET['page']}.php</b>, que debería estar en
-                           el directorio <b>controller</b> de tu plugin.
+                           {function="\L::index__answer_are_you_a_new_developer_1_2"}<b>{$_GET['page']}.php</b>{function="\L::index__answer_are_you_a_new_developer_2_2"}
                         </li>
                      </ul>
                   </li>
                   {/if}
                </ul>
                <p class="help-block">
-                  Si crees que es un error de FacturaScripts, no dudes en notificármelo.
-                  <b>Haz clic en el botón de ayuda</b> <span class="glyphicon glyphicon-question-sign"></span>
-                  y <b>notifícame el error</b>. Intenta no obviar información importante:
-                  ¿Has actualizado desde FacturaScripts 2014 o anteriores? ¿Vienes de Eneboo/Abanq?
-                  ¿Has reinstalado a lo bestia? Son cuestiones importantes a la hora de buscar un error.
+                  {function="\L::index__help_if_you_think_its_a_bug"} <span class="glyphicon glyphicon-question-sign"></span>
+                  {function="\L::index__help_notify_me"}
                </p>
             </div>
          </div>

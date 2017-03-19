@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2016  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -19,6 +20,15 @@
 
 /// Si estas leyendo esto es porque no tienes PHP instalado !!!!!!!!!!!!!!!!!!!!
 
+require_once 'base/fs_i18n.php';
+
+$lang = substr(\filter_input(INPUT_SERVER, 'HTTP_ACCEPT_LANGUAGE'), 0, 2);
+$language = ($lang and file_exists('language/lang_' . $lang . '.ini')) ? $lang : 'es';
+$i18n = new \fs_i18n();
+$i18n->setForcedLang($language);
+$i18n->init();
+$GLOBALS['fsi18n'] = $i18n;
+
 function fatal_handler()
 {
    $error = error_get_last();
@@ -26,12 +36,12 @@ function fatal_handler()
    {
       if( substr($error["message"], 0, 19) != 'Memcache::connect()' )
       {
-         echo "<h1>Error fatal</h1>"
+         echo "<h1>" . \L::index__fatal_error . "</h1>"
             . "<ul>"
-                 . "<li><b>Tipo:</b> ".$error["type"]."</li>"
-                 . "<li><b>Archivo:</b> ".$error["file"]."</li>"
-                 . "<li><b>Línea:</b> ".$error["line"]."</li>"
-                 . "<li><b>Mensaje:</b> ".$error["message"]."</li>"
+                 . "<li><b>" . \L::index__type . "</b> ".$error["type"]."</li>"
+                 . "<li><b>" . \L::index__file . "</b> ".$error["file"]."</li>"
+                 . "<li><b>" . \L::index__line . "</b> ".$error["line"]."</li>"
+                 . "<li><b>" . \L::index__message . "</b> ".$error["message"]."</li>"
             . "</ul>";
       }
    }
@@ -89,10 +99,10 @@ else
             }
             catch(Exception $e)
             {
-               echo "<h1>Error fatal</h1>"
+               echo "<h1>" . \L::index__fatal_error . "</h1>"
                   . "<ul>"
-                       . "<li><b>Código:</b> " . $e->getCode()."</li>"
-                       . "<li><b>Mensage:</b> " . $e->getMessage()."</li>"
+                       . "<li><b>" . \L::index__code . "</b> " . $e->getCode()."</li>"
+                       . "<li><b>" . \L::index__message . "</b> " . $e->getMessage()."</li>"
                   . "</ul>";
                $fsc_error = TRUE;
             }
@@ -117,8 +127,8 @@ else
             {
                echo "<h1>Error fatal</h1>"
                   . "<ul>"
-                       . "<li><b>Código:</b> " . $e->getCode()."</li>"
-                       . "<li><b>Mensage:</b> " . $e->getMessage()."</li>"
+                       . "<li><b>" . \L::index__code . "</b> " . $e->getCode()."</li>"
+                       . "<li><b>" . \L::index__message . "</b> " . $e->getMessage()."</li>"
                   . "</ul>";
                $fsc_error = TRUE;
             }
@@ -160,8 +170,8 @@ else
       else
       {
          echo '<center>'
-         . '<h1>No se puede escribir sobre la carpeta tmp de FacturaScripts</h1>'
-         . '<p>Consulta la <a target="_blank" href="//www.facturascripts.com/comm3/index.php?page=community_item&id=351">documentaci&oacute;n</a>.</p>'
+         . '<h1>' . \L::index__cant_write_tmp_folder . '</h1>'
+         . '<p>' . \L::index__read_the . '<a target="_blank" href="//www.facturascripts.com/comm3/index.php?page=community_item&id=351">' . \L::index__documentation . '</a>.</p>'
          . '</center>';
          die('<center><iframe src="//www.facturascripts.com/comm3/index.php?page=community_item&id=351" width="90%" height="800"></iframe></center>');
       }

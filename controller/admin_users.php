@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2017  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -31,7 +32,7 @@ class admin_users extends fs_controller
    
    public function __construct()
    {
-      parent::__construct(__CLASS__, 'Usuarios', 'admin', TRUE, TRUE);
+      parent::__construct(__CLASS__, \L::common__users, 'admin', TRUE, TRUE);
    }
    
    protected function private_core()
@@ -66,11 +67,11 @@ class admin_users extends fs_controller
       $nu = $this->user->get($_POST['nnick']);
       if($nu)
       {
-         $this->new_error_msg('El usuario <a href="'.$nu->url().'">ya existe</a>.');
+         $this->new_error_msg(\L::common__the_user . '<a href="' . $nu->url() . '">' . $_POST['nnick']. '</a>' . \L::admin_users__msg_user_already_exists_2_2);
       }
       else if(!$this->user->admin)
       {
-         $this->new_error_msg('Solamente un administrador puede crear usuarios.', TRUE, 'login', TRUE);
+         $this->new_error_msg(\L::admin_users__msg_admin_only_create_users, TRUE, 'login', TRUE);
       }
       else
       {
@@ -91,7 +92,7 @@ class admin_users extends fs_controller
             
             if( $nu->save() )
             {
-               $this->new_message('Usuario '.$nu->nick.' creado correctamente.', TRUE, 'login', TRUE);
+               $this->new_message(\L::common__the_user . $nu->nick . \L::admin_users__msg_user_created_2_2, TRUE, 'login', TRUE);
                
                /// algún rol marcado
                if(!$nu->admin AND isset($_POST['roles']))
@@ -135,22 +136,21 @@ class admin_users extends fs_controller
       {
          if(FS_DEMO)
          {
-            $this->new_error_msg('En el modo <b>demo</b> no se pueden eliminar usuarios.
-               Esto es así para evitar malas prácticas entre usuarios que prueban la demo.');
+            $this->new_error_msg(\L::admin_users__msg_demo_cant_delete_user);
          }
          else if(!$this->user->admin)
          {
-            $this->new_error_msg("Solamente un administrador puede eliminar usuarios.", 'login', TRUE);
+            $this->new_error_msg(\L::admin_users__msg_only_admin_can_delete_users, 'login', TRUE);
          }
          else if( $nu->delete() )
          {
-            $this->new_message("Usuario ".$nu->nick." eliminado correctamente.", TRUE, 'login', TRUE);
+            $this->new_message(\L::admin_users__msg_user_deleted_1_2 . $nu->nick . \L::common__msg_successfully_deleted, TRUE, 'login', TRUE);
          }
          else
-            $this->new_error_msg("¡Imposible eliminar al usuario!");
+            $this->new_error_msg(\L::admin_users__msg_user_cant_be_deleted);
       }
       else
-         $this->new_error_msg("¡Usuario no encontrado!");
+         $this->new_error_msg(\L::admin_users__msg_user_not_found);
    }
    
    private function add_rol()
@@ -160,12 +160,12 @@ class admin_users extends fs_controller
       
       if( $this->rol->save() )
       {
-         $this->new_message('Datos guardados correctamente.');
+         $this->new_message(\L::common__msg_data_saved);
          header('Location: '.$this->rol->url());
       }
       else
       {
-         $this->new_error_msg('Error al crear el rol.');
+         $this->new_error_msg(\L::admin_users__msg_error_creating_rol);
       }
    }
    
@@ -176,16 +176,16 @@ class admin_users extends fs_controller
       {
          if( $rol->delete() )
          {
-            $this->new_message('Rol eliminado correctamente.');
+            $this->new_message(\L::admin_users__msg_rol_deleted);
          }
          else
          {
-            $this->new_error_msg('Error al eliminar el rol #'.$rol->id);
+            $this->new_error_msg(\L::admin_users__msg_error_deleting_rol . $rol->id);
          }
       }
       else
       {
-         $this->new_error_msg('Rol no encontrado.');
+         $this->new_error_msg(\L::admin_users__msg_error_rol_not_found);
       }
    }
    

@@ -51,7 +51,7 @@
       <div class="container-fluid">
          <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-               <span class="sr-only">Menú</span>
+               <span class="sr-only">{function="\L::common__menu"}</span>
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
@@ -64,38 +64,38 @@
          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                <li>
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Ayuda">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" title='{function="\L::common__help"}'>
                      <span class="glyphicon glyphicon-question-sign hidden-xs"></span>
-                     <span class="visible-xs">Ayuda</span>
+                     <span class="visible-xs">{function="\L::common__help"}</span>
                   </a>
                   <ul class="dropdown-menu">
                      <li>
                         <a href="https://www.facturascripts.com/documentacion" target="_blank">
-                           <i class="fa fa-book" aria-hidden="true"></i>&nbsp; Documentación
+                           <i class="fa fa-book" aria-hidden="true"></i>&nbsp;{function="\L::header__documentation"}
                         </a>
                      </li>
                      <li>
                         <a href="https://www.facturascripts.com/noticias" target="_blank">
-                           <i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp; Noticias
+                           <i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;{function="\L::header__news"}
                         </a>
                      </li>
                      <li>
                         <a href="https://www.facturascripts.com/preguntas" target="_blank">
-                           <i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp; Preguntas
+                           <i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp;{function="\L::header__questions"}
                         </a>
                      </li>
                      <li>
                         <a href="https://www.facturascripts.com/errores" target="_blank">
-                           <i class="fa fa-bug" aria-hidden="true"></i>&nbsp; Errores
+                           <i class="fa fa-bug" aria-hidden="true"></i>&nbsp;{function="\L::header__errors"}
                         </a>
                      </li>
                      <li>
                         <a href="https://www.facturascripts.com/ideas" target="_blank">
-                           <i class="fa fa-lightbulb-o" aria-hidden="true"></i>&nbsp; Ideas
+                           <i class="fa fa-lightbulb-o" aria-hidden="true"></i>&nbsp;{function="\L::header__ideas"}
                         </a>
                      </li>
                      <li class="divider"></li>
-                     <li><a href="#" id="b_feedback"><span class="glyphicon glyphicon-send"></span>&nbsp; Informar...</a></li>
+                     <li><a href="#" id="b_feedback"><span class="glyphicon glyphicon-send"></span>&nbsp;{function="\L::header__report"}</a></li>
                   </ul>
                </li>
             </ul>
@@ -125,7 +125,7 @@
             <div class="col-md-6 col-md-offset-3">
                <div class="page-header">
                   <h1>
-                     <span class="glyphicon glyphicon-user"></span>&nbsp; Iniciar sesión
+                     <span class="glyphicon glyphicon-user"></span>&nbsp;{function="\L::header__start_session"}
                   </h1>
                </div>
                <div class="well well-sm">
@@ -149,8 +149,8 @@
                            {if="FS_DEMO"}
                            <input type="hidden" name="password" value="demo"/>
                            <div class="form-group">
-                              Bienvenido a la demo de FacturaScripts, escribe tu email para continuar:
-                              <input type="text" class="form-control input-lg" name="user" placeholder="Escribe tu email" autocomplete="off"/>
+                              {function="\L::header__welcome_facturascripts_demo"}
+                              <input type="text" class="form-control input-lg" name="user" placeholder='{function="\L::header__placeholder_your_email"}' autocomplete="off"/>
                            </div>
                            {else}
                            <div class="form-group">
@@ -165,14 +165,14 @@
                               </select>
                            </div>
                            <div class="form-group">
-                              <input type="password" class="form-control input-lg" name="password" maxlength="32" placeholder="Contraseña"/>
+                              <input type="password" class="form-control input-lg" name="password" maxlength="32" placeholder='{function="\L::admin_empresa__placeholder_password"}'/>
                               <p class="help-block">
-                                 <a href="#" id="b_new_password">¿Has olvidado la contraseña?</a>
+                                 <a href="#" id="b_new_password">{function="\L::default__forgot_your_password"}</a>
                               </p>
                            </div>
                            {/if}
                            <button class="btn btn-block btn-primary" type="submit" id="login" onclick="this.disabled=true;this.form.submit();">
-                              <span class="glyphicon glyphicon-log-in"></span>&nbsp; Iniciar sesión
+                              <span class="glyphicon glyphicon-log-in"></span>&nbsp;{function="\L::header__start_session"}
                            </button>
                         </div>
                      </div>
@@ -193,13 +193,13 @@
             <form name="f_new_password" action="index.php" method="post" class="form" role="form">
                <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">
-                     <span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span>
+                     <span aria-hidden="true">&times;</span><span class="sr-only">{function="\L::common__close"}</span>
                   </button>
-                  <h4 class="modal-title">¿Has olvidado la contraseña?</h4>
+                  <h4 class="modal-title">{function="\L::default__forgot_your_password"}</h4>
                </div>
                <div class="modal-body">
                   <div class="form-group">
-                     <label>Usuario</label>
+                     <label>{function="\L::common__user"}</label>
                      <select name="user" class="form-control">
                      {loop="$fsc->user->all()"}
                         {if="$value->nick == $nlogin"}
@@ -211,18 +211,18 @@
                      </select>
                   </div>
                   <div class="form-group">
-                     <label>Nueva contraseña</label>
-                     <input type="password" class="form-control" name="new_password" maxlength="32" placeholder="Nueva contraseña" required=""/>
-                     <input type="password" class="form-control" name="new_password2" maxlength="32" placeholder="Repite la nueva contraseña" required=""/>
+                     <label>{function="\L::admin_user__new_password"}</label>
+                     <input type="password" class="form-control" name="new_password" maxlength="32" placeholder='{function="\L::admin_user__new_password"}' required=""/>
+                     <input type="password" class="form-control" name="new_password2" maxlength="32" placeholder='{function="\L::admin_user__repeat_new_password"}' required=""/>
                   </div>
                   <div class="form-group">
                      <label>Contraseña de la base de datos</label>
-                     <input type="password" class="form-control" name="db_password" placeholder="Contraseña de la base de datos"/>
+                     <input type="password" class="form-control" name="db_password" placeholder='{function="\L::default__database_password"}'/>
                   </div>
                </div>
                <div class="modal-footer">
                   <button type="submit" class="btn btn-sm btn-warning">
-                     <span class="glyphicon glyphicon-wrench"></span>&nbsp; Cambiar
+                     <span class="glyphicon glyphicon-wrench"></span>&nbsp;{function="\L::default__change"}
                   </button>
                </div>
             </form>
@@ -241,7 +241,7 @@
          <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="panel panel-default">
                <div class="panel-heading">
-                  <h3 class="panel-title">Consultas SQL:</h3>
+                  <h3 class="panel-title">{function="\L::footer__sql_queries"}</h3>
                </div>
                <div class="panel-body">
                   <ol style="font-size: 11px; margin: 0px; padding: 0px 0px 0px 20px;">
@@ -255,16 +255,16 @@
       <div class="row">
          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
             <small>
-               Creado con <a target="_blank" href="https://www.facturascripts.com">FacturaScripts</a>.
+               {function="\L::footer__created_with"} <a target="_blank" href="https://www.facturascripts.com">{function="\L::common__facturascripts"}</a>.
             </small>
          </div>
          <div class="col-lg-4 col-md-4 col-sm-4 hidden-xs text-center">
-            <span class="label label-default">Consultas: {$fsc->selects()}</span>
-            <span class="label label-default">Transacciones: {$fsc->transactions()}</span>
+            <span class="label label-default">{function="\L::footer__sql_queries"} {$fsc->selects()}</span>
+            <span class="label label-default">{function="\L::footer__transactions"} {$fsc->transactions()}</span>
          </div>
          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 text-right">
             <span class="label label-default">
-               <span class="glyphicon glyphicon-time" aria-hidden="true" title="Página procesada en {$fsc->duration()}"></span>
+               <span class="glyphicon glyphicon-time" aria-hidden="true" title='{function="\L::footer__page_processed_in"} {$fsc->duration()}"></span>
                &nbsp; {$fsc->duration()}
             </span>
          </div>

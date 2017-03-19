@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2017  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -160,7 +161,7 @@ class forma_pago extends \fs_model
       if( strtotime($fecha1) > strtotime($fecha2) )
       {
          /// vencimiento no válido, asignamos el predeterminado
-         $this->new_error_msg('Vencimiento no válido.');
+         $this->new_error_msg(\L::forma_pago__msg_invalid_expiration);
          $this->vencimiento = '+1day';
       }
    }

@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2017  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -36,7 +37,7 @@ class admin_info extends fs_controller
    
    public function __construct()
    {
-      parent::__construct(__CLASS__, 'Información del sistema', 'admin', TRUE, TRUE);
+      parent::__construct(__CLASS__, \L::admin_info__system_info, 'admin', TRUE, TRUE);
    }
    
    protected function private_core()
@@ -76,23 +77,20 @@ class admin_info extends fs_controller
          
          if( $this->cache->clean() )
          {
-            $this->new_message("Cache limpiada correctamente.");
+            $this->new_message(\L::admin_info__msg_cache_cleanded);
          }
       }
       else if( !$cron_vars['cron_exists'] )
       {
-         $this->new_advice('Nunca se ha ejecutado el'
-                 . ' <a href="https://www.facturascripts.com/comm3/index.php?page=community_item&tag=cron" target="_blank">cron</a>,'
-                 . ' te perderás algunas características interesantes de FacturaScripts.');
+         $this->new_advice(\L::admin_info__msg_cron_never_executed_1_3 . ' <a href="https://www.facturascripts.com/comm3/index.php?page=community_item&tag=cron" target="_blank">' . \L::admin_info__msg_cron_never_executed_2_3 . '</a>' . \L::admin_info__msg_cron_never_executed_3_3);
       }
       else if( $cron_vars['cron_error'] )
       {
-         $this->new_error_msg('Parece que ha habido un error con el cron. Haz clic <a href="'.$this->url()
-                 .'&fix=TRUE">aquí</a> para corregirlo.');
+         $this->new_error_msg(\L::admin_info__msg_error_with_cron_1_3 . '<a href="'.$this->url() . '&fix=TRUE">' . \L::common__here . '</a>' . \L::admin_info__msg_error_with_cron_3_3);
       }
       else if( $cron_vars['cron_lock'] )
       {
-         $this->new_advice('Se está ejecutando el cron.');
+         $this->new_advice(\L::admin_info__msg_cron_working);
       }
       
       $this->b_alerta = isset($_REQUEST['b_alerta']);

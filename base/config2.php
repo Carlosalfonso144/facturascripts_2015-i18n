@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2016  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -38,7 +39,7 @@ if(FS_TMP_NAME != '' AND !file_exists('tmp/'.FS_TMP_NAME) )
    {
       if( mkdir('tmp') )
       {
-         file_put_contents('tmp/index.php', "<?php\necho 'No me toques los cojones!!!';");
+         file_put_contents('tmp/index.php', "<?php\necho \L::config2__blank_index';");
       }
    }
    
@@ -90,14 +91,14 @@ if( file_exists('tmp/'.FS_TMP_NAME.'config2.ini') )
    
    if( !isset($GLOBALS['config2']['precio_compra']) )
    {
-      $GLOBALS['config2']['precio_compra'] = 'coste';
+      $GLOBALS['config2']['precio_compra'] = \L::config2__precio_compra;
       $GLOBALS['config2']['ip_whitelist'] = '*';
    }
    
    if( !isset($GLOBALS['config2']['iva']) )
    {
-      $GLOBALS['config2']['iva'] = 'IVA';
-      $GLOBALS['config2']['irpf'] = 'IRPF';
+      $GLOBALS['config2']['iva'] = \L::config2__iva;
+      $GLOBALS['config2']['irpf'] = \L::config2__irpf;
    }
    
    if( !isset($GLOBALS['config2']['libros_contables']) )
@@ -113,19 +114,19 @@ if( file_exists('tmp/'.FS_TMP_NAME.'config2.ini') )
    
    if( !isset($GLOBALS['config2']['factura']) )
    {
-      $GLOBALS['config2']['factura'] = 'factura';
-      $GLOBALS['config2']['facturas'] = 'facturas';
-      $GLOBALS['config2']['numero2'] = 'número 2';
+      $GLOBALS['config2']['factura'] = \L::config2__factura;
+      $GLOBALS['config2']['facturas'] = \L::config2__facturas;
+      $GLOBALS['config2']['numero2'] = \L::config2__numero_2;
    }
    
    if( !isset($GLOBALS['config2']['factura_simplificada']) )
    {
-      $GLOBALS['config2']['factura_simplificada'] = 'factura simplificada';
+      $GLOBALS['config2']['factura_simplificada'] = \L::config2__factura_simplificada;
    }
    
    if( !isset($GLOBALS['config2']['factura_rectificativa']) )
    {
-      $GLOBALS['config2']['factura_rectificativa'] = 'factura rectificativa';
+      $GLOBALS['config2']['factura_rectificativa'] = \L::config2__factura_rectificativa;
    }
    
    if( !isset($GLOBALS['config2']['db_integer']) )
@@ -135,8 +136,8 @@ if( file_exists('tmp/'.FS_TMP_NAME.'config2.ini') )
    
    if( !isset($GLOBALS['config2']['serie']) )
    {
-      $GLOBALS['config2']['serie'] = 'serie';
-      $GLOBALS['config2']['series'] = 'series';
+      $GLOBALS['config2']['serie'] = \L::config2__serie;
+      $GLOBALS['config2']['series'] = \L::config2__series;
    }
 }
 else
@@ -148,26 +149,26 @@ else
        'nf1' => '.',
        'nf2' => ' ',
        'pos_divisa' => 'right',
-       'factura' => 'factura',
-       'facturas' => 'facturas',
-       'factura_simplificada' => 'factura simplificada',
-       'factura_rectificativa' => 'factura rectificativa',
-       'albaran' => 'albarán',
-       'albaranes' => 'albaranes',
-       'pedido' => 'pedido',
-       'pedidos' => 'pedidos',
-       'presupuesto' => 'presupuesto',
-       'presupuestos' => 'presupuestos',
-       'provincia' => 'provincia',
-       'apartado' => 'apartado',
-       'cifnif' => 'CIF/NIF',
-       'iva' => 'IVA',
-       'irpf' => 'IRPF',
-       'numero2' => 'número 2',
-       'serie' => 'serie',
-       'series' => 'series',
+       'factura' => \L::config2__factura,
+       'facturas' => \L::config2__facturas,
+       'factura_simplificada' => \L::config2__factura_simplificada,
+       'factura_rectificativa' => \L::config2__factura_rectificativa,
+       'albaran' => \L::config2__albaran,
+       'albaranes' => \L::config2__albaranes,
+       'pedido' => \L::config2__pedido,
+       'pedidos' => \L::config2__pedidos,
+       'presupuesto' => \L::config2__presupuesto,
+       'presupuestos' => \L::config2__presupuestos,
+       'provincia' => \L::config2__provincia,
+       'apartado' => \L::config2__apartado,
+       'cifnif' => \L::config2__cif_nif,
+       'iva' => \L::config2__iva,
+       'irpf' => \L::config2__irpf,
+       'numero2' => \L::config2__numero_2,
+       'serie' => \L::config2__serie,
+       'series' => \L::config2__series,
        'cost_is_average' => 1,
-       'precio_compra' => 'coste',
+       'precio_compra' => \L::config2__precio_compra,
        'homepage' => 'admin_home',
        'check_db_types' => 0,
        'stock_negativo' => 1,

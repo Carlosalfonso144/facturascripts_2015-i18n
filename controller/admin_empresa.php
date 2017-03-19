@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2016  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -43,7 +44,7 @@ class admin_empresa extends fs_controller
    
    public function __construct()
    {
-      parent::__construct(__CLASS__, 'Empresa / web', 'admin', TRUE, TRUE);
+      parent::__construct(__CLASS__, \L::admin_empresa__company_web, 'admin', TRUE, TRUE);
    }
    
    protected function private_core()
@@ -78,11 +79,11 @@ class admin_empresa extends fs_controller
          
          if( $this->empresa->save() )
          {
-            $this->new_message('Datos guardados correctamente.');
+            $this->new_message(\L::common__msg_data_saved);
             $this->mail_test();
          }
          else
-            $this->new_error_msg ('Error al guardar los datos.');
+            $this->new_error_msg (\L::common__msg_data_not_saved);
       }
    }
    
@@ -104,27 +105,22 @@ class admin_empresa extends fs_controller
             
             if( !$this->empresa->mail_connect($mail) )
             {
-               $this->new_error_msg('No se ha podido conectar por email. ¿La contraseña es correcta?');
+               $this->new_error_msg(\L::admin_empresa__msg_error_cant_connect_to_mail);
                
                if($mail->Host == 'smtp.gmail.com')
                {
-                  $this->new_error_msg('Aunque la contraseña de gmail sea correcta, en ciertas '
-                          . 'situaciones los servidores de gmail bloquean la conexión. '
-                          . 'Para superar esta situación debes crear y usar una '
-                          . '<a href="https://support.google.com/accounts/answer/185833?hl=es" '
-                          . 'target="_blank">contraseña de aplicación</a>');
+                  $this->new_error_msg(\L::admin_empresa__msg_error_gmail_explanation_1_2
+                          . '<a href="https://support.google.com/accounts/answer/185833?hl=es" target="_blank">' . \L::admin_empresa__msg_error_gmail_explanation_2_2 . '</a>');
                }
                else
                {
-                  $this->new_error_msg("¿<a href='https://www.facturascripts.com/comm3/index.php?page=community_item&id=74'"
-                          . " target='_blank'>Necesitas ayuda</a>?");
+                  $this->new_error_msg("¿<a href='https://www.facturascripts.com/comm3/index.php?page=community_item&id=74' target='_blank'>" . \L::admin_empresa__msg_error_need_help . "</a>?");
                }
             }
          }
          else
          {
-            $this->new_error_msg('No se encuentra la extensión OpenSSL,'
-                    . ' imprescindible para enviar emails.');
+            $this->new_error_msg(\L::admin_empresa__msg_error_ext_openssl_not_found);
          }
       }
    }
@@ -134,7 +130,7 @@ class admin_empresa extends fs_controller
       return array(
           'ssl' => 'SSL',
           'tls' => 'TLS',
-          '' => 'Ninguna'
+          '' => \L::common__none_female
       );
    }
    

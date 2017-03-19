@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2017  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -176,11 +177,11 @@ class divisa extends \fs_model
       }
       else if($this->tasaconv == 0)
       {
-         $this->new_error_msg('La tasa de conversión no puede ser 0.');
+         $this->new_error_msg(\L::divisa__msg_error_conversion_rate_not_0);
       }
       else if($this->tasaconv_compra == 0)
       {
-         $this->new_error_msg('La tasa de conversión para compras no puede ser 0.');
+         $this->new_error_msg(\L::divisa__msg_error_conversion_rate_not_0_for_purchases);
       }
       else
          $status = TRUE;

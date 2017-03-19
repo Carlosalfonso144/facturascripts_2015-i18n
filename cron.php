@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2017  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -17,7 +18,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-echo 'Iniciando cron de FacturaScripts...';
+require_once 'base/fs_i18n.php';
+
+$lang = substr(\filter_input(INPUT_SERVER, 'HTTP_ACCEPT_LANGUAGE'), 0, 2);
+$language = ($lang and file_exists('language/lang_' . $lang . '.ini')) ? $lang : 'es';
+$i18n = new fs_i18n();
+$i18n->setForcedLang($language);
+$i18n->init();
+
+echo \L::cron__starting_cron;
 
 /// accedemos al directorio de FacturaScripts
 chdir(__DIR__);
@@ -46,8 +55,7 @@ if( $db->connect() )
    
    if($cron_vars['cron_lock'])
    {
-      echo "\nERROR: Ya hay un cron en ejecución. Si crees que es un error,"
-      . " ve a Admin > Información del sistema para solucionar el problema.";
+      echo "\n" . \L::cron__cron_still_working;
       
       /// marcamos el error en el cron
       $cron_vars['cron_error'] = 'TRUE';
@@ -70,7 +78,7 @@ if( $db->connect() )
       /// indicamos el inicio en el log
       $fslog = new fs_log();
       $fslog->tipo = 'cron';
-      $fslog->detalle = 'Ejecutando el cron...';
+      $fslog->detalle = \L::cron__executing_cron;
       $fslog->save();
       
       /// establecemos los elementos por defecto
@@ -90,7 +98,7 @@ if( $db->connect() )
       {
          if( file_exists('plugins/'.$plugin.'/cron.php') )
          {
-            echo "\n***********************\nEjecutamos el cron.php del plugin ".$plugin."\n";
+            echo "\n***********************\n" . \L::cron__executing_plugin_cron . $plugin."\n";
             
             include 'plugins/'.$plugin.'/cron.php';
             
@@ -101,7 +109,7 @@ if( $db->connect() )
       /// indicamos el fin en el log
       $fslog = new fs_log();
       $fslog->tipo = 'cron';
-      $fslog->detalle = 'Terminada la ejecución del cron.';
+      $fslog->detalle = \L::cron__execution_finished;
       $fslog->save();
       
       /// Eliminamos la variable cron_lock puesto que ya hemos terminado
@@ -113,18 +121,18 @@ if( $db->connect() )
    
    foreach($fsvar->get_errors() as $err)
    {
-      echo "\nERROR: ".$err."\n";
+      echo "\n" . \L::cron__error . $err . "\n";
    }
    foreach($db->get_errors() as $err)
    {
-      echo "\nERROR: ".$err."\n";
+      echo "\n" . \L::cron__error . $err . "\n";
    }
    
    $db->close();
 }
 else
 {
-   echo "¡Imposible conectar a la base de datos!\n";
+   echo \L::cron__cant_connect_database . "\n";
    
    foreach($db->get_errors() as $err)
    {
@@ -133,4 +141,4 @@ else
 }
 
 $tiempo = explode(' ', microtime());
-echo "\nTiempo de ejecución: ".number_format($tiempo[1] + $tiempo[0] - $uptime, 3)." s\n";
+echo "\n" . \L::cron__execution_time . number_format($tiempo[1] + $tiempo[0] - $uptime, 3)." s\n";

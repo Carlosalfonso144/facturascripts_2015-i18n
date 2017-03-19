@@ -6,26 +6,24 @@
          <div class="page-header" style="margin-bottom: 0px;">
             <h1>
                <i class="fa fa-server" aria-hidden="true"></i>
-               Información del sistema
+               {function="\L::admin_info__system_info"}
                <span class="btn-group">
-                  <a class="btn btn-xs btn-default" href="{$fsc->url()}" title="Recargar la página">
+                  <a class="btn btn-xs btn-default" href="{$fsc->url()}" title='{function="\L::common__button_reload_page"}'>
                      <span class="glyphicon glyphicon-refresh"></span>
                   </a>
                   {if="$fsc->page->is_default()"}
-                  <a class="btn btn-xs btn-default active" href="{$fsc->url()}&amp;default_page=FALSE" title="desmarcar como página de inicio">
+                  <a class="btn btn-xs btn-default active" href="{$fsc->url()}&amp;default_page=FALSE" title='{function="\L::common__button_get_out_startpage"}'>
                      <span class="glyphicon glyphicon-home"></span>
                   </a>
                   {else}
-                  <a class="btn btn-xs btn-default" href="{$fsc->url()}&amp;default_page=TRUE" title="marcar como página de inicio">
+                  <a class="btn btn-xs btn-default" href="{$fsc->url()}&amp;default_page=TRUE" title='{function="\L::common__button_put_on_startpage"}'>
                      <span class="glyphicon glyphicon-home"></span>
                   </a>
                   {/if}
                </span>
             </h1>
             <p class='help-block'>
-               Aquí tienes información básica sobre esta instalación de FacturaScripts,
-               base de datos, listado de tablas y el historial de errores con múltiples
-               filtros, para facilitarte el trabajo a la hora de encontrar un fallo.
+               {function="\L::admin_info__help_info"}
             </p>
          </div>
       </div>
@@ -34,11 +32,11 @@
       <table class="table table-hover">
          <thead>
             <tr>
-               <th class="text-left">FacturaScripts</th>
-               <th class="text-center">PHP</th>
-               <th class="text-center">Base de datos</th>
-               <th class="text-center">Motor de base de datos</th>
-               <th class="text-right">Caché</th>
+               <th class="text-left">{function="\L::common__facturascripts"}</th>
+               <th class="text-center">{function="\L::common__php"}</th>
+               <th class="text-center">{function="\L::common__database"}</th>
+               <th class="text-center">{function="\L::common__database_engine"}</th>
+               <th class="text-right">{function="\L::common__cache"}</th>
             </tr>
          </thead>
          <tr>
@@ -64,7 +62,7 @@
          {if="$fsc->allow_delete"}
          <a class="btn btn-xs btn-danger" href="{$fsc->url()}&clean_cache=TRUE">
             <span class="glyphicon glyphicon-trash"></span>
-            <span class="hidden-xs">&nbsp;Limpiar la cache</span>
+            <span class="hidden-xs">&nbsp;{function="\L::admin_home__clean_cache"}</span>
          </a>
          {/if}
       </div>
@@ -75,13 +73,13 @@
          <br/>
          <div class="panel panel-warning">
             <div class="panel-heading">
-               <h3 class="panel-title">Bloqueos en la base de datos</h3>
+               <h3 class="panel-title">{function="\L::admin_info__title_blocks_database"}</h3>
             </div>
             <div class="table-responsive">
                <table class="table table-hover">
                   <thead>
                      <tr>
-                        <th class="text-left">Base de datos</th>
+                        <th class="text-left">{function="\L::admin_info__database"}</th>
                         <th class="text-left">relname</th>
                         <th class="text-left">relation</th>
                         <th class="text-left">transaction ID</th>
@@ -102,7 +100,7 @@
                   </tr>
                   {else}
                   <tr class="warning">
-                     <td colspan="7">Ningún bloqueo detectado.</td>
+                     <td colspan="7">{function="\L::admin_info__no_blocks_detected"}</td>
                   </tr>
                   {/loop}
                </table>
@@ -117,21 +115,21 @@
    <li role="presentation" class="active">
       <a href="#history" aria-controls="history" role="tab" data-toggle="tab">
          <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-         <span class="hidden-xs">&nbsp;Historial</span>
+         <span class="hidden-xs">&nbsp;{function="\L::common__history"}</span>
          <span class="badge">{function="count($fsc->resultados)"}</span>
       </a>
    </li>
    <li role="presentation">
       <a href="#tablas" aria-controls="tablas" role="tab" data-toggle="tab">
          <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-         <span class="hidden-xs">&nbsp;Tablas</span>
+         <span class="hidden-xs">&nbsp;{function="\L::admin_info__tables"}</span>
       </a>
    </li>
    {if="$fsc->modulos_eneboo"}
    <li role="presentation">
       <a href="#eneboo" aria-controls="eneboo" role="tab" data-toggle="tab">
          <span class="glyphicon glyphicon-hdd" aria-hidden="true"></span>
-         <span class="hidden-xs">&nbsp;Eneboo</span>
+         <span class="hidden-xs">&nbsp;{function="\L::admin_info__eneboo"}</span>
       </a>
    </li>
    {/if}
@@ -143,19 +141,19 @@
             <table class="table table-hover">
                <thead>
                   <tr>
-                     <th width="120">Usuario</th>
-                     <th width="160">Tipo</th>
-                     <th>Detalle</th>
-                     <th width="120">IP</th>
-                     <th colspan="2" class="text-right">Fecha</th>
+                     <th width="120">{function="\L::common__user"}</th>
+                     <th width="160">{function="\L::admin_info__type"}</th>
+                     <th>{function="\L::common__detail"}</th>
+                     <th width="120">{function="\L::common__ip"}</th>
+                     <th colspan="2" class="text-right">{function="\L::common__date"}</th>
                   </tr>
                </thead>
                <tr>
-                  <td><input type="text" name="b_usuario" value="{$fsc->b_usuario}" class="form-control" placeholder="buscar" autocomplete="off"/></td>
+                  <td><input type="text" name="b_usuario" value="{$fsc->b_usuario}" class="form-control" placeholder='{function="\L::common__placeholder_buscar"}' autocomplete="off"/></td>
                   <td>
                      <div class="input-group">
-                        <input type="text" name="b_tipo" value="{$fsc->b_tipo}" class="form-control" placeholder="buscar" autocomplete="off"/>
-                        <span class="input-group-addon" title="alerta">
+                        <input type="text" name="b_tipo" value="{$fsc->b_tipo}" class="form-control" placeholder='{function="\L::common__placeholder_buscar"}' autocomplete="off"/>
+                        <span class="input-group-addon" title='{function="\L::admin_info__title_alert"}'>
                            {if="$fsc->b_alerta"}
                            <input type="checkbox" name="b_alerta" value="TRUE" checked="" onchange="this.form.submit()"/>
                            {else}
@@ -167,7 +165,7 @@
                   </td>
                   <td>
                      <div class="input-group">
-                        <input type="text" name="b_detalle" value="{$fsc->b_detalle}" class="form-control" placeholder="buscar" autocomplete="off"/>
+                        <input type="text" name="b_detalle" value="{$fsc->b_detalle}" class="form-control" placeholder='{function="\L::common__placeholder_buscar"}' autocomplete="off"/>
                         <span class="input-group-btn">
                            <button type="submit" class="btn btn-primary">
                               <span class="glyphicon glyphicon-search"></span>
@@ -175,12 +173,12 @@
                         </span>
                      </div>
                   </td>
-                  <td><input type="text" name="b_ip" value="{$fsc->b_ip}" class="form-control" placeholder="buscar" autocomplete="off"/></td>
+                  <td><input type="text" name="b_ip" value="{$fsc->b_ip}" class="form-control" placeholder='{function="\L::common__placeholder_buscar"}' autocomplete="off"/></td>
                   <td width="140">
-                     <input type="text" name="b_desde" value="{$fsc->b_desde}" class="form-control datepicker" placeholder="desde" autocomplete="off" onchange="this.form.submit()"/>
+                     <input type="text" name="b_desde" value="{$fsc->b_desde}" class="form-control datepicker" placeholder='{function="\L::common__placeholder_desde"}' autocomplete="off" onchange="this.form.submit()"/>
                   </td>
                   <td width="140">
-                     <input type="text" name="b_hasta" value="{$fsc->b_hasta}" class="form-control datepicker" placeholder="hasta" autocomplete="off" onchange="this.form.submit()"/>
+                     <input type="text" name="b_hasta" value="{$fsc->b_hasta}" class="form-control datepicker" placeholder='{function="\L::common__placeholder_hasta"}' autocomplete="off" onchange="this.form.submit()"/>
                   </td>
                </tr>
                {loop="$fsc->resultados"}
@@ -189,7 +187,7 @@
                   <td>{$value->tipo}</td>
                   <td>
                      {if="$value->alerta"}
-                     <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" title="Podría ser importante"></span>&nbsp;
+                     <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" title='{function="\L::admin_info__title_could_be_important"}'></span>&nbsp;
                      {/if}
                      {$value->detalle}
                   </td>
@@ -198,7 +196,7 @@
                </tr>
                {else}
                <tr class="warning">
-                  <td colspan="6">Sin resultados.</td>
+                  <td colspan="6">{function="\L::admin_info__without_results"}</td>
                </tr>
                {/loop}
             </table>
@@ -212,8 +210,7 @@
             <div class="col-lg-12 col-sm-12">
                <p class="help-block">
                   <span class="glyphicon glyphicon-info-sign"></span>
-                  &nbsp; Recuerda que puedes usar el plugin <b>sql_editor</b> para
-                  hacer consultas sql en la base de datos.
+                  &nbsp;{function="\L::admin_info__help_plugin_sql_editor"}
                </p>
             </div>
          </div>
@@ -233,9 +230,9 @@
                   <table class="table table-hover">
                      <thead>
                         <tr>
-                           <th>Módulo</th>
-                           <th>Descripción</th>
-                           <th class="text-right">Versión</th>
+                           <th>{function="\L::admin_info__module"}</th>
+                           <th>{function="\L::common__description"}</th>
+                           <th class="text-right">{function="\L::common__version"}</th>
                         </tr>
                      </thead>
                      {loop="$fsc->modulos_eneboo"}
@@ -253,19 +250,17 @@
                <div class="panel panel-warning">
                   <div class="panel-heading">
                      <h3 class="panel-title">
-                        <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>&nbsp; Importante
+                        <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>&nbsp;{function="\L::admin_info__important"}
                      </h3>
                   </div>
                   <div class="panel-body">
                      <p class="help-block">
-                        FacturaScripts es compatible con los módulos oficiales 2.3
-                        de Eneboo, no así con las docenas de personalizaciones que hay.
-                        Si necesitas modificaciones, busca un Partner de FacturaScripts.
+						{function="\L::admin_info__help_eneboo"}
                      </p>
                   </div>
                   <div class="panel-footer">
                      <a href="https://www.facturascripts.com/contacto" target="_blank" class="btn btn-sm btn-default">
-                        <i class="fa fa-shield" aria-hidden="true"></i>&nbsp; Partners de FacturaScripts
+                        <i class="fa fa-shield" aria-hidden="true"></i>&nbsp;{function="\L::admin_info__partners_facturascripts"}
                      </a>
                   </div>
                </div>

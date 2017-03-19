@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2017  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -30,7 +31,7 @@ class admin_rol extends fs_controller
    
    public function __construct()
    {
-      parent::__construct(__CLASS__, 'Editar rol', 'admin', FALSE, FALSE);
+      parent::__construct(__CLASS__, \L::admin_rol__edit_rol, 'admin', FALSE, FALSE);
    }
    
    protected function private_core()
@@ -57,7 +58,7 @@ class admin_rol extends fs_controller
       }
       else
       {
-         $this->new_error_msg("Rol no encontrado.", 'error', FALSE, FALSE);
+         $this->new_error_msg(\L::admin_rol__msg_error_rol_not_found, 'error', FALSE, FALSE);
       }
    }
    
@@ -196,7 +197,7 @@ class admin_rol extends fs_controller
       }
       else
       {
-         $this->new_error_msg('Error al guardar los datos.');
+         $this->new_error_msg(\L::common__msg_data_not_saved);
       }
    }
    
@@ -259,6 +260,6 @@ class admin_rol extends fs_controller
          }
       }
       
-      $this->new_message($nump.' permisos aplicados correctamente.');
+      $this->new_message($nump . \L::admin_rol__msg_perms_applied);
    }
 }

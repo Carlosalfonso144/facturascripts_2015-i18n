@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2016  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -31,7 +32,7 @@ class admin_user extends fs_controller
    
    public function __construct()
    {
-      parent::__construct(__CLASS__, 'Usuario', 'admin', TRUE, FALSE);
+      parent::__construct(__CLASS__, \L::common__user, 'admin', TRUE, FALSE);
    }
    
    public function private_core()
@@ -76,22 +77,22 @@ class admin_user extends fs_controller
             
             if(!$this->user->admin)
             {
-               $this->new_error_msg('Solamente un administrador puede crear y asignar un empleado desde aquí.');
+               $this->new_error_msg(\L::admin_user__msg_only_admin_can);
             }
             else if( $age0->save() )
             {
-               $this->new_message("Empleado ".$age0->codagente." guardado correctamente.");
+               $this->new_message(\L::common__employee . $age0->codagente . \L::admin_user__msg_employee_saved_2_2);
                $this->suser->codagente = $age0->codagente;
                
                if( $this->suser->save() )
                {
-                  $this->new_message("Empleado ".$age0->codagente." asignado correctamente.");
+                  $this->new_message(\L::common__employee . $age0->codagente . \L::admin_user__msg_employee_assigned_2_2);
                }
                else
-                  $this->new_error_msg("¡Imposible asignar el agente!");
+                  $this->new_error_msg(\L::admin_user__msg_cant_assign_employee);
             }
             else
-               $this->new_error_msg("¡Imposible guardar el agente!");
+               $this->new_error_msg(\L::admin_user__msg_cant_save_employee);
          }
          else if( isset($_POST['spassword']) OR isset($_POST['scodagente']) OR isset($_POST['sadmin']) )
          {
@@ -118,9 +119,7 @@ class admin_user extends fs_controller
             }
             if($sin_paginas)
             {
-               $this->new_advice('No has autorizado a este usuario a acceder a ninguna'
-                  . ' página y por tanto no podrá hacer nada. Puedes darle acceso a alguna página'
-                  . ' desde la pestaña autorizar.');
+               $this->new_advice(\L::admin_user__msg_user_cant_access_pages);
             }
          }
          
@@ -129,7 +128,7 @@ class admin_user extends fs_controller
       }
       else
       {
-         $this->new_error_msg("Usuario no encontrado.", 'error', FALSE, FALSE);
+         $this->new_error_msg(\L::admin_user__msg_error_user_not_found, 'error', FALSE, FALSE);
       }
    }
    
@@ -288,12 +287,11 @@ class admin_user extends fs_controller
    {
       if(FS_DEMO AND $this->user->nick != $this->suser->nick)
       {
-         $this->new_error_msg('En el modo <b>demo</b> sólo puedes modificar los datos de TU usuario.
-            Esto es así para evitar malas prácticas entre usuarios que prueban la demo.');
+         $this->new_error_msg(\L::admin_user__msg_demo_only_edit_your_user);
       }
       else if(!$this->allow_modify)
       {
-         $this->new_error_msg('No tienes permiso para modificar estos datos.');
+         $this->new_error_msg(\L::admin_user__msg_not_allowed_to_modify);
       }
       else
       {
@@ -305,12 +303,12 @@ class admin_user extends fs_controller
             {
                if( $this->suser->set_password($_POST['spassword']) )
                {
-                  $this->new_message('Se ha cambiado la contraseña del usuario '.$this->suser->nick, TRUE, 'login', TRUE);
+                  $this->new_message(\L::admin_user__msg_user_pass_changed . $this->suser->nick, TRUE, 'login', TRUE);
                }
             }
             else
             {
-               $this->new_error_msg('Las contraseñas no coinciden.');
+               $this->new_error_msg(\L::admin_user__msg_bad_password);
                $error = TRUE;
             }
          }
@@ -421,10 +419,10 @@ class admin_user extends fs_controller
                }
             }
             
-            $this->new_message("Datos modificados correctamente.");
+            $this->new_message(\L::common__msg_data_saved);
          }
          else
-            $this->new_error_msg("¡Imposible modificar los datos!");
+            $this->new_error_msg(\L::common__msg_data_not_saved);
       }
    }
 }

@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2015-2017  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -17,9 +18,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+require_once 'base/fs_i18n.php';
+
+$lang = substr(\filter_input(INPUT_SERVER, 'HTTP_ACCEPT_LANGUAGE'), 0, 2);
+$language = ($lang and file_exists('language/lang_' . $lang . '.ini')) ? $lang : 'es';
+$i18n = new fs_i18n();
+$i18n->setForcedLang($language);
+$i18n->init();
+
 if( !file_exists('config.php') )
 {
-   die('Archivo config.php no encontrado. No puedes actualizar sin instalar.');
+   die(\L::updater__config_not_found);
 }
 
 require_once 'config.php';
@@ -70,13 +79,13 @@ class fs_updater
             /// ¿Están todos los permisos correctos?
             foreach($this->__are_writable($this->__get_all_sub_directories('.')) as $dir)
             {
-               $this->errores .= 'No se puede escribir sobre el directorio ' . $dir . '<br/>';
+               $this->errores .= \L::updater__cant_write_folder . $dir . '<br/>';
             }
          }
          
          if($this->errores != '')
          {
-            $this->errores .= 'Tienes que corregir estos errores antes de continuar.';
+            $this->errores .= \L::updater__need_solve_errors;
          }
          else if( isset($_GET['update']) OR isset($_GET['reinstall']) )
          {
@@ -95,10 +104,10 @@ class fs_updater
             $private_key = $_POST['key'];
             if( file_put_contents('tmp/' . FS_TMP_NAME . 'private_keys/' . $_GET['idplugin'], $private_key) )
             {
-               $this->mensajes = 'Clave añadida correctamente.';
+               $this->mensajes = \L::updater__key_added;
             }
             else
-               $this->errores = 'Error al guardar la clave.';
+               $this->errores = \L::updater__key_not_added;
          }
          
          if($this->errores == '')
@@ -107,12 +116,11 @@ class fs_updater
          }
          else
          {
-            $this->tr_updates = '<tr class="warning"><td colspan="5">Aplazada la comprobación'
-                    . ' de plugins hasta que resuelvas los problemas.</td></tr>';
+            $this->tr_updates = '<tr class="warning"><td colspan="5">' . \L::updater__delayed_fro_problems . '</td></tr>';
          }
       }
       else
-         $this->errores = '<a href="index.php">Debes iniciar sesi&oacute;n</a>';
+         $this->errores = '<a href="index.php">' . \L::updater__need_start_session . '</a>';
    }
    
    private function comprobar_actualizaciones()
@@ -160,28 +168,28 @@ class fs_updater
       if($this->updates['core'])
       {
          $this->tr_updates = '<tr>'
-                 . '<td><b>Núcleo</b></td>'
-                 . '<td>Núcleo de FacturaScripts.</td>'
+                 . '<td><b>' . \L::updater___core . '</b></td>'
+                 . '<td>' . \L::updater__facturascripts_core . '</td>'
                  . '<td class="text-right">'.$this->version.'</td>'
                  . '<td class="text-right"><a href="https://www.facturascripts.com/comm3/index.php?page=community_changelog&version='
                  . $this->updates['core'].'" target="_blank">'.$this->updates['core'].'</a></td>'
                  . '<td class="text-right">
                     <a class="btn btn-sm btn-primary" href="updater.php?update=TRUE" role="button">
-                        <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp; Actualizar
+                        <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp;' . \L::updater_update . '
                     </a></td>'
                  . '</tr>';
       }
       else
       {
          $this->tr_options = '<tr>'
-                 . '<td><b>Núcleo</b></td>'
-                 . '<td>Núcleo de FacturaScripts.</td>'
+                 . '<td><b>' . \L::updater__core . '</b></td>'
+                 . '<td>' . \L::updater__facturascripts_core . '</td>'
                  . '<td class="text-right">'.$this->version.'</td>'
                  . '<td class="text-right"><a href="https://www.facturascripts.com/comm3/index.php?page=community_changelog&version='
                  . $this->version.'" target="_blank">'.$this->version.'</a></td>'
                  . '<td class="text-right">
                     <a class="btn btn-xs btn-default" href="updater.php?reinstall=TRUE" role="button">
-                        <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>&nbsp; Reinstalar
+                        <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>&nbsp;' . \L::updater__reinstall . '
                     </a></td>'
                  . '</tr>';
          
@@ -199,7 +207,7 @@ class fs_updater
                           . '<td>'.$plugin['name'].'</td>'
                           . '<td>'.$plugin['description'].'<br/>'
                           . '<a href="#" data-toggle="modal" data-target="#modal_key_'.$plugin['name'].'">'
-                          . '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Cambiar la clave'
+                          . '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>' . \L::updater__change_key
                           . '</a>'
                           . '</td>'
                           . '<td class="text-right">'.$plugin['version'].'</td>'
@@ -209,7 +217,7 @@ class fs_updater
                           . '<div class="btn-group">'
                           . '<a href="updater.php?idplugin='.$plugin['idplugin'].'&name='.$plugin['name'].'&key='.$plugin['private_key']
                           . '" class="btn btn-xs btn-primary">'
-                          . '<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp; Actualizar'
+                          . '<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp;' . \L::updater__update
                           . '</a>'
                           . '</div>'
                           . '</td></tr>';
@@ -225,7 +233,7 @@ class fs_updater
                           . '<td class="text-right">'
                           . '<div class="btn-group">'
                           . '<a href="#" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#modal_key_'.$plugin['name'].'">'
-                          . '<i class="fa fa-key" aria-hidden="true"></i>&nbsp; Añadir clave'
+                          . '<i class="fa fa-key" aria-hidden="true"></i>&nbsp;' . \L::updater__add_key
                           . '</a>'
                           . '</div>'
                           . '</td></tr>';
@@ -241,7 +249,7 @@ class fs_updater
                        . $plugin['new_version'].'&plugin='.$plugin['name'].'" target="_blank">'.$plugin['new_version'].'</a></td>'
                        . '<td class="text-right">'
                        . '<a href="updater.php?plugin='.$plugin['name'].'" class="btn btn-xs btn-primary">'
-                       . '<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp; Actualizar'
+                       . '<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp;' . \L::updater__update
                        . '</a>'
                        . '</td></tr>';
             }
@@ -249,8 +257,8 @@ class fs_updater
          
          if($this->tr_updates == '')
          {
-            $this->tr_updates = '<tr class="success"><td colspan="5">El sistema está actualizado.'
-                    . ' <a href="index.php?page=admin_home&updated=TRUE">Volver</a></td></tr>';
+            $this->tr_updates = '<tr class="success"><td colspan="5">' . \L::updater__system_is_updated
+                    . ' <a href="index.php?page=admin_home&updated=TRUE">' . \L::updater__back . '</a></td></tr>';
             $this->btn_fin = TRUE;
          }
       }
@@ -308,12 +316,12 @@ class fs_updater
             
             if($zip_status !== TRUE)
             {
-               $this->errores = 'Ha habido un error con el archivo update.zip. Código: '.$zip_status
-                       .'. Intente de nuevo en unos minutos.';
+               $this->errores = \L::updater__msg_error_with_zip . $zip_status
+                       . \L::updater__msg_try_later;
             }
             else if( !$this->test_zip_nucleo($zip) )
             {
-               $this->errores = 'Ha habido un error con el archivo update.zip<br/>Intente de nuevo en unos minutos.';
+               $this->errores = \L::updater__msg_error_with_zip_try_later;
             }
             else
             {
@@ -333,13 +341,13 @@ class fs_updater
                $this->recurse_copy('facturascripts_2015-master/', '.');
                $this->del_tree('facturascripts_2015-master/');
                
-               $this->mensajes = 'Actualizado correctamente.';
+               $this->mensajes = \L::updater__updated_successfully;
                $this->actualizacion_correcta();
                break;
             }
          }
          else
-            $this->errores = 'Error al descargar el archivo zip. Intente de nuevo en unos minutos.';
+            $this->errores = \L::updater__msg_error_downloading_zip_try_later;
       }
    }
    
@@ -377,12 +385,11 @@ class fs_updater
             
             if($zip_status !== TRUE)
             {
-               $this->errores = 'Ha habido un error con el archivo update.zip. Código: '.$zip_status
-                       .'. Intente de nuevo en unos minutos.';
+               $this->errores = \L::updater__msg_error_with_zip . $zip_status . \L::updater__msg_try_later;
             }
             else if( !$this->test_zip_plugin($zip) )
             {
-               $this->errores = 'Ha habido un error con el archivo update.zip<br/>Intente de nuevo en unos minutos.';
+               $this->errores = \L::updater__msg_error_with_zip_try_later;
             }
             else
             {
@@ -425,10 +432,10 @@ class fs_updater
             }
          }
          else
-            $this->errores = 'Error al descargar el archivo zip. Intente de nuevo en unos minutos.';
+            $this->errores = \L::updater__msg_error_downloading_zip_try_later;
       }
       else
-         $this->errores = 'Error al leer el archivo plugins/' . $_GET['plugin'] . '/facturascripts.ini';
+         $this->errores = \L::updater__msg_error_reading_ini_1_2 . $_GET['plugin'] . \L::updater__msg_error_reading_ini_2_2;
    }
    
    /**
@@ -465,12 +472,11 @@ class fs_updater
          
          if($zip_status !== TRUE)
          {
-            $this->errores = 'Ha habido un error con el archivo update.zip. Código: '.$zip_status
-                    .'. Intente de nuevo en unos minutos.';
+            $this->errores = \L::updater__msg_error_with_zip . $zip_status . \L::updater__msg_try_later;
          }
          else if( !$this->test_zip_plugin($zip) )
          {
-            $this->errores = 'Ha habido un error con el archivo update.zip<br/>Intente de nuevo en unos minutos.';
+            $this->errores = \L::updater__msg_error_with_zip_try_later;
          }
          else
          {
@@ -488,13 +494,13 @@ class fs_updater
                rename('plugins/' . $_GET['name'] . '-master', 'plugins/' . $_GET['name']);
             }
             
-            $this->mensajes = 'Plugin actualizado correctamente.';
+            $this->mensajes = \L::updater__plugin_updated;
             $this->actualizacion_correcta($_GET['name']);
          }
       }
       else
-         $this->errores = 'Error al descargar el archivo zip. <a href="updater.php?idplugin='.
-              $_GET['idplugin'].'&name='.$_GET['name'].'">¿Clave incorrecta?</a>';
+         $this->errores = \L::updater__msg_error_downloading_zip . '<a href="updater.php?idplugin='.
+              $_GET['idplugin'].'&name='.$_GET['name'].'">' . \L::updater__invalid_key . '</a>';
    }
 
    private function recurse_copy($src, $dst)
@@ -576,7 +582,7 @@ class fs_updater
             {
                $plugin = array(
                    'name' => $f,
-                   'description' => 'Sin descripción.',
+                   'description' => \L::updater__without_description,
                    'version' => 0,
                    'update_url' => '',
                    'version_url' => '',
@@ -733,9 +739,9 @@ $updater = new fs_updater();
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
       <title>Actualizador de FacturaScripts</title>
-      <meta name="description" content="Script de actualización de FacturaScripts." />
+      <meta name="description" content="<? php echo \L::updater__meta_description; ?>" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="generator" content="FacturaScripts" />
+      <meta name="generator" content="<? php echo \L::updater__facturascripts; ?>" />
       <link rel="shortcut icon" href="view/img/favicon.ico" />
       <link rel="stylesheet" href="view/css/bootstrap-yeti.min.css" />
       <link rel="stylesheet" href="view/css/font-awesome.min.css" />
@@ -749,15 +755,15 @@ $updater = new fs_updater();
             <div class="col-sm-12">
                <a href="index.php?page=admin_home&updated=TRUE" class="btn btn-sm btn-default">
                   <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-                  <span class="hidden-xs">&nbsp;Panel de control</span>
+                  <span class="hidden-xs">&nbsp;<? php echo \L::updater__control_panel; ?></span>
                </a>
                <a href="https://www.facturascripts.com/comm3/index.php?page=community_tus_plugins" target="_blank" class="btn btn-sm btn-default">
                   <i class="fa fa-key" aria-hidden="true"></i>
-                  <span class="hidden-xs">&nbsp;Claves</span>
+                  <span class="hidden-xs">&nbsp;<? php echo \L::updater__keys; ?></span>
                </a>
                <div class="page-header">
                   <h1>
-                     <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Actualizador de FacturaScripts
+                     <span class="glyphicon glyphicon-upload" aria-hidden="true"></span><?php echo \L::updater__facturascripts_updater;?>
                   </h1>
                </div>
                <?php
@@ -772,7 +778,7 @@ $updater = new fs_updater();
                   if($updater->btn_fin)
                   {
                      echo '<a href="index.php?page=admin_home&updated=TRUE" class="btn btn-sm btn-info">'
-                             . '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> &nbsp; Finalizar'
+                             . '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> &nbsp;' . \L::updater__finish
                            . '</a></br/></br/>';
                   }
                }
@@ -782,23 +788,20 @@ $updater = new fs_updater();
          <div class="row">
             <div class="col-sm-9">
                <p class="help-block">
-                  Este actualizador permite actualizar <b>tanto el núcleo</b> de FacturaScripts
-                  <b>como sus plugins</b>, incluso los de pago y los privados.
-                  Si hay una actualización del núcleo tendrás que actualizar antes de poder ver si
-                  también hay actualizaciones de plugins.
+                  <?php echo \L::updater__help_updater; ?>
                </p>
                <br/>
                <ul class="nav nav-tabs" role="tablist">
                   <li role="presentation" class="active">
                      <a href="#actualizaciones" aria-controls="actualizaciones" role="tab" data-toggle="tab">
                         <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
-                        <span class="hidden-xs">&nbsp;Actualizaciones</span>
+                        <span class="hidden-xs">&nbsp;<?php echo \L::updater__updates; ?></span>
                      </a>
                   </li>
                   <li role="presentation">
                      <a href="#opciones" aria-controls="opciones" role="tab" data-toggle="tab">
                         <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
-                        <span class="hidden-xs">&nbsp;Opciones</span>
+                        <span class="hidden-xs">&nbsp;<?php echo \L::updater__options; ?></span>
                      </a>
                   </li>
                </ul>
@@ -808,10 +811,10 @@ $updater = new fs_updater();
                         <table class="table table-hover">
                            <thead>
                               <tr>
-                                 <th class="text-left">Nombre</th>
-                                 <th class="text-left">Descripción</th>
-                                 <th class="text-right">Versión</th>
-                                 <th class="text-right">Nueva versión</th>
+                                 <th class="text-left"><?php echo \L::updater__name; ?></th>
+                                 <th class="text-left"><?php echo \L::updater__description; ?></th>
+                                 <th class="text-right"><?php echo \L::updater__version; ?></th>
+                                 <th class="text-right"><?php echo \L::updater__new_version; ?></th>
                                  <th></th>
                               </tr>
                            </thead>
@@ -824,7 +827,7 @@ $updater = new fs_updater();
                         <table class="table table-hover">
                            <thead>
                               <tr>
-                                 <th class="text-left">Opción</th>
+                                 <th class="text-left"><?php echo \L::updater__option; ?></th>
                                  <th></th>
                               </tr>
                            </thead>
@@ -840,18 +843,15 @@ $updater = new fs_updater();
                   <img src='https://i.imgur.com/5XRa2Cm.png' alt="adminlte"/>
                </a>
                <p class="help-block">
-                  Hemos trabajado en un <b>nuevo diseño</b> para dar un aspecto más moderno a FacturaScripts,
-                  con un nuevo menú lateral, buscador integrado, más visibilidad del usuario,
-                  más y mejores iconos y un largo etcétera. Este es el resultado.
+                  <?php echo \L::updater__help_adminlte; ?>
                </p>
                <br/>
                <a href="https://www.facturascripts.com/ideas#mejoras" target="_blank" class="btn btn-block btn-default">
                   <i class="fa fa-trophy fa-3x" aria-hidden="true"></i>
-                  <br/>Mejoras
+                  <br/><?php echo \L::updater__improvements; ?>
                </a>
                <p class="help-block">
-                  Tenemos una serie de mejoras en el horno que te pueden interesar,
-                  pero necesitan financiación ¿Te apuntas? Sólo necesitas <b>5 €</b>.
+                  <?php echo \L::updater__help_improvements; ?>
                </p>
             </div>
          </div>
@@ -873,13 +873,13 @@ $updater = new fs_updater();
                <div class="modal-dialog" role="document">
                   <div class="modal-content">
                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo \L::updater__close; ?>">
                            <span aria-hidden="true">&times;</span>
                         </button>
                         <h4 class="modal-title">
-                           <i class="fa fa-key" aria-hidden="true"></i> Añadir clave de actualización
+                           <i class="fa fa-key" aria-hidden="true"></i> <?php echo \L::updater__add_update_key; ?>
                         </h4>
-                        <p class="help-block">Imprescindible para actualizar el plugin <b><?php echo $plug['name']; ?></b>.</p>
+                        <p class="help-block"><?php echo \L::updater__required_for_update; ?> <b><?php echo $plug['name']; ?></b>.</p>
                      </div>
                      <div class="modal-body">
                         <div class="row">
@@ -888,8 +888,7 @@ $updater = new fs_updater();
                                  Clave:
                                  <input type="text" name="key" class="form-control" autocomplete="off" autofocus=""/>
                                  <p class="help-block">
-                                    ¿No sabes cual es tu clave? Puedes consultarla pulsando el botón
-                                    <b>ver mis claves</b>.
+                                    <?php echo \L::updater__dont_know_your_keys; ?>
                                  </p>
                               </div>
                            </div>
@@ -898,13 +897,13 @@ $updater = new fs_updater();
                            <div class="col-xs-6">
                               <a href="https://www.facturascripts.com/comm3/index.php?page=community_tus_plugins" target="_blank" class="btn btn-sm btn-warning">
                                  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                                 <span class="hidden-xs">&nbsp; Ver mis claves</span>
+                                 <span class="hidden-xs">&nbsp;<?php echo \L::updater__my_keys; ?></span>
                               </a>
                            </div>
                            <div class="col-xs-6 text-right">
                               <button type="submit" class="btn btn-sm btn-primary">
                                  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                 <span class="hidden-xs">&nbsp; Añadir</span>
+                                 <span class="hidden-xs">&nbsp;<?php echo \L::updater__add_key; ?></span>
                               </button>
                            </div>
                         </div>
@@ -928,7 +927,7 @@ $updater = new fs_updater();
          <div class="row">
             <div class="col-xs-6">
                <small>
-                  Creado con <a target="_blank" href="https://www.facturascripts.com">FacturaScripts</a>.
+                  <?php echo \L::footer__created_with; ?> <a target="_blank" href="https://www.facturascripts.com"><?php echo \L::updater__facturascripts; ?></a>.
                </small>
             </div>
             <div class="col-xs-6 text-right">

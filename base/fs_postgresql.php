@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2016  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -134,7 +135,7 @@ class fs_postgresql
          }
       }
       else
-         self::$errors[] = 'No tienes instalada la extensión de PHP para PostgreSQL.';
+         self::$errors[] = \L::fscontroller__ext_psql_not_installed;
       
       return $connected;
    }

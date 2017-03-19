@@ -83,7 +83,7 @@ class fs_default_items
          self::$codserie = NULL;
       }
    }
-   
+      
    public function codejercicio()
    {
       return self::$codejercicio;

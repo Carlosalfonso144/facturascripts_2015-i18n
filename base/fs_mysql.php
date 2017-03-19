@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2017  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -140,7 +141,7 @@ class fs_mysql
       }
       else
       {
-         self::$errors[] = 'No tienes instalada la extensión de PHP para MySQL.';
+         self::$errors[] = \L::fscontroller__ext_mysql_not_installed;
       }
       
       return $connected;
@@ -399,8 +400,7 @@ class fs_mysql
          
          if( self::$link->errno )
          {
-            self::$errors[] =  'Error al ejecutar la consulta '.$i.': '.self::$link->error.
-                    '. La secuencia ocupa la posición '.count(self::$history);
+            self::$errors[] =  \L::fscontroller__error_consulta_1_2 .$i.': '.self::$link->error. \L::fscontroller__error_consulta_2_2 . count(self::$history);
          }
          else
             $resultado = TRUE;
@@ -971,8 +971,7 @@ class fs_mysql
          {
             if( !$this->exec("ALTER TABLE ".$table_name." ENGINE=InnoDB;") )
             {
-               self::$errors[] = 'Imposible convertir la tabla '.$table_name.' a InnoDB.'
-                       . ' Imprescindible para FacturaScripts.';
+               self::$errors[] = \L::fscontroller__cant_convert_to_innodb_1_2 . $table_name . \L::fscontroller__cant_convert_to_innodb_2_2;
                $retorno = FALSE;
             }
          }

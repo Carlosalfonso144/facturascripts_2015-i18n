@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2016  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -188,8 +189,7 @@ class ejercicio extends \fs_model
       {
          if($show_error)
          {
-            $this->new_error_msg('La fecha seleccionada está fuera del rango del ejercicio.
-               Se ha seleccionado una mejor.');
+            $this->new_error_msg(\L::ejercicio___msg_error_data_out_of_range);
          }
          
          return $this->fechafin;
@@ -198,8 +198,7 @@ class ejercicio extends \fs_model
       {
          if($show_error)
          {
-            $this->new_error_msg('La fecha seleccionada está fuera del rango del ejercicio.
-               Se ha seleccionado una mejor.');
+            $this->new_error_msg(\L::ejercicio___msg_error_data_out_of_range);
          }
          
          return $this->fechainicio;
@@ -299,20 +298,19 @@ class ejercicio extends \fs_model
       
       if( !preg_match("/^[A-Z0-9_]{1,4}$/i", $this->codejercicio) )
       {
-         $this->new_error_msg("Código de ejercicio no válido.");
+         $this->new_error_msg(\L::ejercicio__msg_error_invalid_exercise_code);
       }
       else if( strlen($this->nombre) < 1 OR strlen($this->nombre) > 100 )
       {
-         $this->new_error_msg("Nombre del ejercicio no válido.");
+         $this->new_error_msg(\L::ejercicio__msg_error_invalid_exercise_name);
       }
       else if( strtotime($this->fechainicio) > strtotime($this->fechafin) )
       {
-         $this->new_error_msg("La fecha de inicio (".$this->fechainicio.") es "
-                 . "posterior a la fecha fin (".$this->fechafin.").");
+         $this->new_error_msg(\L::ejercicio__msg_error_startdate_before_enddate_1_2 . " (".$this->fechainicio.") " . \L::ejercicio__msg_error_startdate_before_enddate_2_2 . " (" . $this->fechafin . ").");
       }
       else if( strtotime($this->fechainicio) < 1 )
       {
-         $this->new_error_msg("Fecha no válida.");
+         $this->new_error_msg(\L::ejercicio__msg_error_invalid_date);
       }
       else
          $status = TRUE;
@@ -342,8 +340,7 @@ class ejercicio extends \fs_model
             
             if( !$this->floatcmp($debe, $haber, FS_NF0, TRUE) )
             {
-               $this->new_error_msg('El ejercicio está descuadrado a nivel de subcuentas.'
-                       . ' Debe: '.$debe.' | Haber: '.$haber);
+               $this->new_error_msg(\L::ejercicio__msg_exercise_incorrect_subaccounts_1_2 . ' ' . $debe . \L::ejercicio__msg_exercise_to_have . $haber);
                $status = FALSE;
             }
          }
@@ -364,14 +361,12 @@ class ejercicio extends \fs_model
             
             if( !$this->floatcmp($debe, $haber, FS_NF0, TRUE) )
             {
-               $this->new_error_msg('El ejercicio está descuadrado a nivel de asientos.'
-                       . ' Debe: '.$debe.' | Haber: '.$haber);
+               $this->new_error_msg(\L::ejercicio__msg_exercise_incorrect_accounting_1_2 . ' ' . $debe . \L::ejercicio__msg_exercise_to_have . $haber);
                $status = FALSE;
             }
             else if(!$status)
             {
-               $this->new_error_msg('Pero <b>NO</b> está descuadrado a nivel de asientos.'
-                       . ' Debe: '.$debe.' | Haber: '.$haber);
+               $this->new_error_msg(\L::ejercicio__msg_exercise_incorrect_not_accounting_1_2 . ' ' . $debe . \L::ejercicio__msg_exercise_to_have . $haber);
             }
          }
       }

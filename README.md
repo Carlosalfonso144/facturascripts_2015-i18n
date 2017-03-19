@@ -1,3 +1,5 @@
+ESTA ES UNA VERSIÓN EN DESARROLLO PARA INTEGRAR SOPORTE MULTILENGUAJE
+
 __facturascripts__ es un software de facturación para pymes,
 fácil, libre y con actualizaciones constantes.
 

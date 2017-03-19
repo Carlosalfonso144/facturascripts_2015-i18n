@@ -2,6 +2,7 @@
 /*
  * This file is part of FacturaScripts
  * Copyright (C) 2013-2017  Carlos Garcia Gomez  neorazorx@gmail.com
+ * Copyright (C) 2017  Francesc Pineda Segarra  shawe.ewahs@gmail.com
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -17,6 +18,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+require_once 'base/fs_i18n.php';
+
+$lang = substr(\filter_input(INPUT_SERVER, 'HTTP_ACCEPT_LANGUAGE'), 0, 2);
+$language = ($lang and file_exists('language/lang_' . $lang . '.ini')) ? $lang : 'es';
+$i18n = new fs_i18n();
+$i18n->setForcedLang($language);
+$i18n->init();
+
 /// cargamos las constantes de configuración
 require_once 'config.php';
 require_once 'base/config2.php';
@@ -31,7 +40,7 @@ if( $db->connect() )
 {
    if( !isset($_REQUEST['v']) )
    {
-      echo 'Version de la API de FacturaScripts ausente. Actualiza el cliente.';
+      echo \L::api__no_api_version;
    }
    else if($_REQUEST['v'] == '2')
    {
@@ -49,7 +58,7 @@ if( $db->connect() )
                }
                catch(Exception $e)
                {
-                  echo 'ERROR: '.$e->getMessage();
+                  echo \L::api__error.$e->getMessage();
                }
                
                $ejecutada = TRUE;
@@ -59,16 +68,16 @@ if( $db->connect() )
          
          if(!$ejecutada)
          {
-            echo 'Ninguna funcion API ejecutada.';
+            echo \L::api__no_api_function_executed;
          }
       }
       else
-         echo 'Ninguna funcion ejecutada.';
+         echo \L::api__no_function_executed;
    }
    else
    {
-      echo 'Version de la API de FacturaScripts incorrecta. Actualiza el cliente.';
+      echo \L::api__update_facturascripts;
    }
 }
 else
-   echo 'ERROR al conectar a la base de datos';
+   echo \L::api__database_connection_error;
