@@ -316,6 +316,11 @@ class fs_i18n {
          case 'ini':
             $config = parse_ini_file($filename, true);
             break;
+         case 'yml':
+            if( ! class_exists('Spyc') )
+               require_once 'vendor/spyc.php';
+            $config = spyc_load_file($filename);
+            break;
          case 'json':
             $config = json_decode(file_get_contents($filename), true);
             break;
