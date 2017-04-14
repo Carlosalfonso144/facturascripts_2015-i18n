@@ -421,7 +421,7 @@ abstract class fs_model
             {
                if( !$this->db->exec($consulta2) )
                {
-                  $this->new_error_msg(\L::fsmodel__msg_error_check_table . $table_name);
+                  $this->new_error_msg(\L::fsmodel__msg_error_check_table( $table_name ));
                }
             }
             
@@ -444,7 +444,7 @@ abstract class fs_model
          {
             if( !$this->db->exec($consulta) )
             {
-               $this->new_error_msg(\L::fsmodel__msg_error_check_table . $table_name);
+               $this->new_error_msg(\L::fsmodel__msg_error_check_table( $table_name ));
                $done = FALSE;
             }
          }
@@ -518,10 +518,10 @@ abstract class fs_model
             }
          }
          else
-            $this->new_error_msg(\L::fsmodel__msg_error_reading_file . $filename);
+            $this->new_error_msg(\L::fsmodel__msg_error_reading_file( $filename ));
       }
       else
-         $this->new_error_msg(\L::common__file . $filename . \L::fsmodel__msg_file_not_found_2_2);
+         $this->new_error_msg(\L::fsmodel__msg_file_not_found( $filename ));
       
       return $retorno;
    }

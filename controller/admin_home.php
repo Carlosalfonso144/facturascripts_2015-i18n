@@ -85,9 +85,8 @@ class admin_home extends fs_controller
       }
       else if(FS_DEMO)
       {
-         $this->new_advice(\L::admin_home__msg_demo_no_changes_1_3);
-         $this->new_advice(\L::admin_home__msg_demo_no_changes_2_3
-                 . '<a href="https://www.facturascripts.com/comm3/index.php?page=community_questions">' . \L::admin_home__msg_demo_no_changes_3_3 . '</a>.');
+         $this->new_advice(\L::admin_home__msg_demo_no_changes_1_alert);
+         $this->new_advice(\L::admin_home__msg_demo_no_changes_2_alert);
       }
       else if( !$this->user->admin )
       {
@@ -117,7 +116,7 @@ class admin_home extends fs_controller
             {
                if( $p->delete() )
                {
-                  $this->new_message(\L::admin_home__msg_deleted_page_without_controller_1_2 . $p->name . \L::admin_home__msg_deleted_page_without_controller_2_2);
+                  $this->new_message(\L::admin_home__msg_deleted_page_without_controller( $p->name ));
                }
             }
             else if( !isset($_POST['enabled']) ) /// ninguna página marcada
@@ -163,13 +162,13 @@ class admin_home extends fs_controller
          {
             if( $this->del_tree('plugins/'.$_GET['delete_plugin']) )
             {
-               $this->new_message(\L::common__plugin . $_GET['delete_plugin'] . \L::common__msg_successfully_deleted, TRUE);
+               $this->new_message(\L::admin_home__msg_plugin_deleted( $_GET['delete_plugin'] ), TRUE);
             }
             else
-               $this->new_error_msg(\L::admin_home__msg_error_cant_delete_plugin . $_GET['delete_plugin']);
+               $this->new_error_msg(\L::admin_home__msg_error_cant_delete_plugin( $_GET['delete_plugin'] ));
          }
          else
-            $this->new_error_msg(\L::admin_home__msg_error_cant_write_plugins_folder . $_GET['delete_plugin']);
+            $this->new_error_msg(\L::admin_home__msg_error_cant_write_plugins_folder( $_GET['delete_plugin'] ));
       }
       else if( isset($_POST['install']) )
       {
@@ -186,16 +185,16 @@ class admin_home extends fs_controller
             {
                $zip->extractTo('plugins/');
                $zip->close();
-               $this->new_message(\L::common__plugin . $_FILES['fplugin']['name'] . \L::common__plugin);
+               $this->new_message(\L::admin_home__msg_plugin_name_added( $_FILES['fplugin']['name'] ));
                
                $this->clean_cache();
             }
             else
-               $this->new_error_msg(\L::admin_home__msg_error_opening_zip . $res);
+               $this->new_error_msg(\L::admin_home__msg_error_opening_zip( $res ));
          }
          else
          {
-            $this->new_error_msg(\L::admin_home__msg_error_zip_not_found_1_2 . $this->get_max_file_upload() . \L::admin_home__msg_error_zip_not_found_2_2);
+            $this->new_error_msg(\L::admin_home__msg_error_zip_not_found( $this->get_max_file_upload() ));
          }
       }
       else if( isset($_GET['download']) )
@@ -230,7 +229,7 @@ class admin_home extends fs_controller
             unlink('tmp/'.FS_TMP_NAME.'config2.ini');
          }
          
-         $this->new_message(\L::admin_home__msg_reset_1_3 . '<a href="'.$this->url().'#avanzado">' . \L::common__here . '</a>' . \L::admin_home__msg_reset_3_3, TRUE);
+         $this->new_message(\L::admin_home__msg_reset( $this->url() ), TRUE);
       }
       else
       {
@@ -393,12 +392,12 @@ class admin_home extends fs_controller
             {
                if( !$new_fsc->page->save() )
                {
-                  $this->new_error_msg(\L::admin_home__msg_cant_save_page . $page->name);
+                  $this->new_error_msg(\L::admin_home__msg_cant_save_page( $page->name ));
                }
             }
             else
             {
-               $this->new_error_msg(\L::admin_home__msg_error_reading_page . $page->name);
+               $this->new_error_msg(\L::admin_home__msg_error_reading_page( $page->name ));
             }
             
             unset($new_fsc);
@@ -413,7 +412,7 @@ class admin_home extends fs_controller
          
          if( !$new_fsc->page->save() )
          {
-            $this->new_error_msg(\L::admin_home__msg_cant_save_page . $page->name);
+            $this->new_error_msg(\L::admin_home__msg_cant_save_page( $page->name ));
          }
          
          unset($new_fsc);
@@ -428,11 +427,11 @@ class admin_home extends fs_controller
    {
       if($page->name == $this->page->name)
       {
-         $this->new_error_msg(\L::admin_home__msg_error_cant_disable_this_page . " (".$page->name.").");
+         $this->new_error_msg(\L::admin_home__msg_error_cant_disable_this_page( $page->name ));
       }
       else if( !$page->delete() )
       {
-         $this->new_error_msg(\L::admin_home__msg_error_cant_delete_this_page . $page->name.'.');
+         $this->new_error_msg(\L::admin_home__msg_error_cant_delete_this_page( $page->name ));
       }
    }
    
@@ -488,9 +487,13 @@ class admin_home extends fs_controller
    public function get_supported_languages()
    {
       $languages_array = array(
-          'es' => "Español (España)",
-          'en' => "English",
-          'ca' => "Català"
+          'es' => \L::admin_home__languages_es_es,
+          'ba' => \L::admin_home__languages_es_ba,
+          'ca' => \L::admin_home__languages_es_ca,
+          'ar' => \L::admin_home__languages_es_ar,
+          'en' => \L::admin_home__languages_en_en,
+          'de' => \L::admin_home__languages_de_de,
+          'fr' => \L::admin_home__languages_fr_fr
       );
       
       return $languages_array;
@@ -684,7 +687,7 @@ class admin_home extends fs_controller
                if( !in_array($req, $GLOBALS['plugins']) )
                {
                   $install = FALSE;
-                  $txt = \L::admin_home__msg_unfulfilled_dependencies . ' <b>'.$req.'</b>';
+                  $txt = \L::admin_home__msg_unfulfilled_dependencies( $req );
                   
                   foreach($this->download_list2 as $value)
                   {
@@ -710,7 +713,7 @@ class admin_home extends fs_controller
          {
             if($wizard)
             {
-               $this->new_advice(\L::admin_home__msg_now_you_can . ' <a href="index.php?page='.$wizard.'">' . \L::admin_home__msg_configure_plugin . '</a>.');
+               $this->new_advice(\L::admin_home__msg_now_you_can_conf_plugin( $wizard ));
                header('Location: index.php?page='.$wizard);
             }
             else
@@ -739,7 +742,7 @@ class admin_home extends fs_controller
                            
                            if( !$new_fsc->page->save() )
                            {
-                              $this->new_error_msg(\L::admin_home__msg_error_cant_save_page . $page_name);
+                              $this->new_error_msg(\L::admin_home__msg_error_cant_save_page( $page_name ));
                            }
                            
                            unset($new_fsc);
@@ -747,17 +750,17 @@ class admin_home extends fs_controller
                      }
                   }
                   
-                  $this->new_message(\L::admin_home__msg_pages_auto_enabled . join(', ', $page_list) . '.');
+                  $this->new_message(\L::admin_home__msg_pages_auto_enabled( join(', ', $page_list) ));
                }
                
-               $this->new_message(\L::common__plugin . '<b>'.$name.'</b>' . \L::admin_home__msg_plugin_enabled_2_2);
+               $this->new_message(\L::admin_home__msg_plugin_enabled( $name ));
                $this->load_menu(TRUE);
             }
             
             $this->clean_cache();
          }
          else
-            $this->new_error_msg(\L::admin_home__msg_error_cant_enable_plugin . '<b>'.$name.'</b>.');
+            $this->new_error_msg(\L::admin_home__msg_error_cant_enable_plugin( $name ));
       }
    }
    
@@ -776,7 +779,7 @@ class admin_home extends fs_controller
                $GLOBALS['plugins'] = array();
                unlink('tmp/'.FS_TMP_NAME.'enabled_plugins.list');
                
-               $this->new_message(\L::common__plugin . '<b>'.$name.'</b>' . \L::admin_home__msg_plugin_disabled_2_2);
+               $this->new_message(\L::admin_home__msg_plugin_disabled( $name ));
             }
             else
             {
@@ -791,10 +794,10 @@ class admin_home extends fs_controller
                
                if( file_put_contents('tmp/'.FS_TMP_NAME.'enabled_plugins.list', join(',', $GLOBALS['plugins']) ) !== FALSE )
                {
-                  $this->new_message(\L::common__plugin . '<b>'.$name.'</b>' . \L::admin_home__msg_plugin_disabled_2_2);
+                  $this->new_message(\L::admin_home__msg_plugin_disabled( $name ));
                }
                else
-                  $this->new_error_msg(\L::admin_home__msg_error_cant_disable_plugin . '<b>'.$name.'</b>.');
+                  $this->new_error_msg(\L::admin_home__msg_error_cant_disable_plugin( $name ));
             }
          }
          
@@ -833,7 +836,7 @@ class admin_home extends fs_controller
          }
          if($eliminadas)
          {
-            $this->new_message(\L::admin_home__msg_pages_auto_disabled . join(', ', $eliminadas));
+            $this->new_message(\L::admin_home__msg_pages_auto_disabled( join(', ', $eliminadas) ));
          }
          
          /// desactivamos los plugins que dependan de este
@@ -942,7 +945,7 @@ class admin_home extends fs_controller
    {
       if( isset($this->download_list[$_GET['download']]) )
       {
-         $this->new_message(\L::admin_home__msg_downloading_plugin . $_GET['download']);
+         $this->new_message(\L::admin_home__msg_downloading_plugin( $_GET['download'] ));
          
          if( @fs_file_download($this->download_list[$_GET['download']]['url'], 'download.zip') )
          {
@@ -989,13 +992,11 @@ class admin_home extends fs_controller
                }
             }
             else
-               $this->new_error_msg(\L::admin_home__msg_error_opening_zip . $res);
+               $this->new_error_msg(\L::admin_home__msg_error_opening_zip( $res ));
          }
          else
          {
-            $this->new_error_msg(\L::admin_home__msg_error_downloading_plugin_1_4
-                    . '<a href="'.$this->download_list[$_GET['download']]['url'].'" target="_blank">' . \L::common__here . '</a> '
-                    . \L::admin_home__msg_error_downloading_plugin_3_4 . ' <b>' . \L::admin_home__msg_error_downloading_plugin_4_4 . '</b>.');
+            $this->new_error_msg(\L::admin_home__msg_error_downloading_plugin( $this->download_list[$_GET['download']]['url'] ));
          }
       }
       else
@@ -1012,7 +1013,7 @@ class admin_home extends fs_controller
       {
          if( $item->id == intval($_GET['download2']) )
          {
-            $this->new_message(\L::admin_home__msg_downloading_plugin.$item->nombre);
+            $this->new_message(\L::admin_home__msg_downloading_plugin( $item->nombre ));
             $encontrado = TRUE;
             
             if( @fs_file_download($item->zip_link, 'download.zip') )
@@ -1053,13 +1054,11 @@ class admin_home extends fs_controller
                   $this->enable_plugin($item->nombre);
                }
                else
-                  $this->new_error_msg(\L::admin_home__msg_error_opening_zip . $res);
+                  $this->new_error_msg(\L::admin_home__msg_error_opening_zip( $res ));
             }
             else
             {
-            $this->new_error_msg(\L::admin_home__msg_error_downloading_plugin_1_4
-                    . '<a href="'.$item->zip_link.'" target="_blank">' . \L::common__here . '</a> '
-                    . \L::admin_home__msg_error_downloading_plugin_3_4 . ' <b>' . \L::admin_home__msg_error_downloading_plugin_4_4 . '</b>.');
+            $this->new_error_msg(\L::admin_home__msg_error_downloading_plugin);
             }
             break;
          }

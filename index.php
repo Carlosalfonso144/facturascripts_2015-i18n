@@ -44,10 +44,10 @@ function fatal_handler()
       {
          echo "<h1>" . \L::index__fatal_error . "</h1>"
             . "<ul>"
-                 . "<li><b>" . \L::index__type . "</b> ".$error["type"]."</li>"
-                 . "<li><b>" . \L::index__file . "</b> ".$error["file"]."</li>"
-                 . "<li><b>" . \L::index__line . "</b> ".$error["line"]."</li>"
-                 . "<li><b>" . \L::index__message . "</b> ".$error["message"]."</li>"
+                 . "<li>" . \L::index__error_type( $error["type"] )."</li>"
+                 . "<li>" . \L::index__error_file( $error["file"] )."</li>"
+                 . "<li>" . \L::index__error_line( $error["line"] )."</li>"
+                 . "<li>" . \L::index__error_message( $error["message"] )"</li>"
             . "</ul>";
       }
    }
@@ -107,8 +107,8 @@ else
             {
                echo "<h1>" . \L::index__fatal_error . "</h1>"
                   . "<ul>"
-                       . "<li><b>" . \L::index__code . "</b> " . $e->getCode()."</li>"
-                       . "<li><b>" . \L::index__message . "</b> " . $e->getMessage()."</li>"
+                       . "<li>" . \L::index__error_code( $e->getCode() )."</li>"
+                       . "<li>" . \L::index__error_message( $e->getMessage() )."</li>"
                   . "</ul>";
                $fsc_error = TRUE;
             }
@@ -133,8 +133,8 @@ else
             {
                echo "<h1>Error fatal</h1>"
                   . "<ul>"
-                       . "<li><b>" . \L::index__code . "</b> " . $e->getCode()."</li>"
-                       . "<li><b>" . \L::index__message . "</b> " . $e->getMessage()."</li>"
+                       . "<li> . \L::index__error_code( $e->getCode() )."</li>"
+                       . "<li> . \L::index__error_message( $e->getMessage() )."</li>"
                   . "</ul>";
                $fsc_error = TRUE;
             }
@@ -177,7 +177,7 @@ else
       {
          echo '<center>'
          . '<h1>' . \L::index__cant_write_tmp_folder . '</h1>'
-         . '<p>' . \L::index__read_the . '<a target="_blank" href="//www.facturascripts.com/comm3/index.php?page=community_item&id=351">' . \L::index__documentation . '</a>.</p>'
+         . '<p>' . \L::index__read_the_documentation . '</p>'
          . '</center>';
          die('<center><iframe src="//www.facturascripts.com/comm3/index.php?page=community_item&id=351" width="90%" height="800"></iframe></center>');
       }

@@ -26,10 +26,15 @@
    $(document).ready(function() {
       $("#b_eliminar_rol").click(function(event) {
          event.preventDefault();
-         if( confirm("¿Realmente desea eliminar el rol {$fsc->rol->codrol}?") )
-         {
-            window.location.href = 'index.php?page=admin_users&delete_rol={$fsc->rol->codrol}#roles';
-         }
+         bootbox.confirm({
+            message: {function="\L::admin_rol__question_delete_rol( $fsc->rol->codrol )"},
+            title: {function="\L::common__warning"},
+            callback: function(result) {
+               if (result) {
+                  window.location.href = 'index.php?page=admin_users&delete_rol={$fsc->rol->codrol}#roles';
+               }
+            }                
+         });
       });
    });
 </script>
@@ -63,12 +68,12 @@
                {if="$fsc->allow_delete"}
                <a href="#" id="b_eliminar_rol" class="btn btn-sm btn-danger">
                   <span class="glyphicon glyphicon-trash"></span>
-                  <span class="hidden-xs hidden-sm">&nbsp;{function="\L::common__button_delete"}</span>
+                  <span class="hidden-xs hidden-sm">&nbsp; {function="\L::common__button_delete"}</span>
                </a>
                {/if}
                <button class="btn btn-sm btn-primary" type="submit" onclick="this.disabled=true;this.form.submit();">
                   <span class="glyphicon glyphicon-floppy-disk"></span>
-                  <span class="hidden-xs">&nbsp;{function="\L::common__button_save"}</span>
+                  <span class="hidden-xs">&nbsp; {function="\L::common__button_save"}</span>
                </button>
             </div>
          </div>
@@ -83,7 +88,7 @@
                <a href="{$fsc->rol->url()}&aplicar=TRUE" class="label label-success">
                   <i class="fa fa-check" aria-hidden="true"></i>{function="\L::common__button_apply"}
                </a>
-               &nbsp;{function="\L::admin_rol__press_to_regenerate"}
+               &nbsp; {function="\L::admin_rol__press_to_regenerate"}
             </div>
             <div class="form-group">
                <input type="text" name="descripcion" value="{$fsc->rol->descripcion}" class="form-control" autocomplete="off"/>
@@ -95,13 +100,13 @@
       <li role="presentation" class="active">
          <a href="#autorizar" aria-controls="usuarios" role="tab" data-toggle="tab">
             <i class="fa fa-check-square" aria-hidden="true"></i>
-            <span class="hidden-xs">&nbsp;{function="\L::admin_rol__autorize"}</span>
+            <span class="hidden-xs">&nbsp; {function="\L::admin_rol__autorize"}</span>
          </a>
       </li>
       <li role="presentation">
          <a href="#usuarios" aria-controls="usuarios" role="tab" data-toggle="tab">
             <i class="fa fa-users" aria-hidden="true"></i>
-            <span class="hidden-xs">&nbsp;{function="\L::common__users"}</span>
+            <span class="hidden-xs">&nbsp; {function="\L::common__users"}</span>
          </a>
       </li>
    </ul>
@@ -146,7 +151,7 @@
                         {/if}
                      </td>
                      <td class="text-center">
-                        <input type="checkbox" id="allow_delete_{$counter}" name="allow_delete[]" value="{$value->name}"{if="$value->allow_delete"} checked=""{/if} title='{function="\L::admin_role__user_can_delete_on_page"}'/>
+                        <input type="checkbox" id="allow_delete_{$counter}" name="allow_delete[]" value="{$value->name}"{if="$value->allow_delete"} checked=""{/if} title='{function="\L::admin_rol__user_can_delete_on_page"}'/>
                      </td>
                   </tr>
                {/loop}

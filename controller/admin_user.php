@@ -81,18 +81,22 @@ class admin_user extends fs_controller
             }
             else if( $age0->save() )
             {
-               $this->new_message(\L::common__employee . $age0->codagente . \L::admin_user__msg_employee_saved_2_2);
+               $this->new_message(\L::admin_user__msg_employee_saved( $age0->codagente ));
                $this->suser->codagente = $age0->codagente;
                
                if( $this->suser->save() )
                {
-                  $this->new_message(\L::common__employee . $age0->codagente . \L::admin_user__msg_employee_assigned_2_2);
+                  $this->new_message(\L::admin_user__msg_employee_assigned( $age0->codagente ));
                }
                else
-                  $this->new_error_msg(\L::admin_user__msg_cant_assign_employee);
+               {
+                  $this->new_error_msg(\L::admin_user__msg_cant_assign_employee( $age0->codagente ));
+               }
             }
             else
-               $this->new_error_msg(\L::admin_user__msg_cant_save_employee);
+            {
+               $this->new_error_msg(\L::admin_user__msg_cant_save_employee( $age0->codagente ));
+            }
          }
          else if( isset($_POST['spassword']) OR isset($_POST['scodagente']) OR isset($_POST['sadmin']) )
          {
@@ -128,7 +132,7 @@ class admin_user extends fs_controller
       }
       else
       {
-         $this->new_error_msg(\L::admin_user__msg_error_user_not_found, 'error', FALSE, FALSE);
+         $this->new_error_msg(\L::admin_user__msg_error_user_not_found( $this->suser ), 'error', FALSE, FALSE);
       }
    }
    
@@ -303,7 +307,7 @@ class admin_user extends fs_controller
             {
                if( $this->suser->set_password($_POST['spassword']) )
                {
-                  $this->new_message(\L::admin_user__msg_user_pass_changed . $this->suser->nick, TRUE, 'login', TRUE);
+                  $this->new_message(\L::admin_user__msg_user_pass_changed( $this->suser->nick ), TRUE, 'login', TRUE);
                }
             }
             else
@@ -422,7 +426,9 @@ class admin_user extends fs_controller
             $this->new_message(\L::common__msg_data_saved);
          }
          else
+         {
             $this->new_error_msg(\L::common__msg_data_not_saved);
+         }
       }
    }
 }

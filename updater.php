@@ -79,7 +79,13 @@ class fs_updater
             /// ¿Están todos los permisos correctos?
             foreach($this->__are_writable($this->__get_all_sub_directories('.')) as $dir)
             {
-               $this->errores .= \L::updater__cant_write_folder . $dir . '<br/>';
+               $this->errores .= \L::updater__cant_write_folder( $dir ). '<br/>';
+            }
+            
+            /// ¿Sigue estando disponible ziparchive?
+            if( !extension_loaded('zip') )
+            {
+               $this->errores .= 'No se encuentra la clase ZipArchive, debes instalar php-zip.<br/>';
             }
          }
          
@@ -105,6 +111,7 @@ class fs_updater
             if( file_put_contents('tmp/' . FS_TMP_NAME . 'private_keys/' . $_GET['idplugin'], $private_key) )
             {
                $this->mensajes = \L::updater__key_added;
+               $this->cache->clean();
             }
             else
                $this->errores = \L::updater__key_not_added;
@@ -120,7 +127,7 @@ class fs_updater
          }
       }
       else
-         $this->errores = '<a href="index.php">' . \L::updater__need_start_session . '</a>';
+         $this->errores = \L::updater__need_start_session;
    }
    
    private function comprobar_actualizaciones()
@@ -168,14 +175,14 @@ class fs_updater
       if($this->updates['core'])
       {
          $this->tr_updates = '<tr>'
-                 . '<td><b>' . \L::updater___core . '</b></td>'
+                 . '<td><b>' . \L::updater__core . '</b></td>'
                  . '<td>' . \L::updater__facturascripts_core . '</td>'
                  . '<td class="text-right">'.$this->version.'</td>'
                  . '<td class="text-right"><a href="https://www.facturascripts.com/comm3/index.php?page=community_changelog&version='
                  . $this->updates['core'].'" target="_blank">'.$this->updates['core'].'</a></td>'
                  . '<td class="text-right">
                     <a class="btn btn-sm btn-primary" href="updater.php?update=TRUE" role="button">
-                        <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp;' . \L::updater_update . '
+                        <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp; ' . \L::updater__update . '
                     </a></td>'
                  . '</tr>';
       }
@@ -189,7 +196,7 @@ class fs_updater
                  . $this->version.'" target="_blank">'.$this->version.'</a></td>'
                  . '<td class="text-right">
                     <a class="btn btn-xs btn-default" href="updater.php?reinstall=TRUE" role="button">
-                        <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>&nbsp;' . \L::updater__reinstall . '
+                        <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>&nbsp; ' . \L::updater__reinstall . '
                     </a></td>'
                  . '</tr>';
          
@@ -217,7 +224,7 @@ class fs_updater
                           . '<div class="btn-group">'
                           . '<a href="updater.php?idplugin='.$plugin['idplugin'].'&name='.$plugin['name'].'&key='.$plugin['private_key']
                           . '" class="btn btn-xs btn-primary">'
-                          . '<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp;' . \L::updater__update
+                          . '<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp; ' . \L::updater__update
                           . '</a>'
                           . '</div>'
                           . '</td></tr>';
@@ -233,7 +240,7 @@ class fs_updater
                           . '<td class="text-right">'
                           . '<div class="btn-group">'
                           . '<a href="#" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#modal_key_'.$plugin['name'].'">'
-                          . '<i class="fa fa-key" aria-hidden="true"></i>&nbsp;' . \L::updater__add_key
+                          . '<i class="fa fa-key" aria-hidden="true"></i>&nbsp; ' . \L::updater__add_key
                           . '</a>'
                           . '</div>'
                           . '</td></tr>';
@@ -249,7 +256,7 @@ class fs_updater
                        . $plugin['new_version'].'&plugin='.$plugin['name'].'" target="_blank">'.$plugin['new_version'].'</a></td>'
                        . '<td class="text-right">'
                        . '<a href="updater.php?plugin='.$plugin['name'].'" class="btn btn-xs btn-primary">'
-                       . '<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp;' . \L::updater__update
+                       . '<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp; ' . \L::updater__update
                        . '</a>'
                        . '</td></tr>';
             }
@@ -258,7 +265,7 @@ class fs_updater
          if($this->tr_updates == '')
          {
             $this->tr_updates = '<tr class="success"><td colspan="5">' . \L::updater__system_is_updated
-                    . ' <a href="index.php?page=admin_home&updated=TRUE">' . \L::updater__back . '</a></td></tr>';
+                    . ' <a href="index.php?page=admin_home&updated=TRUE">' . \L::config__back . '</a></td></tr>';
             $this->btn_fin = TRUE;
          }
       }
@@ -316,8 +323,7 @@ class fs_updater
             
             if($zip_status !== TRUE)
             {
-               $this->errores = \L::updater__msg_error_with_zip . $zip_status
-                       . \L::updater__msg_try_later;
+               $this->errores = \L::updater__msg_error_with_zip( $zip_status );
             }
             else if( !$this->test_zip_nucleo($zip) )
             {
@@ -385,7 +391,7 @@ class fs_updater
             
             if($zip_status !== TRUE)
             {
-               $this->errores = \L::updater__msg_error_with_zip . $zip_status . \L::updater__msg_try_later;
+               $this->errores = \L::updater__msg_error_with_zip( $zip_status );
             }
             else if( !$this->test_zip_plugin($zip) )
             {
@@ -435,7 +441,7 @@ class fs_updater
             $this->errores = \L::updater__msg_error_downloading_zip_try_later;
       }
       else
-         $this->errores = \L::updater__msg_error_reading_ini_1_2 . $_GET['plugin'] . \L::updater__msg_error_reading_ini_2_2;
+         $this->errores = \L::updater__msg_error_reading_ini( $_GET['plugin'] );
    }
    
    /**
@@ -472,7 +478,7 @@ class fs_updater
          
          if($zip_status !== TRUE)
          {
-            $this->errores = \L::updater__msg_error_with_zip . $zip_status . \L::updater__msg_try_later;
+            $this->errores = \L::updater__msg_error_with_zip( $zip_status );
          }
          else if( !$this->test_zip_plugin($zip) )
          {
@@ -499,8 +505,7 @@ class fs_updater
          }
       }
       else
-         $this->errores = \L::updater__msg_error_downloading_zip . '<a href="updater.php?idplugin='.
-              $_GET['idplugin'].'&name='.$_GET['name'].'">' . \L::updater__invalid_key . '</a>';
+         $this->errores = \L::updater__msg_error_downloading_zip ( $_GET['idplugin'], $_GET['name'] );
    }
 
    private function recurse_copy($src, $dst)
@@ -755,11 +760,11 @@ $updater = new fs_updater();
             <div class="col-sm-12">
                <a href="index.php?page=admin_home&updated=TRUE" class="btn btn-sm btn-default">
                   <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-                  <span class="hidden-xs">&nbsp;<? php echo \L::updater__control_panel; ?></span>
+                  <span class="hidden-xs">&nbsp; <? php echo \L::updater__control_panel; ?></span>
                </a>
                <a href="https://www.facturascripts.com/comm3/index.php?page=community_tus_plugins" target="_blank" class="btn btn-sm btn-default">
                   <i class="fa fa-key" aria-hidden="true"></i>
-                  <span class="hidden-xs">&nbsp;<? php echo \L::updater__keys; ?></span>
+                  <span class="hidden-xs">&nbsp; <? php echo \L::updater__keys; ?></span>
                </a>
                <div class="page-header">
                   <h1>
@@ -778,7 +783,7 @@ $updater = new fs_updater();
                   if($updater->btn_fin)
                   {
                      echo '<a href="index.php?page=admin_home&updated=TRUE" class="btn btn-sm btn-info">'
-                             . '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> &nbsp;' . \L::updater__finish
+                             . '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> &nbsp; ' . \L::updater__finish
                            . '</a></br/></br/>';
                   }
                }
@@ -795,13 +800,13 @@ $updater = new fs_updater();
                   <li role="presentation" class="active">
                      <a href="#actualizaciones" aria-controls="actualizaciones" role="tab" data-toggle="tab">
                         <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
-                        <span class="hidden-xs">&nbsp;<?php echo \L::updater__updates; ?></span>
+                        <span class="hidden-xs">&nbsp; <?php echo \L::updater__updates; ?></span>
                      </a>
                   </li>
                   <li role="presentation">
                      <a href="#opciones" aria-controls="opciones" role="tab" data-toggle="tab">
                         <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
-                        <span class="hidden-xs">&nbsp;<?php echo \L::updater__options; ?></span>
+                        <span class="hidden-xs">&nbsp; <?php echo \L::updater__options; ?></span>
                      </a>
                   </li>
                </ul>
@@ -879,7 +884,7 @@ $updater = new fs_updater();
                         <h4 class="modal-title">
                            <i class="fa fa-key" aria-hidden="true"></i> <?php echo \L::updater__add_update_key; ?>
                         </h4>
-                        <p class="help-block"><?php echo \L::updater__required_for_update; ?> <b><?php echo $plug['name']; ?></b>.</p>
+                        <p class="help-block"><?php echo \L::updater__required_for_update( $plug['name'] ) ?></p>
                      </div>
                      <div class="modal-body">
                         <div class="row">
@@ -897,13 +902,13 @@ $updater = new fs_updater();
                            <div class="col-xs-6">
                               <a href="https://www.facturascripts.com/comm3/index.php?page=community_tus_plugins" target="_blank" class="btn btn-sm btn-warning">
                                  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                                 <span class="hidden-xs">&nbsp;<?php echo \L::updater__my_keys; ?></span>
+                                 <span class="hidden-xs">&nbsp; <?php echo \L::updater__my_keys; ?></span>
                               </a>
                            </div>
                            <div class="col-xs-6 text-right">
                               <button type="submit" class="btn btn-sm btn-primary">
                                  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                 <span class="hidden-xs">&nbsp;<?php echo \L::updater__add_key; ?></span>
+                                 <span class="hidden-xs">&nbsp; <?php echo \L::updater__add_key; ?></span>
                               </button>
                            </div>
                         </div>
@@ -927,7 +932,7 @@ $updater = new fs_updater();
          <div class="row">
             <div class="col-xs-6">
                <small>
-                  <?php echo \L::footer__created_with; ?> <a target="_blank" href="https://www.facturascripts.com"><?php echo \L::updater__facturascripts; ?></a>.
+                  <?php echo \L::footer__created_with; ?>
                </small>
             </div>
             <div class="col-xs-6 text-right">

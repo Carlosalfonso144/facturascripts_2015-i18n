@@ -400,7 +400,7 @@ class fs_mysql
          
          if( self::$link->errno )
          {
-            self::$errors[] =  \L::fscontroller__error_consulta_1_2 .$i.': '.self::$link->error. \L::fscontroller__error_consulta_2_2 . count(self::$history);
+            self::$errors[] =  \L::fsmysql__error_consulta( $i, self::$link->error, count(self::$history) ));
          }
          else
             $resultado = TRUE;
@@ -971,7 +971,7 @@ class fs_mysql
          {
             if( !$this->exec("ALTER TABLE ".$table_name." ENGINE=InnoDB;") )
             {
-               self::$errors[] = \L::fscontroller__cant_convert_to_innodb_1_2 . $table_name . \L::fscontroller__cant_convert_to_innodb_2_2;
+               self::$errors[] = \L::fsmysql__cant_convert_to_innodb( $table_name );
                $retorno = FALSE;
             }
          }

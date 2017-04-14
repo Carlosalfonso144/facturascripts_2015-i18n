@@ -197,11 +197,11 @@ class pais extends \fs_model
       
       if( !preg_match("/^[A-Z0-9]{1,20}$/i", $this->codpais) )
       {
-         $this->new_error_msg(\L::pais__msg_invalid_country_code . $this->codpais);
+         $this->new_error_msg(\L::pais__msg_invalid_country_code( $this->codpais ));
       }
       else if( strlen($this->nombre) < 1 OR strlen($this->nombre) > 100 )
       {
-         $this->new_error_msg(\L::pais__msg_invalid_country_name);
+         $this->new_error_msg(\L::pais__msg_invalid_country_name( $this->nombre ));
       }
       else
          $status = TRUE;

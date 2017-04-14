@@ -68,7 +68,7 @@ if( file_exists('tmp/'.FS_TMP_NAME.'config2.ini') )
    if( !isset($GLOBALS['config2']['nf0']) )
    {
       $GLOBALS['config2']['nf0'] = 2;
-      $GLOBALS['config2']['nf1'] = '.';
+      $GLOBALS['config2']['nf1'] = ',';
       $GLOBALS['config2']['nf2'] = ' ';
       $GLOBALS['config2']['pos_divisa'] = 'right';
    }
@@ -152,7 +152,7 @@ else
        'idioma' => 'es',
        'nf0' => 2,
        'nf0_art' => 2,
-       'nf1' => '.',
+       'nf1' => ',',
        'nf2' => ' ',
        'pos_divisa' => 'right',
        'factura' => \L::config2__factura,

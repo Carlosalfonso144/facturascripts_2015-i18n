@@ -67,7 +67,7 @@ class admin_users extends fs_controller
       $nu = $this->user->get($_POST['nnick']);
       if($nu)
       {
-         $this->new_error_msg(\L::common__the_user . '<a href="' . $nu->url() . '">' . $_POST['nnick']. '</a>' . \L::admin_users__msg_user_already_exists_2_2);
+         $this->new_error_msg(\L::admin_users__msg_user_already_exists( $_POST['nnick'], $nu->url() ));
       }
       else if(!$this->user->admin)
       {
@@ -92,7 +92,7 @@ class admin_users extends fs_controller
             
             if( $nu->save() )
             {
-               $this->new_message(\L::common__the_user . $nu->nick . \L::admin_users__msg_user_created_2_2, TRUE, 'login', TRUE);
+               $this->new_message(\L::admin_users__msg_user_created( $nu->nick ), TRUE, 'login', TRUE);
                
                /// algún rol marcado
                if(!$nu->admin AND isset($_POST['roles']))
@@ -144,13 +144,17 @@ class admin_users extends fs_controller
          }
          else if( $nu->delete() )
          {
-            $this->new_message(\L::admin_users__msg_user_deleted_1_2 . $nu->nick . \L::common__msg_successfully_deleted, TRUE, 'login', TRUE);
+            $this->new_message(\L::admin_users__msg_user_deleted( $nu->nick ), TRUE, 'login', TRUE);
          }
          else
-            $this->new_error_msg(\L::admin_users__msg_user_cant_be_deleted);
+         {
+            $this->new_error_msg(\L::admin_users__msg_user_cant_be_deleted( $nu->nick ));
+         }
       }
       else
-         $this->new_error_msg(\L::admin_users__msg_user_not_found);
+      {
+         $this->new_error_msg(\L::admin_users__msg_user_not_found( $_GET['delete'] ));
+      }
    }
    
    private function add_rol()
@@ -165,7 +169,7 @@ class admin_users extends fs_controller
       }
       else
       {
-         $this->new_error_msg(\L::admin_users__msg_error_creating_rol);
+         $this->new_error_msg(\L::admin_users__msg_error_creating_rol( $_POST['nrol'] ));
       }
    }
    
@@ -176,16 +180,16 @@ class admin_users extends fs_controller
       {
          if( $rol->delete() )
          {
-            $this->new_message(\L::admin_users__msg_rol_deleted);
+            $this->new_message(\L::admin_users__msg_rol_deleted( $rol->id ));
          }
          else
          {
-            $this->new_error_msg(\L::admin_users__msg_error_deleting_rol . $rol->id);
+            $this->new_error_msg(\L::admin_users__msg_error_deleting_rol( $rol->id ));
          }
       }
       else
       {
-         $this->new_error_msg(\L::admin_users__msg_error_rol_not_found);
+         $this->new_error_msg(\L::admin_users__msg_error_rol_not_found( $_GET['delete_rol'] ));
       }
    }
    

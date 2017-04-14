@@ -384,7 +384,7 @@
    "fscontroller__msg_password_guardada": "Password changed correctly",
    "fscontroller__msg_password_incorrecta": "Incorrect password!",
    "fscontroller__msg_password_no_guardada": "Unable to change user password",
-   "fscontroller__msg_required_php_version": "FacturaScripts needs PHP 5.3 or higher, and you have PHP",
+   "fscontroller__msg_required_php_version": "FacturaScripts needs PHP 5.3 or higher, and you have PHP %1$s",
    "fscontroller__msg_user_no_existe_2_2": "does not exist",
    "fscontroller__msg_user_no_guardado": "Unable to save user data.",
    "fscontroller__user_cerrado_sesion": "The user has closed the session",

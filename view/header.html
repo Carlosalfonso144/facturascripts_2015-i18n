@@ -16,8 +16,11 @@
    <script type="text/javascript" src="{#FS_PATH#}view/js/bootstrap-datepicker.js" charset="UTF-8"></script>
    <script type="text/javascript" src="{#FS_PATH#}view/js/jquery.autocomplete.min.js"></script>
    <script type="text/javascript" src="{#FS_PATH#}view/js/jquery-ui.min.js"></script>
-   <script type="text/javascript" src="{#FS_PATH#}view/js/base.js?updated=2016.25"></script>
+   <script type="text/javascript" src="{#FS_PATH#}view/js/base.js?updated={$fsc->today()}"></script>
+   <script type="text/javascript" src="{#FS_PATH#}view/js/bootbox.min.js"></script>
    <script type="text/javascript">
+      bootbox.setLocale("es");
+      
       function show_precio(precio, coddivisa)
       {
          coddivisa || ( coddivisa = '{$fsc->empresa->coddivisa}' );
@@ -55,8 +58,8 @@
                <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="index.php">
-               <span class="glyphicon glyphicon-home"></span> &nbsp;
-               <span class="hidden-sm">{if="FS_DEMO"}DEMO{elseif="$fsc->empresa->nombrecorto"}{$fsc->empresa->nombrecorto}{else}{$fsc->empresa->nombre}{/if}</span>
+               <i class="fa fa-home" aria-hidden="true"></i>&nbsp;
+               <span class="hidden-sm">{if="FS_DEMO"}{function="\L::demo__demo"}{elseif="$fsc->empresa->nombrecorto"}{$fsc->empresa->nombrecorto}{else}{$fsc->empresa->nombre}{/if}</span>
             </a>
          </div>
          
@@ -66,7 +69,7 @@
                <li class='dropdown{if="$value1==$fsc->page->folder"} active{/if}'>
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                      {if="$value1=='admin'"}
-                     <span class="glyphicon glyphicon-wrench hidden-xs" title='{function="\L::header__administration"}'></span>
+                     <i class="fa fa-wrench hidden-xs" title='{function="\L::header__administration"}'></span>
                      <span class="text-capitalize visible-xs">{$value1}</span>
                      {else}
                      <span class="text-capitalize">{$value1}</span>
@@ -81,8 +84,9 @@
                {/loop}
                {if="count($GLOBALS['plugins'])>0"}
                <li class="dropdown hidden-sm">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" title='{function="\L::header__title_quick_access"}'>
-                     <span class="glyphicon glyphicon-star"></span>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" title='{function="\L::header__quick_access"}'>
+                     <i class="fa fa-star hidden-xs" aria-hidden="true"></i>
+                     <span class="visible-xs">{function="\L::header__quick_access"}</span>
                   </a>
                   <ul class="dropdown-menu">
                      {$menu_ar_vacio=TRUE}
@@ -93,7 +97,7 @@
                         {/if}
                      {/loop}
                      {if="$menu_ar_vacio"}
-                     <li><a href="#">Vacío</a></li>
+                     <li><a href="#">{function="\L::common__empty_male"}</a></li>
                      {/if}
                   </ul>
                </li>
@@ -104,8 +108,8 @@
                {if="$fsc->check_for_updates()"}
                <li>
                   <a href="updater.php" class="bg-primary" title='{function="\L::common__available_updates"}'>
-                     <span class="glyphicon glyphicon-upload hidden-xs"></span>
-                     <span class="visible-xs">{function="\L::header__updates"}</span>
+                     <i class="fa fa-cloud-upload hidden-xs" aria-hidden="true"></i>
+                     <span class="visible-xs">{function="\L::common__updates"}</span>
                   </a>
                </li>
                {/if}
@@ -113,77 +117,81 @@
                {if="$fsc->get_last_changes()"}
                <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                     <span class="glyphicon glyphicon-time hidden-xs"></span>
+                     <i class="fa fa-clock-o hidden-xs" aria-hidden="true"></i>
                      <span class="visible-xs">{function="\L::common__history"}</span>
                   </a>
                   <ul class="dropdown-menu">
-                     {loop="$fsc->get_last_changes()"}
-                        <li title="{if="$value['nuevo']"}creado{else}modificado{/if} el {$value['cambio']}">
-                           <a href="{$value['url']}">
-                              {if="$value['nuevo']"}
-                              <span class="glyphicon glyphicon-file"></span> &nbsp;
-                              {else}
-                              <span class="glyphicon glyphicon-edit"></span> &nbsp;
-                              {/if}
-                              {$value['texto']}
-                           </a>
-                        </li>
-                     {/loop}
+                  {loop="$fsc->get_last_changes()"}
+                     {if="$value['nuevo']"}
+                     <li title='{function="\L::header__created_at( $value[\'cambio\'] )"}'>
+                        <a href="{$value['url']}">
+                           <i class="fa fa-file" aria-hidden="true"></i>&nbsp; {$value['texto']}
+                        </a>
+                     </li>
+                     {else}
+                     <li title='{function="\L::header__modified_at( $value[\'cambio\'] )"}'>
+                        <a href="{$value['url']}">
+                           <i class="fa fa-edit" aria-hidden="true"></i>&nbsp; {$value['texto']}
+                        </a>
+                     </li>
+                     {/if}
+                  {/loop}
                   </ul>
                </li>
                {/if}
                
                <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" title='{function="\L::header__help"}'>
-                     <span class="glyphicon glyphicon-question-sign hidden-xs"></span>
+                     <span class="hidden-xs">
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp; {function="\L::header__help"}
+                     </span>
                      <span class="visible-xs">{function="\L::header__help"}</span>
                   </a>
                   <ul class="dropdown-menu">
                      <li>
                         <a href="https://www.facturascripts.com/documentacion" target="_blank">
-                           <i class="fa fa-book" aria-hidden="true"></i>&nbsp;{function="\L::header__documentation"}
+                           <i class="fa fa-book" aria-hidden="true"></i>&nbsp; {function="\L::header__documentation"}
                         </a>
                      </li>
                      <li>
-                        <a href="https://www.facturascripts.com/noticias" target="_blank">
-                           <i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;{function="\L::header__news"}
-                        </a>
-                     </li>
-                     <li>
-                        <a href="https://www.facturascripts.com/preguntas" target="_blank">
-                           <i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp;{function="\L::header__questions"}
+                        <a href="https://www.facturascripts.com/contacto" target="_blank">
+                           <i class="fa fa-shield" aria-hidden="true"></i>&nbsp; {function="\L::header__official_support"}
                         </a>
                      </li>
                      <li>
                         <a href="https://www.facturascripts.com/errores" target="_blank">
-                           <i class="fa fa-bug" aria-hidden="true"></i>&nbsp;{function="\L::header__errors"}
+                           <i class="fa fa-bug" aria-hidden="true"></i>&nbsp; {function="\L::header__errors"}
                         </a>
                      </li>
                      <li>
                         <a href="https://www.facturascripts.com/ideas" target="_blank">
-                           <i class="fa fa-lightbulb-o" aria-hidden="true"></i>&nbsp;{function="\L::header__ideas"}
+                           <i class="fa fa-lightbulb-o" aria-hidden="true"></i>&nbsp; {function="\L::header__ideas"}
                         </a>
                      </li>
                      <li class="divider"></li>
-                     <li><a href="#" id="b_feedback"><span class="glyphicon glyphicon-send"></span>&nbsp;{function="\L::header__report"}</a></li>
+                     <li>
+                        <a href="#" id="b_feedback">
+                           <i class="fa fa-edit" aria-hidden="true"></i>&nbsp; {function="\L::header__report"}
+                        </a>
+                     </li>
                   </ul>
                </li>
                
                <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="{$fsc->user->nick}">
-                     <span class="glyphicon glyphicon-user hidden-xs"></span>
+                     <i class="fa fa-user-circle hidden-xs" aria-hidden="true"></i>
                      <span class="visible-xs">{function="\L::common__user"}</span>
                   </a>
                   <ul class="dropdown-menu">
                      <li>
                         <a href="{$fsc->user->url()}">
-                           <span class="glyphicon glyphicon-user"></span>&nbsp; {$fsc->user->nick}
+                           <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp; {$fsc->user->nick}
                         </a>
                      </li>
                      <li class="divider"></li>
                      <li>
                         <a href="{$fsc->url()}&logout=TRUE">
-                           <span class="glyphicon glyphicon-log-out"></span>&nbsp;{function="\L::header__close_session"}
+                           <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; {function="\L::header__close_session"}
                         </a>
                      </li>
                   </ul>
@@ -200,17 +208,26 @@
    {/if}
    
    {if="$fsc->get_errors()"}
-   <div class="alert alert-danger hidden-print">
+   <div class="alert alert-danger alert-dismissible hidden-print" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label='{function="\L::common__close"}'>
+         <span aria-hidden="true">&times;</span>
+      </button>
       <ul>{loop="$fsc->get_errors()"}<li>{$value}</li>{/loop}</ul>
    </div>
    {/if}
    {if="$fsc->get_messages()"}
-   <div class="alert alert-success hidden-print">
+   <div class="alert alert-success alert-dismissible hidden-print" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label='{function="\L::common__close"}'>
+         <span aria-hidden="true">&times;</span>
+      </button>
       <ul>{loop="$fsc->get_messages()"}<li>{$value}</li>{/loop}</ul>
    </div>
    {/if}
    {if="$fsc->get_advices()"}
-   <div class="alert alert-info hidden-print">
+   <div class="alert alert-info alert-dismissible hidden-print" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label='{function="\L::common__close"}'>
+         <span aria-hidden="true">&times;</span>
+      </button>
       <ul>{loop="$fsc->get_advices()"}<li>{$value}</li>{/loop}</ul>
    </div>
    {/if}
@@ -227,7 +244,7 @@
                <h4 class="modal-title">{function="\L::common__facturascripts"}</h4>
             </div>
             <iframe src="" width="100%" height="600" frameBorder="0">
-                {function="\L::header__this_browser_not_support_frames"}
+               {function="\L::header__this_browser_not_support_frames"}
             </iframe>
          </div>
       </div>

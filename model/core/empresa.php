@@ -394,11 +394,11 @@ class empresa extends \fs_model
       
       if( strlen($this->nombre) < 1 OR strlen($this->nombre) > 100 )
       {
-         $this->new_error_msg(\L::empresa__msg_error_invalid_company_name);
+         $this->new_error_msg(\L::empresa__msg_error_invalid_company_name( $this->nombre ));
       }
       else if( strlen($this->nombre) < strlen($this->nombrecorto) )
       {
-         $this->new_error_msg(\L::empresa__msg_error_resumed_company_name_less_than_company_name);
+         $this->new_error_msg(\L::empresa__msg_error_resumed_company_name_less_than_company_name( $this->nombrecorto ));
       }
       else
       {

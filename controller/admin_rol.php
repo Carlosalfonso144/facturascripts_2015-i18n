@@ -260,6 +260,6 @@ class admin_rol extends fs_controller
          }
       }
       
-      $this->new_message($nump . \L::admin_rol__msg_perms_applied);
+      $this->new_message(\L::admin_rol__msg_perms_applied( $nump ));
    }
 }

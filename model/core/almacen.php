@@ -163,14 +163,16 @@ class almacen extends \fs_model
       
       if( !preg_match("/^[A-Z0-9]{1,4}$/i", $this->codalmacen) )
       {
-         $this->new_error_msg(\L::almacen__msg_error_invalid_storehouse_code);
+         $this->new_error_msg(\L::almacen__msg_error_invalid_storehouse_code( $this->codalmacen ));
       }
       else if( strlen($this->nombre) < 1 OR strlen($this->nombre) > 100 )
       {
-         $this->new_error_msg(\L::almacen__msg_error_invalid_storehouse_name);
+         $this->new_error_msg(\L::almacen__msg_error_invalid_storehouse_name( $this->nombre ));
       }
       else
+      {
          $status = TRUE;
+      }
       
       return $status;
    }

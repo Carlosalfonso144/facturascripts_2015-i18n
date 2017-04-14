@@ -58,7 +58,7 @@ if( $db->connect() )
                }
                catch(Exception $e)
                {
-                  echo \L::api__error.$e->getMessage();
+                  echo \L::api__error( $e->getMessage() );
                }
                
                $ejecutada = TRUE;
@@ -72,7 +72,9 @@ if( $db->connect() )
          }
       }
       else
+      {
          echo \L::api__no_function_executed;
+      }
    }
    else
    {
@@ -80,4 +82,6 @@ if( $db->connect() )
    }
 }
 else
+{
    echo \L::api__database_connection_error;
+}

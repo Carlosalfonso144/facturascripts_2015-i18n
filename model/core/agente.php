@@ -258,7 +258,9 @@ class agente extends \fs_model
          $this->new_error_msg(\L::agente__msg_error_employee_surname_less_100_chars);
       }
       else
+      {
          $status = TRUE;
+      }
       
       return $status;
    }

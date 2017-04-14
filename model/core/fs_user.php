@@ -392,13 +392,13 @@ class fs_user extends \fs_model
    }
    
    /*
-    * Modifica y guarda la fecha de login si tiene una diferencia de más de una hora
+    * Modifica y guarda la fecha de login si tiene una diferencia de más de 5 minutos
     * con la fecha guardada, así se evita guardar en cada consulta
     */
    public function update_login()
    {
       $ltime = strtotime($this->last_login.' '.$this->last_login_time);
-      if( time() - $ltime > 3600 )
+      if( time() - $ltime >= 300 )
       {
          $this->last_login = Date('d-m-Y');
          $this->last_login_time = Date('H:i:s');
@@ -472,7 +472,7 @@ class fs_user extends \fs_model
       
       if( !preg_match("/^[A-Z0-9_\+\.\-]{3,12}$/i", $this->nick) )
       {
-         $this->new_error_msg(\L::fs_user__msg_invalid_user_nick);
+         $this->new_error_msg(\L::fs_user__msg_invalid_user_nick( $this->nick ));
          return FALSE;
       }
       else

@@ -175,9 +175,7 @@ class fs_cache {
             self::$memcache = NULL;
             self::$connected = FALSE;
             self::$error = TRUE;
-            self::$error_msg = \L::fscache__msg_instalar_memcache_1_3;
-            self::$error_msg += '<a target="_blank" href="//www.facturascripts.com/comm3/index.php?page=community_item&id=553">' . \L::fscache__msg_instalar_memcache_2_3 . '</a>';
-            self::$error_msg += \L::fscache__msg_instalar_memcache_3_3;
+            self::$error_msg = \L::fscache__msg_instalar_memcache;
          }
       }
 
@@ -297,7 +295,7 @@ class fs_cache {
 
    public function version() {
       if (self::$connected) {
-         return \L::fscache__memcache . ' ' . self::$memcache->getVersion();
+         return \L::fscache__memcache( self::$memcache->getVersion() );
       } else {
          return \L::common__files;
       }

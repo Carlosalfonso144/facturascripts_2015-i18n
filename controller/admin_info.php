@@ -82,11 +82,11 @@ class admin_info extends fs_controller
       }
       else if( !$cron_vars['cron_exists'] )
       {
-         $this->new_advice(\L::admin_info__msg_cron_never_executed_1_3 . ' <a href="https://www.facturascripts.com/comm3/index.php?page=community_item&tag=cron" target="_blank">' . \L::admin_info__msg_cron_never_executed_2_3 . '</a>' . \L::admin_info__msg_cron_never_executed_3_3);
+         $this->new_advice(\L::admin_info__msg_cron_never_executed);
       }
       else if( $cron_vars['cron_error'] )
       {
-         $this->new_error_msg(\L::admin_info__msg_error_with_cron_1_3 . '<a href="'.$this->url() . '&fix=TRUE">' . \L::common__here . '</a>' . \L::admin_info__msg_error_with_cron_3_3);
+         $this->new_error_msg(\L::admin_info__msg_error_with_cron( $this->url() ));
       }
       else if( $cron_vars['cron_lock'] )
       {

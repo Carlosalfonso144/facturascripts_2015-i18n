@@ -184,7 +184,9 @@ class divisa extends \fs_model
          $this->new_error_msg(\L::divisa__msg_error_conversion_rate_not_0_for_purchases);
       }
       else
+      {
          $status = TRUE;
+      }
       
       return $status;
    }

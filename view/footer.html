@@ -9,7 +9,7 @@
                   {function="\L::footer__did_you_convinced"}
                </h3>
                <p class="help-block">
-				   {function="\L::footer__help_demo_facturascripts"}
+                  {function="\L::footer__help_demo_facturascripts"}
                </p>
             </div>
          </div>
@@ -37,7 +37,7 @@
          </div>
          <div class="col-sm-3">
             <a href='https://www.facturascripts.com/descargar?ref={function="base64_encode($fsc->user->email)"}' target="_blank" class="btn btn-lg btn-block btn-primary">
-               <i class="fa fa-download" aria-hidden="true"></i>&nbsp;{function="\L::admin_home__downloads"}
+               <i class="fa fa-download" aria-hidden="true"></i>&nbsp; {function="\L::admin_home__download"}
             </a>
             <i class="fa fa-cloud" aria-hidden="true"></i>
             <i class="fa fa-windows" aria-hidden="true"></i>
@@ -61,7 +61,7 @@
             {if="FS_DB_HISTORY"}
                <div class="panel panel-default hidden-print">
                   <div class="panel-heading">
-                     <h3 class="panel-title">{function="\L::footer__sql_queries"}</h3>
+                     <h3 class="panel-title">{function="\L::footer__sql_queries"}{function="\L::common__colon"}</h3>
                   </div>
                   <div class="panel-body">
                      <ol style="font-size: 11px; margin: 0px; padding: 0px 0px 0px 20px;">
@@ -88,16 +88,16 @@
       <div class="row">
          <div class="col-sm-4 col-xs-6">
             <small>
-               {function="\L::footer__created_with"} <a target="_blank" href="https://www.facturascripts.com">{function="\L::common__facturascripts"}</a>.
+               {function="\L::footer__created_with"}
             </small>
          </div>
          <div class="col-sm-4 hidden-xs text-center">
-            <span class="label label-default">{function="\L::footer__sql_queries"} {$fsc->selects()}</span>
-            <span class="label label-default">{function="\L::footer__transactions"} {$fsc->transactions()}</span>
+            <span class="label label-default">{function="\L::footer__sql_queries_number( $fsc->selects() )"}</span>
+            <span class="label label-default">{function="\L::footer__transactions_number( $fsc->transactions() )"}</span>
          </div>
          <div class="col-sm-4 col-xs-6 text-right">
             <span class="label label-default">
-               <span class="glyphicon glyphicon-time" aria-hidden="true" title='{function="\L::footer__page_processed_in"} {$fsc->duration()}"'></span>
+               <i class="fa fa-clock" aria-hidden="true" title='{function="\L::footer__page_processed_in( $fsc->duration() )"}"'></i>
                &nbsp; {$fsc->duration()}
             </span>
          </div>

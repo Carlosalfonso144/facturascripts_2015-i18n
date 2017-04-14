@@ -57,45 +57,41 @@
                <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="index.php">
-               <span class="glyphicon glyphicon-lock"></span> &nbsp;
-               {if="FS_DEMO"}DEMO{elseif="$fsc->empresa->nombrecorto"}{$fsc->empresa->nombrecorto}{else}{$fsc->empresa->nombre}{/if}
+               <i class="fa fa-lock" aria-hidden="true"></i>&nbsp;
+               {if="FS_DEMO"}{function="\L::default__demo"}{elseif="$fsc->empresa->nombrecorto"}{$fsc->empresa->nombrecorto}{else}{$fsc->empresa->nombre}{/if}
             </a>
          </div>
          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                <li>
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" title='{function="\L::common__help"}'>
-                     <span class="glyphicon glyphicon-question-sign hidden-xs"></span>
+                     <span class="hidden-xs">
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp; {function="\L::common__help"}
+                     </span>
                      <span class="visible-xs">{function="\L::common__help"}</span>
                   </a>
                   <ul class="dropdown-menu">
                      <li>
                         <a href="https://www.facturascripts.com/documentacion" target="_blank">
-                           <i class="fa fa-book" aria-hidden="true"></i>&nbsp;{function="\L::header__documentation"}
+                           <i class="fa fa-book" aria-hidden="true"></i>&nbsp; {function="\L::header__documentation"}
                         </a>
                      </li>
                      <li>
-                        <a href="https://www.facturascripts.com/noticias" target="_blank">
-                           <i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;{function="\L::header__news"}
-                        </a>
-                     </li>
-                     <li>
-                        <a href="https://www.facturascripts.com/preguntas" target="_blank">
-                           <i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp;{function="\L::header__questions"}
+                        <a href="https://www.facturascripts.com/contacto" target="_blank">
+                           <i class="fa fa-shield" aria-hidden="true"></i>&nbsp; {function="\L::header__official_support"}
                         </a>
                      </li>
                      <li>
                         <a href="https://www.facturascripts.com/errores" target="_blank">
-                           <i class="fa fa-bug" aria-hidden="true"></i>&nbsp;{function="\L::header__errors"}
-                        </a>
-                     </li>
-                     <li>
-                        <a href="https://www.facturascripts.com/ideas" target="_blank">
-                           <i class="fa fa-lightbulb-o" aria-hidden="true"></i>&nbsp;{function="\L::header__ideas"}
+                           <i class="fa fa-bug" aria-hidden="true"></i>&nbsp; {function="\L::header__errors"}
                         </a>
                      </li>
                      <li class="divider"></li>
-                     <li><a href="#" id="b_feedback"><span class="glyphicon glyphicon-send"></span>&nbsp;{function="\L::header__report"}</a></li>
+                     <li>
+                        <a href="#" id="b_feedback">
+                           <i class="fa fa-edit" aria-hidden="true"></i>&nbsp; {function="\L::header__report"}
+                        </a>
+                     </li>
                   </ul>
                </li>
             </ul>
@@ -125,15 +121,22 @@
             <div class="col-md-6 col-md-offset-3">
                <div class="page-header">
                   <h1>
-                     <span class="glyphicon glyphicon-user"></span>&nbsp;{function="\L::header__start_session"}
+                     <i class="fa fa-user" aria-hidden="true"></i>&nbsp; {function="\L::header__start_session"}
                   </h1>
+                  <p class="help-block">
+                     {if="FS_DEMO"}
+                     {function="\L::default__welcome_facturascripts_demo"}
+                     {else}
+                     {function="\L::default__select_user_to_login"}
+                     {/if}
+                  </p>
                </div>
                <div class="well well-sm">
                   <br/>
                   <div class="container-fluid">
                      <div class="row">
-                        <div class="col-sm-5">
-                           <div class="thumbnail hidden-sm hidden-xs">
+                        <div class="col-sm-4 col-md-5">
+                           <div class="thumbnail hidden-xs">
                               {if="FS_DEMO"}
                               <img src="{#FS_PATH#}view/img/logo.png" alt="logo"/>
                               {elseif="file_exists(FS_MYDOCS.'images/logo.png')"}
@@ -145,12 +148,11 @@
                               {/if}
                            </div>
                         </div>
-                        <div class="col-sm-7">
+                        <div class="col-sm-8 col-md-7">
                            {if="FS_DEMO"}
                            <input type="hidden" name="password" value="demo"/>
                            <div class="form-group">
-                              {function="\L::header__welcome_facturascripts_demo"}
-                              <input type="text" class="form-control input-lg" name="user" placeholder='{function="\L::header__placeholder_your_email"}' autocomplete="off"/>
+                              <input type="text" name="user" class="form-control input-lg" placeholder='{function="\L::header__placeholder_your_email"}' required="" autocomplete="off"/>
                            </div>
                            {else}
                            <div class="form-group">
@@ -165,14 +167,14 @@
                               </select>
                            </div>
                            <div class="form-group">
-                              <input type="password" class="form-control input-lg" name="password" maxlength="32" placeholder='{function="\L::admin_empresa__placeholder_password"}'/>
+                              <input type="password" name="password" class="form-control input-lg" maxlength="32" required="" placeholder='{function="\L::admin_empresa__placeholder_password"}'/>
                               <p class="help-block">
                                  <a href="#" id="b_new_password">{function="\L::default__forgot_your_password"}</a>
                               </p>
                            </div>
                            {/if}
-                           <button class="btn btn-block btn-primary" type="submit" id="login" onclick="this.disabled=true;this.form.submit();">
-                              <span class="glyphicon glyphicon-log-in"></span>&nbsp;{function="\L::header__start_session"}
+                           <button class="btn btn-block btn-primary" type="submit" id="login">
+                              <i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp; {function="\L::header__start_session"}
                            </button>
                         </div>
                      </div>
@@ -216,13 +218,13 @@
                      <input type="password" class="form-control" name="new_password2" maxlength="32" placeholder='{function="\L::admin_user__repeat_new_password"}' required=""/>
                   </div>
                   <div class="form-group">
-                     <label>Contraseña de la base de datos</label>
+                     <label>{function="\L::default__database_password"}</label>
                      <input type="password" class="form-control" name="db_password" placeholder='{function="\L::default__database_password"}'/>
                   </div>
                </div>
                <div class="modal-footer">
                   <button type="submit" class="btn btn-sm btn-warning">
-                     <span class="glyphicon glyphicon-wrench"></span>&nbsp;{function="\L::default__change"}
+                     <i class="fa fa-wrench" aria-hidden="true"></i>&nbsp; {function="\L::default__change"}
                   </button>
                </div>
             </form>
@@ -233,11 +235,10 @@
    
    {include="feedback"}
    
+   {if="FS_DB_HISTORY"}
    <hr style="margin-top: 50px;"/>
-   
    <div class="container-fluid" style="margin-bottom: 10px;">
       <div class="row">
-         {if="FS_DB_HISTORY"}
          <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="panel panel-default">
                <div class="panel-heading">
@@ -250,25 +251,25 @@
                </div>
             </div>
          </div>
-         {/if}
-      </div>
-      <div class="row">
-         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-            <small>
-               {function="\L::footer__created_with"} <a target="_blank" href="https://www.facturascripts.com">{function="\L::common__facturascripts"}</a>.
-            </small>
-         </div>
-         <div class="col-lg-4 col-md-4 col-sm-4 hidden-xs text-center">
-            <span class="label label-default">{function="\L::footer__sql_queries"} {$fsc->selects()}</span>
-            <span class="label label-default">{function="\L::footer__transactions"} {$fsc->transactions()}</span>
-         </div>
-         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 text-right">
-            <span class="label label-default">
-               <span class="glyphicon glyphicon-time" aria-hidden="true" title='{function="\L::footer__page_processed_in"} {$fsc->duration()}"></span>
-               &nbsp; {$fsc->duration()}
-            </span>
-         </div>
       </div>
    </div>
+   {/if}
+   
+   <nav class="navbar navbar-default navbar-fixed-bottom hidden-xs">
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-sm-6">
+               <p class="navbar-text">
+                  {function="\L::footer__created_with"}
+               </p>
+            </div>
+            <div class="col-sm-6">
+               <p class="navbar-text navbar-right">
+                  {function="\L::default__queries_transactions_time( $fsc->selects(), $fsc->transactions(), $fsc->duration() )"}
+               </p>
+            </div>
+         </div>
+      </div>
+   </nav>
 </body>
 </html>

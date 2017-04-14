@@ -161,7 +161,7 @@ class forma_pago extends \fs_model
       if( strtotime($fecha1) > strtotime($fecha2) )
       {
          /// vencimiento no válido, asignamos el predeterminado
-         $this->new_error_msg(\L::forma_pago__msg_invalid_expiration);
+         $this->new_error_msg(\L::forma_pago__msg_invalid_expiration( $fecha1, $fecha2 ));
          $this->vencimiento = '+1day';
       }
    }

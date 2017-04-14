@@ -160,11 +160,11 @@ class serie extends \fs_model
       
       if( !preg_match("/^[A-Z0-9]{1,2}$/i", $this->codserie) )
       {
-         $this->new_error_msg(\L::serie__msg_invalid_series_code);
+         $this->new_error_msg(\L::serie__msg_invalid_series_code( $this->codserie ));
       }
       else if( strlen($this->descripcion) < 1 OR strlen($this->descripcion) > 100 )
       {
-         $this->new_error_msg(\L::serie__msg_invalid_series_description);
+         $this->new_error_msg(\L::serie__msg_invalid_series_description( $this->descripcion ));
       }
       else
          $status = TRUE;

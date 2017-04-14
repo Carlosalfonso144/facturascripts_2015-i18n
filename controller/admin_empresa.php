@@ -109,12 +109,11 @@ class admin_empresa extends fs_controller
                
                if($mail->Host == 'smtp.gmail.com')
                {
-                  $this->new_error_msg(\L::admin_empresa__msg_error_gmail_explanation_1_2
-                          . '<a href="https://support.google.com/accounts/answer/185833?hl=es" target="_blank">' . \L::admin_empresa__msg_error_gmail_explanation_2_2 . '</a>');
+                  $this->new_error_msg(\L::admin_empresa__msg_error_gmail_explanation);
                }
                else
                {
-                  $this->new_error_msg("¿<a href='https://www.facturascripts.com/comm3/index.php?page=community_item&id=74' target='_blank'>" . \L::admin_empresa__msg_error_need_help . "</a>?");
+                  $this->new_error_msg(\L::admin_empresa__msg_error_need_help);
                }
             }
          }
@@ -128,8 +127,8 @@ class admin_empresa extends fs_controller
    public function encriptaciones()
    {
       return array(
-          'ssl' => 'SSL',
-          'tls' => 'TLS',
+          'ssl' => \L::admin_empresa__encryption_ssl,
+          'tls' => \L::admin_empresa__encryption_tls,
           '' => \L::common__none_female
       );
    }
@@ -137,9 +136,9 @@ class admin_empresa extends fs_controller
    public function mailers()
    {
       return array(
-          'mail' => 'Mail',
-          'sendmail' => 'SendMail',
-          'smtp' => 'SMTP'
+          'mail' => \L::admin_empresa__mailers_mail,
+          'sendmail' => \L::admin_empresa__mailers_sendmail,
+          'smtp' => \L::admin_empresa__mailers_smtp
       );
    }
 }

@@ -55,7 +55,7 @@ if( $db->connect() )
    
    if($cron_vars['cron_lock'])
    {
-      echo "\n" . \L::cron__cron_still_working;
+      echo \L::cron__cron_still_working;
       
       /// marcamos el error en el cron
       $cron_vars['cron_error'] = 'TRUE';
@@ -98,11 +98,11 @@ if( $db->connect() )
       {
          if( file_exists('plugins/'.$plugin.'/cron.php') )
          {
-            echo "\n***********************\n" . \L::cron__executing_plugin_cron . $plugin."\n";
+            echo \L::cron__executing_plugin_cron( $plugin );
             
             include 'plugins/'.$plugin.'/cron.php';
             
-            echo "\n***********************";
+            echo \L::cron__separator( $plugin );
          }
       }
       
@@ -121,18 +121,18 @@ if( $db->connect() )
    
    foreach($fsvar->get_errors() as $err)
    {
-      echo "\n" . \L::cron__error . $err . "\n";
+      echo \L::cron__error( $err );
    }
    foreach($db->get_errors() as $err)
    {
-      echo "\n" . \L::cron__error . $err . "\n";
+      echo \L::cron__error( $err );
    }
    
    $db->close();
 }
 else
 {
-   echo \L::cron__cant_connect_database . "\n";
+   echo \L::cron__cant_connect_database;
    
    foreach($db->get_errors() as $err)
    {
@@ -141,4 +141,4 @@ else
 }
 
 $tiempo = explode(' ', microtime());
-echo "\n" . \L::cron__execution_time . number_format($tiempo[1] + $tiempo[0] - $uptime, 3)." s\n";
+echo "\n" . \L::cron__execution_time( number_format($tiempo[1] + $tiempo[0] - $uptime, 3) );

@@ -26,10 +26,15 @@
    $(document).ready(function() {
       $("#b_eliminar_usuario").click(function(event) {
          event.preventDefault();
-         if( confirm('"'{function="\L::admin_user__confirm_delete_user"}'"') )
-         {
-            window.location.href = 'index.php?page=admin_users&delete={$fsc->suser->nick}';
-         }
+         bootbox.confirm({
+            message: {function="\L::admin_user__confirm_delete_user"},
+            title: {function="\L::common__warning"},
+            callback: function(result) {
+               if (result) {
+                  window.location.href = 'index.php?page=admin_users&delete={$fsc->suser->nick}';
+               }
+            }                
+         });
       });
       $("#b_nuevo_agente").click(function(event) {
          event.preventDefault();
@@ -47,7 +52,7 @@
             <div class="btn-group">
                <a class="btn btn-sm btn-default" href="index.php?page=admin_users">
                   <span class="glyphicon glyphicon-arrow-left"></span>
-                  <span class="hidden-xs">&nbsp;{function="\L::common__users"}</span>
+                  <span class="hidden-xs">&nbsp; {function="\L::common__users"}</span>
                </a>
                <a class="btn btn-sm btn-default" href="{$fsc->url()}" title='{function="\L::common__button_reload_page"}'>
                   <span class="glyphicon glyphicon-refresh"></span>
@@ -69,12 +74,12 @@
                {if="$fsc->allow_delete"}
                <a href="#" id="b_eliminar_usuario" class="btn btn-sm btn-danger">
                   <span class="glyphicon glyphicon-trash"></span>
-                  <span class="hidden-xs hidden-sm">&nbsp;{function="\L::common__button_delete"}</span>
+                  <span class="hidden-xs hidden-sm">&nbsp; {function="\L::common__button_delete"}</span>
                </a>
                {/if}
                <button class="btn btn-sm btn-primary" type="submit" onclick="this.disabled=true;this.form.submit();">
                   <span class="glyphicon glyphicon-floppy-disk"></span>
-                  <span class="hidden-xs">&nbsp;{function="\L::common__button_save"}</span>
+                  <span class="hidden-xs">&nbsp; {function="\L::common__button_save"}</span>
                </button>
             </div>
          </div>
@@ -186,13 +191,13 @@
          <li role="presentation" class="active">
             <a href="#autorizar" aria-controls="autorizar" role="tab" data-toggle="tab">
                <i class="fa fa-check-square" aria-hidden="true"></i>
-               <span class="hidden-xs">&nbsp;{function="\L::admin_rol__autorize"}</span>
+               <span class="hidden-xs">&nbsp; {function="\L::admin_rol__autorize"}</span>
             </a>
          </li>
          <li role="presentation">
             <a href="#historial" aria-controls="historial" role="tab" data-toggle="tab">
                <i class="fa fa-history" aria-hidden="true"></i>
-               <span class="hidden-xs">&nbsp;{function="\L::common__history"}</span>
+               <span class="hidden-xs">&nbsp; {function="\L::common__history"}</span>
             </a>
          </li>
          {loop="$fsc->extensions"}
@@ -219,7 +224,7 @@
                   {if="$fsc->suser->admin"}
                   <tr class="success">
                      <td colspan="5">
-                        <span class="glyphicon glyphicon-ok"></span> &nbsp;{function="\L::admin_user__admin_has_full_access"}
+                        <span class="glyphicon glyphicon-ok"></span> &nbsp; {function="\L::admin_user__admin_has_full_access"}
                      </td>
                   </tr>
                   {elseif="!$fsc->user->admin"}
@@ -311,13 +316,13 @@
                   <div class="col-sm-8">
                      <p class="help-block">
                         <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                        &nbsp;{function="\L::admin_user__help_system_info"}
+                        &nbsp; {function="\L::admin_user__help_system_info"}
                      </p>
                   </div>
                   <div class="col-sm-4 text-right">
                      <a href="index.php?page=admin_info" class="btn btn-xs btn-default">
                         <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-                        <span class="hidden-xs">&nbsp;{function="\L::common__full_history"}</span>
+                        <span class="hidden-xs">&nbsp; {function="\L::common__full_history"}</span>
                      </a>
                   </div>
                </div>
@@ -371,7 +376,7 @@
             <div class="modal-header">
                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                <h4 class="modal-title">
-                  <span class="glyphicon glyphicon-user"></span>&nbsp;{function="\L::admin_user__title_new_employee"}
+                  <span class="glyphicon glyphicon-user"></span>&nbsp; {function="\L::admin_user__title_new_employee"}
                </h4>
                <p class="help-block">
                   {function="\L::admin_user__help_new_employee_and_assign"}
@@ -391,7 +396,7 @@
                   </div>
                </div>
                <div class="form-group">
-                  <label for="ndnicif" class="col-sm-2 control-label">{#FS_CIFNIF#}</label>
+                  <label for="ndnicif" class="col-sm-2 control-label">{function="\L::common__cifnif"}</label>
                   <div class="col-sm-10">
                      <input class="form-control" type="text" name="ndnicif" autocomplete="off"/>
                   </div>
@@ -411,7 +416,7 @@
             </div>
             <div class="modal-footer">
                <button class="btn btn-sm btn-primary" type="submit">
-                  <span class="glyphicon glyphicon-floppy-disk"></span> &nbsp;{function="\L::common__button_save"}
+                  <span class="glyphicon glyphicon-floppy-disk"></span> &nbsp; {function="\L::common__button_save"}
                </button>
             </div>
          </div>

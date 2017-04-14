@@ -120,7 +120,8 @@ class fs_controller
    public $template;
    
    /**
-    * La cadena obtenida del formulario de búsqueda
+    * Esta variable contiene el texto enviado como parámetro query por cualquier formulario,
+    * es decir, se corresponde con $_REQUEST['query']
     * @var type 
     */
    public $query;
@@ -166,26 +167,13 @@ class fs_controller
       /// comprobamos la versión de PHP
       if( floatval( substr(phpversion(), 0, 3) ) < 5.3 )
       {
-         $this->new_error_msg(\L::fscontroller__msg_required_php_version . phpversion().'.');
+         $this->new_error_msg(\L::fscontroller__msg_required_php_version( phpversion() ));
       }
       
       if( $this->db->connect() )
       {
          $this->user = new fs_user();
-         $this->page = new fs_page(
-                 array(
-                     'name' => $name,
-                     'title' => $title,
-                     'folder' => $folder,
-                     'version' => $this->version(),
-                     'show_on_menu' => $shmenu,
-                     'important' => $important
-                 )
-         );
-         if($name != '')
-         {
-            $this->page->save();
-         }
+         $this->check_fs_page($name, $title, $folder, $shmenu, $important);
          
          $this->empresa = new empresa();
          $this->default_items = new fs_default_items();
@@ -212,20 +200,20 @@ class fs_controller
             if( $this->ip_baneada($ips) )
             {
                $this->banear_ip($ips);
-               $this->new_error_msg(\L::fscontroller__msg_ip_baneada_1_2 . $_POST['user'] . \L::fscontroller__msg_ip_baneada_2_2);
+               $this->new_error_msg(\L::fscontroller__msg_ip_baneada_usuario( $_POST['user'] ));
             }
             else if($_POST['new_password'] != $_POST['new_password2'])
             {
-               $this->new_error_msg(\L::fscontroller__msg_password_diferentes . $_POST['user']);
+               $this->new_error_msg(\L::fscontroller__msg_password_diferentes_usuario( $_POST['user'] ));
             }
             else if($_POST['new_password'] == '')
             {
-               $this->new_error_msg(\L::fscontroller__msg_nueva_password . $_POST['user']);
+               $this->new_error_msg(\L::fscontroller__msg_nueva_password_usuario( $_POST['user'] ));
             }
             else if($_POST['db_password'] != FS_DB_PASS)
             {
                $this->banear_ip($ips);
-               $this->new_error_msg(\L::fscontroller__msg_password_incorrecta . $_POST['user']);
+               $this->new_error_msg(\L::fscontroller__msg_password_incorrecta_usuario( $_POST['user'] ));
             }
             else
             {
@@ -235,10 +223,10 @@ class fs_controller
                   $suser->set_password($_POST['new_password']);
                   if( $suser->save() )
                   {
-                     $this->new_message(\L::fscontroller__msg_password_guardada . $_POST['user']);
+                     $this->new_message(\L::fscontroller__msg_password_guardada_usuario( $_POST['user'] ));
                   }
                   else
-                     $this->new_error_msg(\L::fscontroller__msg_password_no_guardada . $_POST['user']);
+                     $this->new_error_msg(\L::fscontroller__msg_password_no_guardada_usuario( $_POST['user'] ));
                }
             }
             
@@ -296,7 +284,48 @@ class fs_controller
       else
       {
          $this->template = 'no_db';
-         $this->new_error_msg(\L::fscontroller__msg_not_conected_to_db_1_2 . ' "<b>' . FS_DB_NAME . '</b>"' . \L::fscontroller__msg_not_conected_to_db_2_2);
+         $this->new_error_msg(\L::fscontroller__msg_not_conected_to_db( FS_DB_NAME ));
+      }
+   }
+   
+   private function check_fs_page($name, $title, $folder, $shmenu, $important)
+   {
+      /// cargamos los datos de la página o entrada del menú actual
+      $this->page = new fs_page(
+              array(
+                  'name' => $name,
+                  'title' => $title,
+                  'folder' => $folder,
+                  'version' => $this->version(),
+                  'show_on_menu' => $shmenu,
+                  'important' => $important,
+                  'orden' => 100
+              )
+      );
+      
+      /// ahora debemos comprobar si guardar o no
+      if($name)
+      {
+         $page = $this->page->get($name);
+         if($page)
+         {
+            /// la página ya existe ¿Actualizamos?
+            if($page->name != $name OR $page->folder != $folder OR $page->show_on_menu != $shmenu OR $page->important != $important)
+            {
+               $page->name = $name;
+               $page->folder = $folder;
+               $page->show_on_menu = $shmenu;
+               $page->important = $important;
+               $page->save();
+            }
+            
+            $this->page = $page;
+         }
+         else
+         {
+            /// la página no existe, guardamos.
+            $this->page->save();
+         }
       }
    }
    
@@ -643,13 +672,13 @@ class fs_controller
                }
                else
                {
-                  $this->new_error_msg(\L::fscontroller__msg_password_incorrecta . ' (' . $_POST['user'] . ')', 'login', TRUE);
+                  $this->new_error_msg(\L::fscontroller__msg_short_password_incorrecta_usuario( $_POST['user'] ), 'login', TRUE);
                   $this->banear_ip($ips);
                }
             }
             else
             {
-               $this->new_error_msg(\L::common__the_user . $_POST['user'] . \L::fscontroller__msg_user_no_existe_2_2);
+               $this->new_error_msg(\L::fscontroller__msg_user_no_existe( $_POST['user'] ));
                $this->user->clean_cache(TRUE);
                $this->cache->clean();
             }
@@ -664,18 +693,20 @@ class fs_controller
             {
                $user->logged_on = TRUE;
                $user->update_login();
+               setcookie('user', $user->nick, time()+FS_COOKIES_EXPIRE);
+               setcookie('logkey', $user->log_key, time()+FS_COOKIES_EXPIRE);
                $this->user = $user;
                $this->load_menu();
             }
             else if( !is_null($user->log_key) )
             {
-               $this->new_message(\L::fscontroller__msg_cookie_no_valida_1_2 . $user->last_ip . \L::fscontroller__msg_cookie_no_valida_2_2);
+               $this->new_message(\L::fscontroller__msg_cookie_no_valida_ip( $user->last_ip ));
                $this->log_out();
             }
          }
          else
          {
-            $this->new_error_msg(\L::common__the_user . $_COOKIE['user'] . \L::fscontroller__msg_user_no_existe_2_2);
+            $this->new_error_msg(\L::fscontroller__msg_user_no_existe( $_COOKIE['user'] ));
             $this->log_out(TRUE);
             $this->user->clean_cache(TRUE);
             $this->cache->clean();
@@ -942,7 +973,7 @@ class fs_controller
     */
    protected function save_codejercicio($cod)
    {
-      $this->new_error_msg('fs_controller::save_codejercicio()' . \L::fscontroller__msg_funcion_obsoleta);
+      $this->new_error_msg(\L::fscontroller__msg_funcion_obsoleta( 'fs_controller::save_codejercicio()' ));
    }
    
    /**
@@ -962,7 +993,7 @@ class fs_controller
     */
    protected function save_codcliente($cod)
    {
-      $this->new_error_msg('fs_controller::save_codcliente()' . \L::fscontroller__msg_funcion_obsoleta);
+      $this->new_error_msg(\L::fscontroller__msg_funcion_obsoleta( 'fs_controller::save_codcliente()' ));
    }
    
    /**
@@ -972,7 +1003,7 @@ class fs_controller
     */
    protected function save_coddivisa($cod)
    {
-      $this->new_error_msg('fs_controller::save_coddivisa()' . \L::fscontroller__msg_funcion_obsoleta);
+      $this->new_error_msg(\L::fscontroller__msg_funcion_obsoleta( 'fs_controller::save_coddivisa()' ));
    }
    
    /**
@@ -982,7 +1013,7 @@ class fs_controller
     */
    protected function save_codfamilia($cod)
    {
-      $this->new_error_msg('fs_controller::save_codfamilia()' . \L::fscontroller__msg_funcion_obsoleta);
+      $this->new_error_msg(\L::fscontroller__msg_funcion_obsoleta( 'fs_controller::save_codfamilia()' ));
    }
    
    /**
@@ -1012,7 +1043,7 @@ class fs_controller
     */
    protected function save_codpais($cod)
    {
-      $this->new_error_msg('fs_controller::save_codpais()' . \L::fscontroller__msg_funcion_obsoleta);
+      $this->new_error_msg(\L::fscontroller__msg_funcion_obsoleta( 'fs_controller::save_codpais()' ));
    }
    
    /**
@@ -1022,7 +1053,7 @@ class fs_controller
     */
    protected function save_codproveedor($cod)
    {
-      $this->new_error_msg('fs_controller::save_codproveedor()' . \L::fscontroller__msg_funcion_obsoleta);
+      $this->new_error_msg(\L::fscontroller__msg_funcion_obsoleta( 'fs_controller::save_codproveedor()' ));
    }
    
    /**
@@ -1032,7 +1063,7 @@ class fs_controller
     */
    protected function save_codserie($cod)
    {
-      $this->new_error_msg('fs_controller::save_codserie()' . \L::fscontroller__msg_funcion_obsoleta);
+      $this->new_error_msg(\L::fscontroller__msg_funcion_obsoleta( 'fs_controller::save_codserie()' ));
    }
    
    /**

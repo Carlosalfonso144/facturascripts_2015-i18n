@@ -189,7 +189,7 @@ class ejercicio extends \fs_model
       {
          if($show_error)
          {
-            $this->new_error_msg(\L::ejercicio___msg_error_data_out_of_range);
+            $this->new_error_msg(\L::ejercicio__msg_error_data_out_of_range);
          }
          
          return $this->fechafin;
@@ -198,7 +198,7 @@ class ejercicio extends \fs_model
       {
          if($show_error)
          {
-            $this->new_error_msg(\L::ejercicio___msg_error_data_out_of_range);
+            $this->new_error_msg(\L::ejercicio__msg_error_data_out_of_range);
          }
          
          return $this->fechainicio;
@@ -298,22 +298,24 @@ class ejercicio extends \fs_model
       
       if( !preg_match("/^[A-Z0-9_]{1,4}$/i", $this->codejercicio) )
       {
-         $this->new_error_msg(\L::ejercicio__msg_error_invalid_exercise_code);
+         $this->new_error_msg(\L::ejercicio__msg_error_invalid_exercise_code( $this->codejercicio ));
       }
       else if( strlen($this->nombre) < 1 OR strlen($this->nombre) > 100 )
       {
-         $this->new_error_msg(\L::ejercicio__msg_error_invalid_exercise_name);
+         $this->new_error_msg(\L::ejercicio__msg_error_invalid_exercise_name( $this->nombre ));
       }
       else if( strtotime($this->fechainicio) > strtotime($this->fechafin) )
       {
-         $this->new_error_msg(\L::ejercicio__msg_error_startdate_before_enddate_1_2 . " (".$this->fechainicio.") " . \L::ejercicio__msg_error_startdate_before_enddate_2_2 . " (" . $this->fechafin . ").");
+         $this->new_error_msg(\L::ejercicio__msg_error_startdate_before_enddate( $this->fechainicio, $this->fechafin ));
       }
       else if( strtotime($this->fechainicio) < 1 )
       {
-         $this->new_error_msg(\L::ejercicio__msg_error_invalid_date);
+         $this->new_error_msg(\L::ejercicio__msg_error_invalid_date( $this->fechainicio ));
       }
       else
+      {
          $status = TRUE;
+      }
       
       return $status;
    }
@@ -340,7 +342,7 @@ class ejercicio extends \fs_model
             
             if( !$this->floatcmp($debe, $haber, FS_NF0, TRUE) )
             {
-               $this->new_error_msg(\L::ejercicio__msg_exercise_incorrect_subaccounts_1_2 . ' ' . $debe . \L::ejercicio__msg_exercise_to_have . $haber);
+               $this->new_error_msg(\L::ejercicio__msg_exercise_incorrect_subaccounts( $debe, $haber ));
                $status = FALSE;
             }
          }
@@ -361,12 +363,12 @@ class ejercicio extends \fs_model
             
             if( !$this->floatcmp($debe, $haber, FS_NF0, TRUE) )
             {
-               $this->new_error_msg(\L::ejercicio__msg_exercise_incorrect_accounting_1_2 . ' ' . $debe . \L::ejercicio__msg_exercise_to_have . $haber);
+               $this->new_error_msg(\L::ejercicio__msg_exercise_incorrect_accounting( $debe, $haber ));
                $status = FALSE;
             }
             else if(!$status)
             {
-               $this->new_error_msg(\L::ejercicio__msg_exercise_incorrect_not_accounting_1_2 . ' ' . $debe . \L::ejercicio__msg_exercise_to_have . $haber);
+               $this->new_error_msg(\L::ejercicio__msg_exercise_incorrect_not_accounting( $debe, $haber ));
             }
          }
       }
