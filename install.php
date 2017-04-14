@@ -25,7 +25,7 @@ $lang = substr(\filter_input(INPUT_SERVER, 'HTTP_ACCEPT_LANGUAGE'), 0, 2);
 /* 
  * En caso de que quieras probar como se ven las traducciones, indicalo aquí
  */
-$lang = 'ba';
+$lang = 'en';
 
 $language = ($lang and file_exists('language/lang_' . $lang . '.json')) ? $lang : 'es';
 $i18n = new fs_i18n();
