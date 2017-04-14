@@ -26,7 +26,7 @@ class fs_i18n {
     *
     * @var string
     */
-   protected $filePath = './language/lang_{LANGUAGE}.ini';
+   protected $filePath = './language/lang_{LANGUAGE}.json';
 
    /**
     * Cache file path
@@ -66,7 +66,7 @@ class fs_i18n {
     * @var string
     */
    //protected $forcedLang = NULL;
-   protected $forcedLang = 'es';
+   protected $forcedLang = NULL;
 
    /**
     * This is the seperator used if you use sections in your ini-file.

@@ -22,8 +22,14 @@
 
 require_once 'base/fs_i18n.php';
 
+/* El idioma se lee de los lenguajes que soporta el navegador */
 $lang = substr(\filter_input(INPUT_SERVER, 'HTTP_ACCEPT_LANGUAGE'), 0, 2);
-$language = ($lang and file_exists('language/lang_' . $lang . '.ini')) ? $lang : 'es';
+/* 
+ * En caso de que quieras probar como se ven las traducciones, indicalo aquí
+ */
+$lang = 'en';
+
+$language = ($lang and file_exists('language/lang_' . $lang . '.json')) ? $lang : 'es';
 $i18n = new \fs_i18n();
 $i18n->setForcedLang($language);
 $i18n->init();
