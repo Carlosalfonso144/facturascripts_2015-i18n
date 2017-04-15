@@ -78,7 +78,9 @@ class fs_relation extends fs_model
          return FALSE;
       }
       else
+      {
          return $this->db->select("SELECT * FROM fs_relations WHERE id = ".$this->var2str($this->id).";");
+      }
    }
    
    public function save()
@@ -109,7 +111,9 @@ class fs_relation extends fs_model
             return TRUE;
          }
          else
+         {
             return FALSE;
+         }
       }
    }
    

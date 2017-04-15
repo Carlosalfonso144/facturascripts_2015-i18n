@@ -273,7 +273,9 @@ class empresa extends \fs_model
          return TRUE;
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**
@@ -364,7 +366,9 @@ class empresa extends \fs_model
          return FALSE;
       }
       else
+      {
          return $this->db->select("SELECT * FROM ".$this->table_name." WHERE id = ".$this->var2str($this->id).";");
+      }
    }
    
    /**
@@ -498,7 +502,9 @@ class empresa extends \fs_model
                return TRUE;
             }
             else
+            {
                return FALSE;
+            }
          }
       }
       else

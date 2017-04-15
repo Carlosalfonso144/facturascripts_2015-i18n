@@ -159,8 +159,9 @@ class fs_i18n {
 
       if ($outdated) {
          $config = $this->load($this->langFilePath);
-         if ($this->mergeFallback)
+         if ($this->mergeFallback) {
             $config = self::array_extend($config, $this->load($this->getConfigFilename($this->fallbackLang)));
+         }
 
          $compiled = "<?php class " . $this->prefix . " {\n"
                  . $this->compile($config)
@@ -172,8 +173,9 @@ class fs_i18n {
                  . '    return $args ? vsprintf($return,$args) : $return;'
                  . "\n}";
 
-         if (!is_dir($this->cachePath))
+         if (!is_dir($this->cachePath)) {
             mkdir($this->cachePath, 0755, true);
+         }
 
          if (file_put_contents($this->cacheFilePath, $compiled) === FALSE) {
             throw new Exception("Could not write cache file to path '" . $this->cacheFilePath . "'. Is it writable?");
@@ -317,7 +319,7 @@ class fs_i18n {
             $config = parse_ini_file($filename, true);
             break;
          case 'yml':
-            if( ! class_exists('Spyc') )
+            if (!class_exists('Spyc'))
                require_once 'vendor/spyc.php';
             $config = spyc_load_file($filename);
             break;

@@ -166,7 +166,7 @@
       <li role="presentation">
          <a href="#t_avanzado" aria-controls="t_avanzado" role="tab" data-toggle="tab">
             <span class="glyphicon glyphicon-wrench"></span>
-            <span class="hidden-xs">&nbsp; {function="\L::admin_home__advanced"}</span>
+            <span class="hidden-xs">&nbsp; {function="\L::common__advanced"}</span>
          </a>
       </li>
    </ul>
@@ -485,7 +485,7 @@
                   </div>
                   <div class="col-md-3 col-sm-3">
                      <div class="form-group">
-                        {function="\L::admin_home__startpage"}
+                        {function="\L::common__startpage"}
                         <select name="homepage" class="form-control">
                            {loop="$fsc->paginas"}
                            <option value="{$value->name}"{if="$value->name==$GLOBALS['config2']['homepage']"} selected=""{/if}>{$value->name}</option>

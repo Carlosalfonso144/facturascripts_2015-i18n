@@ -144,7 +144,9 @@ class ejercicio extends \fs_model
             return sprintf('%04s', (1 + intval($cod[0]['cod'])));
          }
          else
+         {
             return '0001';
+         }
       }
    }
    
@@ -159,7 +161,9 @@ class ejercicio extends \fs_model
          return 'index.php?page=contabilidad_ejercicios';
       }
       else
+      {
          return 'index.php?page=contabilidad_ejercicio&cod='.$this->codejercicio;
+      }
    }
    
    /**
@@ -218,7 +222,9 @@ class ejercicio extends \fs_model
          return new \ejercicio($ejercicio[0]);
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**
@@ -243,7 +249,9 @@ class ejercicio extends \fs_model
             return $eje;
          }
          else
+         {
             return FALSE;
+         }
       }
       else if($crear)
       {
@@ -262,10 +270,14 @@ class ejercicio extends \fs_model
             return $eje;
          }
          else
+         {
             return FALSE;
+         }
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**
@@ -418,7 +430,9 @@ class ejercicio extends \fs_model
          return $this->db->exec($sql);
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**

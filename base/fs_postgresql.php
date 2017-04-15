@@ -135,7 +135,9 @@ class fs_postgresql
          }
       }
       else
+      {
          self::$errors[] = \L::fscontroller__ext_psql_not_installed;
+      }
       
       return $connected;
    }
@@ -151,7 +153,9 @@ class fs_postgresql
          return TRUE;
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**
@@ -167,7 +171,9 @@ class fs_postgresql
          return $retorno;
       }
       else
+      {
          return TRUE;
+      }
    }
    
    /**
@@ -187,7 +193,9 @@ class fs_postgresql
          return $resultado;
       }
       else
+      {
          return array();
+      }
    }
    
    /**
@@ -252,7 +260,9 @@ class fs_postgresql
          return 'POSTGRESQL '.$aux['server'];
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**
@@ -274,7 +284,9 @@ class fs_postgresql
             pg_free_result($filas);
          }
          else
+         {
             self::$errors[] = pg_last_error(self::$link);
+         }
          
          self::$t_selects++;
       }
@@ -305,7 +317,9 @@ class fs_postgresql
             pg_free_result($filas);
          }
          else
+         {
             self::$errors[] = pg_last_error(self::$link);
+         }
          
          self::$t_selects++;
       }
@@ -417,7 +431,9 @@ class fs_postgresql
          return $aux[0]['num'];
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**
@@ -502,7 +518,9 @@ class fs_postgresql
                         $consulta .= 'ALTER TABLE '.$table_name.' ALTER COLUMN "'.$col['nombre'].'" DROP NOT NULL;';
                      }
                      else
+                     {
                         $consulta .= 'ALTER TABLE '.$table_name.' ALTER COLUMN "'.$col['nombre'].'" SET NOT NULL;';
+                     }
                   }
                   
                   $encontrada = TRUE;
@@ -687,7 +705,9 @@ class fs_postgresql
             $consulta .= ', ';
          }
          else
+         {
             $i = TRUE;
+         }
          
          $consulta .= '"'.$col['nombre'].'" '.$col['tipo'];
          

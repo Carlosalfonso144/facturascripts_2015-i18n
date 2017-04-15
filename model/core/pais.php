@@ -126,7 +126,9 @@ class pais extends \fs_model
          return 'index.php?page=admin_paises';
       }
       else
+      {
          return 'index.php?page=admin_paises#'.$this->codpais;
+      }
    }
    
    /**
@@ -151,7 +153,9 @@ class pais extends \fs_model
          return new \pais($pais[0]);
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**
@@ -167,7 +171,9 @@ class pais extends \fs_model
          return new \pais($pais[0]);
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**
@@ -181,7 +187,9 @@ class pais extends \fs_model
          return FALSE;
       }
       else
+      {
          return $this->db->select("SELECT * FROM ".$this->table_name." WHERE codpais = ".$this->var2str($this->codpais).";");
+      }
    }
    
    /**
@@ -204,7 +212,9 @@ class pais extends \fs_model
          $this->new_error_msg(\L::pais__msg_invalid_country_name( $this->nombre ));
       }
       else
+      {
          $status = TRUE;
+      }
       
       return $status;
    }
@@ -236,7 +246,9 @@ class pais extends \fs_model
          return $this->db->exec($sql);
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**

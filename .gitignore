@@ -4,5 +4,7 @@
 /doc/
 /tmp/
 .DS_Store
+.gitignore
 .htaccess
 config.php
+/language/utils/auto-translator

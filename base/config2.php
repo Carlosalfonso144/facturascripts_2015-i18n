@@ -167,7 +167,7 @@ else
        'presupuestos' => \L::config2__presupuestos,
        'provincia' => \L::config2__provincia,
        'apartado' => \L::config2__apartado,
-       'cifnif' => \L::config2__cif_nif,
+       'cifnif' => \L::common__cifnif,
        'iva' => \L::config2__iva,
        'irpf' => \L::config2__irpf,
        'numero2' => \L::config2__numero_2,

@@ -181,7 +181,9 @@ class agente extends \fs_model
          return 1 + intval($cod[0]['cod']);
       }
       else
+      {
          return 1;
+      }
    }
    
    /**
@@ -195,7 +197,9 @@ class agente extends \fs_model
          return "index.php?page=admin_agentes";
       }
       else
+      {
          return "index.php?page=admin_agente&cod=".$this->codagente;
+      }
    }
    
    /**
@@ -326,7 +330,9 @@ class agente extends \fs_model
          return $this->db->exec($sql);
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**

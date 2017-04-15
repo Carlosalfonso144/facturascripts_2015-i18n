@@ -194,7 +194,9 @@ else
          $tpl->assign('nlogin', $_COOKIE['user']);
       }
       else
+      {
          $tpl->assign('nlogin', '');
+      }
       
       $tpl->draw( $fsc->template );
    }

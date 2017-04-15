@@ -20,8 +20,14 @@
 
 require_once 'base/fs_i18n.php';
 
+/* El idioma se lee de los lenguajes que soporta el navegador */
 $lang = substr(\filter_input(INPUT_SERVER, 'HTTP_ACCEPT_LANGUAGE'), 0, 2);
-$language = ($lang and file_exists('language/lang_' . $lang . '.ini')) ? $lang : 'es';
+/* 
+ * En caso de que quieras probar como se ven las traducciones, indicalo aquí
+ */
+$lang = 'en';
+
+$language = ($lang and file_exists('language/lang_' . $lang . '.json')) ? $lang : 'es';
 $i18n = new fs_i18n();
 $i18n->setForcedLang($language);
 $i18n->init();
@@ -127,7 +133,9 @@ class fs_updater
          }
       }
       else
+      {
          $this->errores = \L::updater__need_start_session;
+      }
    }
    
    private function comprobar_actualizaciones()
@@ -265,7 +273,7 @@ class fs_updater
          if($this->tr_updates == '')
          {
             $this->tr_updates = '<tr class="success"><td colspan="5">' . \L::updater__system_is_updated
-                    . ' <a href="index.php?page=admin_home&updated=TRUE">' . \L::config__back . '</a></td></tr>';
+                    . ' <a href="index.php?page=admin_home&updated=TRUE">' . \L::common__back . '</a></td></tr>';
             $this->btn_fin = TRUE;
          }
       }
@@ -353,7 +361,9 @@ class fs_updater
             }
          }
          else
+         {
             $this->errores = \L::updater__msg_error_downloading_zip_try_later;
+         }
       }
    }
    
@@ -433,15 +443,19 @@ class fs_updater
                   }
                }
                
-               $this->mensajes = 'Plugin actualizado correctamente.';
+               $this->mensajes = \L::updater__msg_info_plugin_updated;
                $this->actualizacion_correcta($_GET['plugin']);
             }
          }
          else
+         {
             $this->errores = \L::updater__msg_error_downloading_zip_try_later;
+         }
       }
       else
+      {
          $this->errores = \L::updater__msg_error_reading_ini( $_GET['plugin'] );
+      }
    }
    
    /**
@@ -505,7 +519,9 @@ class fs_updater
          }
       }
       else
+      {
          $this->errores = \L::updater__msg_error_downloading_zip ( $_GET['idplugin'], $_GET['name'] );
+      }
    }
 
    private function recurse_copy($src, $dst)
@@ -587,7 +603,7 @@ class fs_updater
             {
                $plugin = array(
                    'name' => $f,
-                   'description' => \L::updater__without_description,
+                   'description' => \L::common__without_description,
                    'version' => 0,
                    'update_url' => '',
                    'version_url' => '',
@@ -743,10 +759,10 @@ $updater = new fs_updater();
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es" >
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <title>Actualizador de FacturaScripts</title>
-      <meta name="description" content="<? php echo \L::updater__meta_description; ?>" />
+      <title><?php echo \L::updater__facturascripts_updater; ?></title>
+      <meta name="description" content="<?php echo \L::updater__meta_description; ?>" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="generator" content="<? php echo \L::updater__facturascripts; ?>" />
+      <meta name="generator" content="<?php echo \L::common__facturascripts; ?>" />
       <link rel="shortcut icon" href="view/img/favicon.ico" />
       <link rel="stylesheet" href="view/css/bootstrap-yeti.min.css" />
       <link rel="stylesheet" href="view/css/font-awesome.min.css" />
@@ -758,17 +774,17 @@ $updater = new fs_updater();
       <div class="container-fluid">
          <div class="row">
             <div class="col-sm-12">
-               <a href="index.php?page=admin_home&updated=TRUE" class="btn btn-sm btn-default">
+               <a href="index.php?page=admin_home&updated=TRUE" class="btn btn-sm btn-default" title="<?php echo \L::admin_home__control_panel; ?>">
                   <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-                  <span class="hidden-xs">&nbsp; <? php echo \L::updater__control_panel; ?></span>
+                  <span class="hidden-xs">&nbsp; <?php echo \L::admin_home__control_panel; ?></span>
                </a>
-               <a href="https://www.facturascripts.com/comm3/index.php?page=community_tus_plugins" target="_blank" class="btn btn-sm btn-default">
+               <a href="https://www.facturascripts.com/comm3/index.php?page=community_tus_plugins" target="_blank" class="btn btn-sm btn-default" title="<?php echo \L::updater__keys; ?>">
                   <i class="fa fa-key" aria-hidden="true"></i>
-                  <span class="hidden-xs">&nbsp; <? php echo \L::updater__keys; ?></span>
+                  <span class="hidden-xs">&nbsp; <?php echo \L::updater__keys; ?></span>
                </a>
                <div class="page-header">
                   <h1>
-                     <span class="glyphicon glyphicon-upload" aria-hidden="true"></span><?php echo \L::updater__facturascripts_updater;?>
+                     <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp; <?php echo \L::updater__facturascripts_updater;?>
                   </h1>
                </div>
                <?php
@@ -800,7 +816,7 @@ $updater = new fs_updater();
                   <li role="presentation" class="active">
                      <a href="#actualizaciones" aria-controls="actualizaciones" role="tab" data-toggle="tab">
                         <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
-                        <span class="hidden-xs">&nbsp; <?php echo \L::updater__updates; ?></span>
+                        <span class="hidden-xs">&nbsp; <?php echo \L::common__updates; ?></span>
                      </a>
                   </li>
                   <li role="presentation">
@@ -816,9 +832,9 @@ $updater = new fs_updater();
                         <table class="table table-hover">
                            <thead>
                               <tr>
-                                 <th class="text-left"><?php echo \L::updater__name; ?></th>
-                                 <th class="text-left"><?php echo \L::updater__description; ?></th>
-                                 <th class="text-right"><?php echo \L::updater__version; ?></th>
+                                 <th class="text-left"><?php echo \L::common__name; ?></th>
+                                 <th class="text-left"><?php echo \L::common__description; ?></th>
+                                 <th class="text-right"><?php echo \L::common__version; ?></th>
                                  <th class="text-right"><?php echo \L::updater__new_version; ?></th>
                                  <th></th>
                               </tr>
@@ -878,7 +894,7 @@ $updater = new fs_updater();
                <div class="modal-dialog" role="document">
                   <div class="modal-content">
                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo \L::updater__close; ?>">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo \L::common__close; ?>">
                            <span aria-hidden="true">&times;</span>
                         </button>
                         <h4 class="modal-title">

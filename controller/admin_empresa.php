@@ -83,7 +83,9 @@ class admin_empresa extends fs_controller
             $this->mail_test();
          }
          else
+         {
             $this->new_error_msg (\L::common__msg_data_not_saved);
+         }
       }
    }
    

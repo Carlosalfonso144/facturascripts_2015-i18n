@@ -131,7 +131,9 @@ class forma_pago extends \fs_model
          return new \forma_pago($pago[0]);
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**
@@ -145,7 +147,9 @@ class forma_pago extends \fs_model
          return FALSE;
       }
       else
+      {
          return $this->db->select("SELECT * FROM ".$this->table_name." WHERE codpago = ".$this->var2str($this->codpago).";");
+      }
    }
    
    /**

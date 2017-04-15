@@ -226,7 +226,9 @@ class fs_controller
                      $this->new_message(\L::fscontroller__msg_password_guardada_usuario( $_POST['user'] ));
                   }
                   else
+                  {
                      $this->new_error_msg(\L::fscontroller__msg_password_no_guardada_usuario( $_POST['user'] ));
+                  }
                }
             }
             
@@ -341,7 +343,9 @@ class fs_controller
          return trim($v);
       }
       else
+      {
          return '0';
+      }
    }
    
    /**
@@ -539,7 +543,9 @@ class fs_controller
                $encontrada = TRUE;
             }
             else
+            {
                fwrite( $file, join(';', $ip) );
+            }
          }
          
          if(!$encontrada)
@@ -895,7 +901,9 @@ class fs_controller
                }
             }
             else
+            {
                $page = $this->user->fs_page;
+            }
             
             header('Location: index.php?page='.$page);
          }
@@ -1156,7 +1164,9 @@ class fs_controller
                $txt .= "curl: YES\n";
             }
             else
+            {
                $txt .= "curl: NO\n";
+            }
             
             $txt .= 'plugins: '.join(',', $GLOBALS['plugins'])."\n";
             
@@ -1213,7 +1223,9 @@ class fs_controller
             return $divi0->simbolo;
          }
          else
+         {
             return '?';
+         }
       }
    }
    
@@ -1240,7 +1252,9 @@ class fs_controller
             return number_format($precio, $dec, FS_NF1, FS_NF2).' '.$this->simbolo_divisa($coddivisa);
          }
          else
+         {
             return number_format($precio, $dec, FS_NF1, FS_NF2).' '.$coddivisa;
+         }
       }
       else
       {
@@ -1249,7 +1263,9 @@ class fs_controller
             return $this->simbolo_divisa($coddivisa).number_format($precio, $dec, FS_NF1, FS_NF2);
          }
          else
+         {
             return $coddivisa.' '.number_format($precio, $dec, FS_NF1, FS_NF2);
+         }
       }
    }
    
@@ -1267,7 +1283,9 @@ class fs_controller
          return number_format($num, $decimales, '.', '');
       }
       else
+      {
          return number_format($num, $decimales, FS_NF1, FS_NF2);
+      }
    }
    
    /**
@@ -1345,10 +1363,14 @@ class fs_controller
             $this->last_changes[0]['nuevo'] = $nuevo;
          }
          else
+         {
             array_unshift($this->last_changes, array('texto' => ucfirst($txt), 'url' => $url, 'nuevo' => $nuevo, 'cambio' => date('d-m-Y H:i:s')) );
+         }
       }
       else
+      {
          array_unshift($this->last_changes, array('texto' => ucfirst($txt), 'url' => $url, 'nuevo' => $nuevo, 'cambio' => date('d-m-Y H:i:s')) );
+      }
       
       /// sólo queremos 10 elementos
       $num = 10;

@@ -8,3 +8,7 @@ Para instalarlo sólo necesitas PHP 5.3 o superior, PostgreSQL o MySQL.
 
 Para cualquier duda, problema o sugerencia:
 https://www.facturascripts.com
+
+TODO
+=====
+- Bootbox que dependa del idioma asignado (view/header.html y view/header.html)

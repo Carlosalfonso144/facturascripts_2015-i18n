@@ -117,7 +117,9 @@ class fs_page extends fs_model
          return 'index.php?page=admin_home';
       }
       else
+      {
          return 'index.php?page='.$this->name.$this->extra_url;
+      }
    }
    
    public function is_default()
@@ -137,7 +139,9 @@ class fs_page extends fs_model
          return FALSE;
       }
       else
+      {
          return $this->db->select("SELECT * FROM ".$this->table_name." WHERE name = ".$this->var2str($this->name).";");
+      }
    }
    
    public function get($name)
@@ -148,7 +152,9 @@ class fs_page extends fs_model
          return new fs_page($p[0]);
       }
       else
+      {
          return FALSE;
+      }
    }
    
    public function save()

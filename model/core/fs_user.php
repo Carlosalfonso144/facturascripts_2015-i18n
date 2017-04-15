@@ -257,7 +257,9 @@ class fs_user extends \fs_model
          return $agente->get_fullname();
       }
       else
+      {
          return $this->nick;
+      }
    }
    
    public function get_agente_url()
@@ -268,7 +270,9 @@ class fs_user extends \fs_model
          return $agente->url();
       }
       else
+      {
          return '#';
+      }
    }
    
    /**
@@ -452,7 +456,9 @@ class fs_user extends \fs_model
          return new \fs_user($u[0]);
       }
       else
+      {
          return FALSE;
+      }
    }
    
    public function exists()
@@ -476,7 +482,9 @@ class fs_user extends \fs_model
          return FALSE;
       }
       else
+      {
          return TRUE;
+      }
    }
    
    public function save()
@@ -521,7 +529,9 @@ class fs_user extends \fs_model
          return $this->db->exec($sql);
       }
       else
+      {
          return FALSE;
+      }
    }
    
    public function delete()

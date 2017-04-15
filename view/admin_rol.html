@@ -28,7 +28,7 @@
          event.preventDefault();
          bootbox.confirm({
             message: '{function="\L::admin_rol__question_delete_rol( $fsc->rol->codrol )"}',
-            title: '{function="\L::common__warning"}'',
+            title: '{function="\L::common__warning"}',
             callback: function(result) {
                if (result) {
                   window.location.href = 'index.php?page=admin_users&delete_rol={$fsc->rol->codrol}#roles';

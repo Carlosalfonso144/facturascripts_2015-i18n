@@ -59,7 +59,9 @@ class fs_rol extends fs_model
          return 'index.php?page=admin_rol';
       }
       else
+      {
          return 'index.php?page=admin_rol&codrol='.$this->codrol;
+      }
    }
    
    public function get($codrol)

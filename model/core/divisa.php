@@ -140,7 +140,9 @@ class divisa extends \fs_model
          return new \divisa($divisa[0]);
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**
@@ -154,7 +156,9 @@ class divisa extends \fs_model
          return FALSE;
       }
       else
+      {
          return $this->db->select("SELECT * FROM ".$this->table_name." WHERE coddivisa = ".$this->var2str($this->coddivisa).";");
+      }
    }
    
    /**
@@ -224,7 +228,9 @@ class divisa extends \fs_model
          return $this->db->exec($sql);
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**

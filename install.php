@@ -555,7 +555,7 @@ $system_info = str_replace('"', "'", $system_info);
                      <i class="fa fa-globe" aria-hidden="true"></i>&nbsp; <?= \L::install__hosting; ?>
                   </h3>
                   <p class="help-block">
-                     <?= \L::install__help_mbstring_hosting; ?>
+                     <?= \L::install__help_hosting_trimmed_php; ?>
                   </p>
                </div>
             </div>
@@ -576,7 +576,7 @@ $system_info = str_replace('"', "'", $system_info);
                      <i class="fa fa-globe" aria-hidden="true"></i>&nbsp; <?= \L::install__hosting; ?>
                   </h3>
                   <p class="help-block">
-                     <?= \L::install__help_openssl_hosting; ?>
+                     <?= \L::install__help_hosting_trimmed_php; ?>
                   </p>
                   <h3>
                      <i class="fa fa-windows" aria-hidden="true"></i>&nbsp; <?= \L::install__windows; ?>
@@ -620,7 +620,7 @@ $system_info = str_replace('"', "'", $system_info);
                      <i class="fa fa-globe" aria-hidden="true"></i>&nbsp; <?= \L::install__hosting; ?>
                   </h3>
                   <p class="help-block">
-                     <?= \L::install__help_ziparchive_hosting; ?>
+                     <?= \L::install__help_hosting_trimmed_php; ?>
                   </p>
                </div>
             </div>
@@ -715,13 +715,13 @@ $system_info = str_replace('"', "'", $system_info);
                   <li role="presentation" class="active">
                      <a href="#db" aria-controls="db" role="tab" data-toggle="tab">
                         <i class="fa fa-database"></i>&nbsp;
-                        <?= \L::install__database; ?>
+                        <?= \L::common__database; ?>
                      </a>
                   </li>
                   <li role="presentation">
                      <a href="#cache" aria-controls="cache" role="tab" data-toggle="tab">
                         <i class="fa fa-wrench"></i>&nbsp;
-                        <?= \L::install__advanced; ?>
+                        <?= \L::common__advanced; ?>
                      </a>
                   </li>
                   <li role="presentation">
@@ -739,7 +739,7 @@ $system_info = str_replace('"', "'", $system_info);
                <div class="row">
                   <div class="col-sm-4">
                      <div class="form-group">
-                        <?= \L::install__type_database_server; ?>
+                        <?= \L::install__type_database_server . \L::common__colon; ?>
                         <select name="db_type" class="form-control" onchange="change_db_type()">
                            <option value="MYSQL"<?php if($db_type=='MYSQL') { echo ' selected=""'; } ?>><?= \L::install__mysql; ?></option>
                            <option value="POSTGRESQL"<?php if($db_type=='POSTGRESQL') { echo ' selected=""'; } ?>><?= \L::install__postgresql; ?></option>
@@ -748,13 +748,13 @@ $system_info = str_replace('"', "'", $system_info);
                   </div>
                   <div class="col-sm-4">
                      <div class="form-group">
-                        <?= \L::install__server; ?>
+                        <?= \L::install__server . \L::common__colon; ?>
                         <input class="form-control" type="text" name="db_host" value="<?php echo $db_host; ?>" autocomplete="off"/>
                      </div>
                   </div>
                   <div class="col-sm-4">
                      <div class="form-group">
-                        <?= \L::install__port; ?>
+                        <?= \L::common__port . \L::common__colon; ?>
                         <input class="form-control" type="number" name="db_port" value="<?php echo $db_port; ?>" autocomplete="off"/>
                      </div>
                   </div>
@@ -762,19 +762,19 @@ $system_info = str_replace('"', "'", $system_info);
                <div class="row">
                   <div class="col-sm-4">
                      <div class="form-group">
-                        <?= \L::install__database_name; ?>
+                        <?= \L::install__database_name . \L::common__colon; ?>
                         <input class="form-control" type="text" name="db_name" value="<?php echo $db_name; ?>" autocomplete="off"/>
                      </div>
                   </div>
                   <div class="col-sm-4">
                      <div class="form-group">
-                        <?= \L::install__database_username; ?>
+                        <?= \L::install__database_username . \L::common__colon; ?>
                         <input class="form-control" type="text" name="db_user" value="<?php echo $db_user; ?>" autocomplete="off"/>
                      </div>
                   </div>
                   <div class="col-sm-4">
                      <div class="form-group">
-                        <?= \L::install__database_password; ?>
+                        <?= \L::install__database_password . \L::common__colon; ?>
                         <input class="form-control" type="password" name="db_pass" value="" autocomplete="off"/>
                      </div>
                   </div>
@@ -782,7 +782,7 @@ $system_info = str_replace('"', "'", $system_info);
                <div class="row">
                   <div class="col-sm-4">
                      <div id="mysql_socket" class="form-group">
-                        <?= \L::install__database_socket; ?>
+                        <?= \L::install__database_socket . \L::common__colon; ?>
                         <input class="form-control" type="text" name="mysql_socket" value="" placeholder="<?= \L::install__optional; ?>" autocomplete="off"/>
                         <p class="help-block">
                            <?= \L::install__help_database_socket; ?>
@@ -805,19 +805,19 @@ $system_info = str_replace('"', "'", $system_info);
                            <div class="row">
                               <div class="col-sm-4">
                                  <div class="form-group">
-                                    <?= \L::install__server; ?>
+                                    <?= \L::install__server . \L::common__colon; ?>
                                     <input class="form-control" type="text" name="cache_host" value="localhost" autocomplete="off"/>
                                  </div>
                               </div>
                               <div class="col-sm-4">
                                  <div class="form-group">
-                                    <?= \L::install__port; ?>
+                                    <?= \L::common__port . \L::common__colon; ?>
                                     <input class="form-control" type="number" name="cache_port" value="11211" autocomplete="off"/>
                                  </div>
                               </div>
                               <div class="col-sm-4">
                                  <div class="form-group">
-                                    <?= \L::install__prefix; ?>
+                                    <?= \L::install__prefix . \L::common__colon; ?>
                                     <input class="form-control" type="text" name="cache_prefix" value="<?php echo random_string(8); ?>_" autocomplete="off"/>
                                  </div>
                               </div>
@@ -832,7 +832,7 @@ $system_info = str_replace('"', "'", $system_info);
                            <div class="row">
                               <div class="col-sm-4">
                                  <div class="form-group">
-                                    <?= \L::install__type_proxy; ?>
+                                    <?= \L::install__type_proxy . \L::common__colon; ?>
                                     <select class='form-control' name="proxy_type">
                                        <option value=""><?= \L::install__without_proxy; ?></option>
                                        <option value=""><?= \L::common__option_separator; ?></option>
@@ -844,13 +844,13 @@ $system_info = str_replace('"', "'", $system_info);
                               </div>
                               <div class="col-sm-4">
                                  <div class="form-group">
-                                    <?= \L::install__server; ?>
+                                    <?= \L::install__server . \L::common__colon; ?>
                                     <input class="form-control" type="text" name="proxy_host" placeholder="192.168.1.1" autocomplete="off"/>
                                  </div>
                               </div>
                               <div class="col-sm-4">
                                  <div class="form-group">
-                                    <?= \L::install__port; ?>
+                                    <?= \L::common__port . \L::common__colon; ?>
                                     <input class="form-control" type="number" name="proxy_port" placeholder="8080" autocomplete="off"/>
                                  </div>
                               </div>

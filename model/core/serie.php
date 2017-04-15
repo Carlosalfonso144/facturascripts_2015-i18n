@@ -100,7 +100,9 @@ class serie extends \fs_model
          return 'index.php?page=contabilidad_series';
       }
       else
+      {
          return 'index.php?page=contabilidad_series#'.$this->codserie;
+      }
    }
    
    /**
@@ -125,7 +127,9 @@ class serie extends \fs_model
          return new \serie($serie[0]);
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**
@@ -139,7 +143,9 @@ class serie extends \fs_model
          return FALSE;
       }
       else
+      {
          return $this->db->select("SELECT * FROM ".$this->table_name." WHERE codserie = ".$this->var2str($this->codserie).";");
+      }
    }
    
    /**
@@ -167,7 +173,9 @@ class serie extends \fs_model
          $this->new_error_msg(\L::serie__msg_invalid_series_description( $this->descripcion ));
       }
       else
+      {
          $status = TRUE;
+      }
       
       return $status;
    }
@@ -205,7 +213,9 @@ class serie extends \fs_model
          return $this->db->exec($sql);
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**

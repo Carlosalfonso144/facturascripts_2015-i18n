@@ -155,7 +155,9 @@ function fs_file_get_contents($url, $timeout = 10)
       }
    }
    else
+   {
       return file_get_contents($url);
+   }
 }
 
 /**

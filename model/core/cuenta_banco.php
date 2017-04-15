@@ -113,7 +113,9 @@ class cuenta_banco extends \fs_model
          return new \cuenta_banco($data[0]);
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**
@@ -129,7 +131,9 @@ class cuenta_banco extends \fs_model
          return 1 + intval($cod[0]['cod']);
       }
       else
+      {
          return 1;
+      }
    }
    
    /**
@@ -143,7 +147,9 @@ class cuenta_banco extends \fs_model
          return FALSE;
       }
       else
+      {
          return $this->db->select("SELECT * FROM ".$this->table_name." WHERE codcuenta = ".$this->var2str($this->codcuenta).";");
+      }
    }
    
    /**

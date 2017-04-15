@@ -75,7 +75,9 @@ class admin_home extends fs_controller
             echo \L::common__available_updates;
          }
          else
+         {
             echo \L::admin_home__no_available_updates;
+         }
       }
       else if( isset($_GET['updated']) )
       {
@@ -165,10 +167,14 @@ class admin_home extends fs_controller
                $this->new_message(\L::admin_home__msg_plugin_deleted( $_GET['delete_plugin'] ), TRUE);
             }
             else
+            {
                $this->new_error_msg(\L::admin_home__msg_error_cant_delete_plugin( $_GET['delete_plugin'] ));
+            }
          }
          else
+         {
             $this->new_error_msg(\L::admin_home__msg_error_cant_write_plugins_folder( $_GET['delete_plugin'] ));
+         }
       }
       else if( isset($_POST['install']) )
       {
@@ -190,7 +196,9 @@ class admin_home extends fs_controller
                $this->clean_cache();
             }
             else
+            {
                $this->new_error_msg(\L::admin_home__msg_error_opening_zip( $res ));
+            }
          }
          else
          {
@@ -357,7 +365,9 @@ class admin_home extends fs_controller
             return 1;
          }
          else
+         {
             return -1;
+         }
       });
       
       return $pages;
@@ -445,7 +455,7 @@ class admin_home extends fs_controller
       $include = array(
           \L::config2__factura, \L::config2__facturas, \L::config2__factura_simplificada, \L::config2__factura_rectificativa,
           \L::config2__albaran, \L::config2__albaranes, \L::config2__pedido, \L::config2__pedidos, \L::config2__presupuesto, \L::config2__presupuestos,
-          \L::config2__provincia, \L::config2__apartado, \L::config2__cif_nif, \L::config2__iva, \L::config2__irpf, \L::config2__numero_2, \L::config2__serie, \L::config2__series
+          \L::config2__provincia, \L::config2__apartado, \L::common__cifnif, \L::config2__iva, \L::config2__irpf, \L::config2__numero_2, \L::config2__serie, \L::config2__series
       );
       
       foreach($GLOBALS['config2'] as $i => $value)
@@ -544,7 +554,7 @@ class admin_home extends fs_controller
          {
             $plugin = array(
                 'compatible' => FALSE,
-                'description' => \L::admin_home__without_description,
+                'description' => \L::common__without_description,
                 'download2_url' => '',
                 'enabled' => FALSE,
                 'idplugin' => NULL,
@@ -760,7 +770,9 @@ class admin_home extends fs_controller
             $this->clean_cache();
          }
          else
+         {
             $this->new_error_msg(\L::admin_home__msg_error_cant_enable_plugin( $name ));
+         }
       }
    }
    
@@ -797,7 +809,9 @@ class admin_home extends fs_controller
                   $this->new_message(\L::admin_home__msg_plugin_disabled( $name ));
                }
                else
+               {
                   $this->new_error_msg(\L::admin_home__msg_error_cant_disable_plugin( $name ));
+               }
             }
          }
          
@@ -992,7 +1006,9 @@ class admin_home extends fs_controller
                }
             }
             else
+            {
                $this->new_error_msg(\L::admin_home__msg_error_opening_zip( $res ));
+            }
          }
          else
          {
@@ -1000,7 +1016,9 @@ class admin_home extends fs_controller
          }
       }
       else
+      {
          $this->new_error_msg(\L::admin_home__msg_error_download_not_found);
+      }
    }
    
    /**
@@ -1054,7 +1072,9 @@ class admin_home extends fs_controller
                   $this->enable_plugin($item->nombre);
                }
                else
+               {
                   $this->new_error_msg(\L::admin_home__msg_error_opening_zip( $res ));
+               }
             }
             else
             {

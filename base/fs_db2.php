@@ -23,7 +23,9 @@ if(strtolower(FS_DB_TYPE) == 'mysql')
    require_once 'base/fs_mysql.php';
 }
 else
+{
    require_once 'base/fs_postgresql.php';
+}
 
 /**
  * Clase genérica de acceso a la base de datos, ya sea MySQL o PostgreSQL.

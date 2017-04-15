@@ -251,7 +251,9 @@ abstract class fs_model
             return 'TRUE';
          }
          else
+         {
             return 'FALSE';
+         }
       }
       else if( preg_match('/^([0-9]{1,2})-([0-9]{1,2})-([0-9]{4})$/i', $v) ) /// es una fecha
       {
@@ -262,7 +264,9 @@ abstract class fs_model
          return "'".Date($this->db->date_style().' H:i:s', strtotime($v))."'";
       }
       else
+      {
          return "'" . $this->db->escape_string($v) . "'";
+      }
    }
    
    /**
@@ -278,7 +282,9 @@ abstract class fs_model
          return 'NULL';
       }
       else
+      {
          return "'".base64_encode($v)."'";
+      }
    }
    
    /**
@@ -294,7 +300,9 @@ abstract class fs_model
          return NULL;
       }
       else
+      {
          return base64_decode($v);
+      }
    }
    
    /**
@@ -322,7 +330,9 @@ abstract class fs_model
          return NULL;
       }
       else
+      {
          return intval($s);
+      }
    }
    
    /**
@@ -336,7 +346,9 @@ abstract class fs_model
          return( abs($f1-$f2) < 6/pow(10,$precision+1) );
       }
       else
+      {
          return( bccomp( (string)$f1, (string)$f2, $precision ) == 0 );
+      }
    }
    
    /**
@@ -497,7 +509,9 @@ abstract class fs_model
                      $columnas[$i]['defecto'] = NULL;
                   }
                   else
+                  {
                      $columnas[$i]['defecto'] = $col->defecto;
+                  }
                   
                   $i++;
                }
@@ -518,10 +532,14 @@ abstract class fs_model
             }
          }
          else
+         {
             $this->new_error_msg(\L::fsmodel__msg_error_reading_file( $filename ));
+         }
       }
       else
+      {
          $this->new_error_msg(\L::fsmodel__msg_file_not_found( $filename ));
+      }
       
       return $retorno;
    }

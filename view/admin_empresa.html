@@ -34,7 +34,7 @@
                </div>
                <div class="panel-body">
                   <div class="form-group">
-                     {function="\L::admin_empresa__name"}
+                     {function="\L::common__name"}
                      <input class="form-control" type="text" name="nombre" value="{$fsc->empresa->nombre}" autocomplete="off" autofocus />
                   </div>
                   <div class="form-group">
@@ -130,7 +130,7 @@
                      </div>
                      <div class="col-sm-2">
                         <div class="form-group">
-                           {function="\L::admin_empresa__port"}
+                           {function="\L::common__port"}{function="\L::common__colon"}
                            <input class="form-control" type="number" name="mail_port" value="{$fsc->empresa->email_config['mail_port']}" autocomplete="off"/>
                         </div>
                      </div>

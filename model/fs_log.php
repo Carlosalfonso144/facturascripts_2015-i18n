@@ -91,7 +91,9 @@ class fs_log extends fs_model
          return new fs_log($data[0]);
       }
       else
+      {
          return FALSE;
+      }
    }
 
    public function exists()
@@ -101,7 +103,9 @@ class fs_log extends fs_model
          return FALSE;
       }
       else
+      {
          return $this->db->select("SELECT * FROM fs_logs WHERE id =" . $this->var2str($this->id) . ";");
+      }
    }
 
    public function save()
@@ -134,7 +138,9 @@ class fs_log extends fs_model
             return TRUE;
          }
          else
+         {
             return FALSE;
+         }
       }
    }
 

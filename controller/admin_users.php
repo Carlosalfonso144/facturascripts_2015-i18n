@@ -124,7 +124,9 @@ class admin_users extends fs_controller
                Header('location: index.php?page=admin_user&snick=' . $nu->nick);
             }
             else
-               $this->new_error_msg("¡Imposible guardar el usuario!");
+            {
+               $this->new_error_msg(\L::admin_users__msg_error_cant_save_user);
+            }
          }
       }
    }

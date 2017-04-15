@@ -27,7 +27,7 @@ class admin_orden_menu extends fs_controller
 {
    public function __construct()
    {
-      parent::__construct(__CLASS__, 'Ordenar menú', 'admin', FALSE, TRUE);
+      parent::__construct(__CLASS__, \L::admin_orden_menu__order_menu, 'admin', FALSE, TRUE);
    }
 
    protected function private_core()

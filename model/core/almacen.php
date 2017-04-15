@@ -101,7 +101,9 @@ class almacen extends \fs_model
          return 'index.php?page=admin_almacenes';
       }
       else
+      {
          return 'index.php?page=admin_almacenes#'.$this->codalmacen;
+      }
    }
    
    /**
@@ -126,7 +128,9 @@ class almacen extends \fs_model
          return new \almacen($almacen[0]);
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**
@@ -140,7 +144,9 @@ class almacen extends \fs_model
          return FALSE;
       }
       else
+      {
          return $this->db->select("SELECT * FROM ".$this->table_name." WHERE codalmacen = ".$this->var2str($this->codalmacen).";");
+      }
    }
    
    /**
@@ -217,7 +223,9 @@ class almacen extends \fs_model
          return $this->db->exec($sql);
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**

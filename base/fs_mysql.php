@@ -158,7 +158,9 @@ class fs_mysql
          return TRUE;
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**
@@ -174,7 +176,9 @@ class fs_mysql
          return $retorno;
       }
       else
+      {
          return TRUE;
+      }
    }
    
    /**
@@ -295,7 +299,9 @@ class fs_mysql
          return 'MYSQL '.self::$link->server_version;
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**
@@ -323,7 +329,9 @@ class fs_mysql
             $filas->free();
          }
          else
+         {
             self::$errors[] = self::$link->error;
+         }
          
          self::$t_selects++;
       }
@@ -362,7 +370,9 @@ class fs_mysql
             $filas->free();
          }
          else
+         {
             self::$errors[] = self::$link->error;
+         }
          
          self::$t_selects++;
       }
@@ -403,7 +413,9 @@ class fs_mysql
             self::$errors[] =  \L::fsmysql__error_consulta( $i, self::$link->error, count(self::$history) );
          }
          else
+         {
             $resultado = TRUE;
+         }
          
          if($transaccion)
          {
@@ -412,7 +424,9 @@ class fs_mysql
                self::$link->commit();
             }
             else
+            {
                self::$link->rollback();
+            }
             
             /// reactivamos el autocommit
             self::$link->autocommit(TRUE);
@@ -467,7 +481,9 @@ class fs_mysql
          return $aux[0]['num'];
       }
       else
+      {
          return FALSE;
+      }
    }
    
    /**
@@ -482,7 +498,9 @@ class fs_mysql
          return self::$link->escape_string($s);
       }
       else
+      {
          return $s;
+      }
    }
    
    /**
@@ -546,7 +564,9 @@ class fs_mysql
                         $consulta .= 'ALTER TABLE '.$table_name.' MODIFY `'.$col['nombre'].'` '.$col['tipo'].' NULL;';
                      }
                      else
+                     {
                         $consulta .= 'ALTER TABLE '.$table_name.' MODIFY `'.$col['nombre'].'` '.$col['tipo'].' NOT NULL;';
+                     }
                   }
                   
                   if( !$this->compare_defaults($col2['column_default'], $col['defecto']) )
@@ -572,7 +592,9 @@ class fs_mysql
                            }
                         }
                         else
+                        {
                            $consulta .= 'ALTER TABLE '.$table_name.' ALTER `'.$col['nombre'].'` SET DEFAULT '.$col['defecto'].";";
+                        }
                      }
                   }
                   
@@ -598,7 +620,9 @@ class fs_mysql
                   $consulta .= " NOT NULL";
                }
                else
+               {
                   $consulta .= " NULL";
+               }
                
                if($col['defecto'])
                {
@@ -609,7 +633,9 @@ class fs_mysql
                   $consulta .= " DEFAULT NULL;";
                }
                else
+               {
                   $consulta .= ';';
+               }
             }
          }
       }
@@ -873,7 +899,9 @@ class fs_mysql
             $consulta .= ", ";
          }
          else
+         {
             $i = TRUE;
+         }
          
          if($col['tipo'] == 'serial')
          {

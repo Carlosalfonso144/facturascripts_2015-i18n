@@ -147,7 +147,9 @@ class admin_user extends fs_controller
          return $this->suser->url();
       }
       else
+      {
          return $this->page->url();
+      }
    }
    
    public function all_pages()
