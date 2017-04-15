@@ -69,7 +69,7 @@
                <li class='dropdown{if="$value1==$fsc->page->folder"} active{/if}'>
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                      {if="$value1=='admin'"}
-                     <i class="fa fa-wrench hidden-xs" title='{function="\L::header__administration"}'></span>
+                     <i class="fa fa-wrench hidden-xs" title='{function="\L::header__administration"}'></i>
                      <span class="text-capitalize visible-xs">{$value1}</span>
                      {else}
                      <span class="text-capitalize">{$value1}</span>
@@ -123,15 +123,15 @@
                   <ul class="dropdown-menu">
                   {loop="$fsc->get_last_changes()"}
                      {if="$value['nuevo']"}
-                     <li title='{function="\L::header__created_at( $value[\'cambio\'] )"}'>
+                     <li title='{function="\L::header__created_at( $value->cambio )"}'>
                         <a href="{$value['url']}">
-                           <i class="fa fa-file" aria-hidden="true"></i>&nbsp; {$value['texto']}
+                           <i class="fa fa-file" aria-hidden="true"></i>&nbsp; {$value->texto}
                         </a>
                      </li>
                      {else}
-                     <li title='{function="\L::header__modified_at( $value[\'cambio\'] )"}'>
+                     <li title='{function="\L::header__modified_at( $value->cambio )"}'>
                         <a href="{$value['url']}">
-                           <i class="fa fa-edit" aria-hidden="true"></i>&nbsp; {$value['texto']}
+                           <i class="fa fa-edit" aria-hidden="true"></i>&nbsp; {$value->texto}
                         </a>
                      </li>
                      {/if}

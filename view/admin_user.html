@@ -27,8 +27,8 @@
       $("#b_eliminar_usuario").click(function(event) {
          event.preventDefault();
          bootbox.confirm({
-            message: {function="\L::admin_user__confirm_delete_user"},
-            title: {function="\L::common__warning"},
+            message: '{function="\L::admin_user__confirm_delete_user"}',
+            title: '{function="\L::common__warning"}',
             callback: function(result) {
                if (result) {
                   window.location.href = 'index.php?page=admin_users&delete={$fsc->suser->nick}';

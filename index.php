@@ -47,7 +47,7 @@ function fatal_handler()
                  . "<li>" . \L::index__error_type( $error["type"] )."</li>"
                  . "<li>" . \L::index__error_file( $error["file"] )."</li>"
                  . "<li>" . \L::index__error_line( $error["line"] )."</li>"
-                 . "<li>" . \L::index__error_message( $error["message"] )"</li>"
+                 . "<li>" . \L::index__error_message( $error["message"] )."</li>"
             . "</ul>";
       }
    }
@@ -133,8 +133,8 @@ else
             {
                echo "<h1>Error fatal</h1>"
                   . "<ul>"
-                       . "<li> . \L::index__error_code( $e->getCode() )."</li>"
-                       . "<li> . \L::index__error_message( $e->getMessage() )."</li>"
+                       . "<li>".\L::index__error_code( $e->getCode() )."</li>"
+                       . "<li>".\L::index__error_message( $e->getMessage() )."</li>"
                   . "</ul>";
                $fsc_error = TRUE;
             }

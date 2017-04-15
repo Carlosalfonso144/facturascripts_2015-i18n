@@ -12,8 +12,8 @@
    function eliminar(name)
    {
       bootbox.confirm({
-         message: {function="\L::admin_home__question_delete_plugin(name)"},
-         title: {function="\L::common__warning"},
+         message: '{function="\L::admin_home__question_delete_plugin"}',
+         title: '{function="\L::common__warning"}',
          callback: function(result) {
             if (result) {
                window.location.href = '{$fsc->url()}&delete_plugin='+name+'#plugins';
@@ -24,8 +24,8 @@
    function descargar_plugin_inestable(id)
    {
       bootbox.confirm({
-         message: {function="\L::admin_home__question_download_unstable_plugin"},
-         title: {function="\L::common__warning"},
+         message: '{function="\L::admin_home__question_download_unstable_plugin"}',
+         title: '{function="\L::common__warning"}',
          callback: function(result) {
             if (result) {
                window.location.href = '{$fsc->url()}&caca={$fsc->random_string(4)}&download2='+id+'#plugins';
@@ -688,7 +688,7 @@
                   <input type="file" name="fplugin" accept="application/zip"/>
                </div>
                <p class="help-block">
-                  {function="\L::admin_home__help_server_accepts_filesize( {$fsc->get_max_file_upload()} )"}
+                  {function="\L::admin_home__help_server_accepts_filesize( $fsc->get_max_file_upload() )"}
                </p>
                <button type="submit" class="btn btn-primary" onclick="this.disabled=true;this.form.submit();">
                   <span class="glyphicon glyphicon-import" aria-hidden="true"></span>&nbsp; {function="\L::common__button_add"}

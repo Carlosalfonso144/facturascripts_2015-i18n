@@ -400,7 +400,7 @@ class fs_mysql
          
          if( self::$link->errno )
          {
-            self::$errors[] =  \L::fsmysql__error_consulta( $i, self::$link->error, count(self::$history) ));
+            self::$errors[] =  \L::fsmysql__error_consulta( $i, self::$link->error, count(self::$history) );
          }
          else
             $resultado = TRUE;
