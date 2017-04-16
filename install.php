@@ -774,7 +774,7 @@ $system_info = str_replace('"', "'", $system_info);
                   </div>
                   <div class="col-sm-4">
                      <div class="form-group">
-                        <?= \L::default__database_password.\L . \L::common__colon ?>
+                        <?= \L::default__database_password . \L::common__colon ?>
                         <input class="form-control" type="password" name="db_pass" value="" autocomplete="off"/>
                      </div>
                   </div>
