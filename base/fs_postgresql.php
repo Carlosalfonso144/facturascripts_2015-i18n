@@ -136,7 +136,7 @@ class fs_postgresql
       }
       else
       {
-         self::$errors[] = \L::fscontroller__ext_psql_not_installed;
+         self::$errors[] = \L::install__php_pgsql_not_found;
       }
       
       return $connected;

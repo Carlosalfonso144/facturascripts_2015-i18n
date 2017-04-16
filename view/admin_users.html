@@ -99,7 +99,7 @@
                <div class="col-sm-6">
                   <a id="b_nuevo_usuario" class="btn btn-xs btn-success" href="#">
                      <span class="glyphicon glyphicon-plus"></span>
-                     <span class="hidden-xs">&nbsp; {function="\L::common__button_new"}</span>
+                     <span class="hidden-xs">&nbsp; {function="\L::common__button_new_male"}</span>
                   </a>
                </div>
                <div class="col-sm-6 text-right">
@@ -186,7 +186,7 @@
                <div class="col-sm-6">
                   <a id="b_nuevo_rol" class="btn btn-xs btn-success" href="#">
                      <span class="glyphicon glyphicon-plus"></span>
-                     <span class="hidden-xs">&nbsp; {function="\L::common__button_new"}</span>
+                     <span class="hidden-xs">&nbsp; {function="\L::common__button_new_male"}</span>
                   </a>
                </div>
                <div class="col-sm-6 text-right">
@@ -284,7 +284,7 @@
             </div>
             <div class="modal-body">
                <div class="form-group">
-                  {function="\L::common__nick"}
+                  {function="\L::common__nick.\L::common__colon"}
                   <input class="form-control" type="text" name="nnick" maxlength="12" autocomplete="off" required=""/>
                   <label class="checkbox-inline">
                      <input type="checkbox" name="nadmin" value="TRUE"/>
@@ -298,11 +298,11 @@
                   {/loop}
                </div>
                <div class="form-group">
-                  {function="\L::admin_user__password"}
+                  {function="\L::common__password.\L::common__colon"}
                   <input class="form-control" type="password" name="npassword" maxlength="32"/>
                </div>
                <div class="form-group">
-                  {function="\L::admin_user__email"}
+                  {function="\L::common__email.\L::common__colon"}
                   <div class="input-group">
                      <span class="input-group-addon">
                         <span class="glyphicon glyphicon-envelope"></span>
@@ -311,7 +311,11 @@
                   </div>
                </div>
                <div class="form-group">
-                  <a target="_blank" href="{$fsc->agente->url()}">{function="\L::common__employee"}</a>:
+                  {if condition="in_array('facturacion_base',$GLOBALS['plugins'])"}
+                  <a href="{$fsc->agente->url()}">{function="\L::common__employee"}</a>{function="\L::common__colon"}
+                  {else}
+                  {function="\L::common__employee.\L::common__colon"}
+                  {/if}
                   <select name="ncodagente" class="form-control">
                      <option value="">{function="\L::common__none_male"}</option>
                      <option value="">{function="\L::common__option_separator"}</option>

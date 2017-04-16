@@ -8,3 +8,4 @@
 .htaccess
 config.php
 /language/utils/auto-translator
+/language/backup/

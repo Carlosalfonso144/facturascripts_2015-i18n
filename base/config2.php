@@ -39,7 +39,7 @@ if(FS_TMP_NAME != '' AND !file_exists('tmp/'.FS_TMP_NAME) )
    {
       if( mkdir('tmp') )
       {
-         file_put_contents('tmp/index.php', "<?php\necho \L::config2__blank_index';");
+         file_put_contents('tmp/index.php', "<?= \L::config2__blank_index';");
       }
    }
    

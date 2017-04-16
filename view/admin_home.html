@@ -455,7 +455,7 @@
                <div class="row">
                   <div class="col-md-3 col-sm-6">
                      <div class="form-group">
-                        {function="\L::admin_home__language"}
+                        {function="\L::admin_home__language.\L::common__colon"}
                         <select class="form-control" name="idioma">
                         {loop="$fsc->get_supported_languages()"}
                            {if="isset($GLOBALS['config2']['idioma'])"}
@@ -469,7 +469,7 @@
                   </div>
                   <div class="col-md-3 col-sm-6">
                      <div class="form-group">
-                        {function="\L::admin_home__time_zone"}
+                        {function="\L::admin_home__time_zone.\L::common__colon"}
                         <select class="form-control" name="zona_horaria">
                         {loop="$fsc->get_timezone_list()"}
                            {if="isset($GLOBALS['config2']['zona_horaria'])"}
@@ -485,7 +485,7 @@
                   </div>
                   <div class="col-md-3 col-sm-3">
                      <div class="form-group">
-                        {function="\L::common__startpage"}
+                        {function="\L::common__startpage.\L::common__colon"}
                         <select name="homepage" class="form-control">
                            {loop="$fsc->paginas"}
                            <option value="{$value->name}"{if="$value->name==$GLOBALS['config2']['homepage']"} selected=""{/if}>{$value->name}</option>
@@ -495,7 +495,7 @@
                   </div>
                   <div class="col-md-3 col-sm-3">
                      <div class="form-group">
-                        {function="\L::admin_home__decimals_on_totals"}
+                        {function="\L::admin_home__decimals_on_totals.\L::common__colon"}
                         <select name="nf0" class="form-control">
                         {loop="$fsc->nf0()"}
                            <option value="{$value}"{if="$value==$GLOBALS['config2']['nf0']"} selected=""{/if}>{$value}</option>
@@ -505,7 +505,7 @@
                   </div>
                   <div class="col-md-3 col-sm-3">
                      <div class="form-group">
-                        {function="\L::admin_home__decimals_on_prices"}
+                        {function="\L::admin_home__decimals_on_prices.\L::common__colon"}
                         <select name="nf0_art" class="form-control">
                         {loop="$fsc->nf0()"}
                            <option value="{$value}"{if="$value==$GLOBALS['config2']['nf0_art']"} selected=""{/if}>{$value}</option>
@@ -515,7 +515,7 @@
                   </div>
                   <div class="col-md-3 col-sm-3">
                      <div class="form-group">
-                        {function="\L::admin_home__separator_for_decimals"}
+                        {function="\L::admin_home__separator_for_decimals.\L::common__colon"}
                         <select name="nf1" class="form-control">
                         {loop="$fsc->nf1()"}
                            <option value="{$key}"{if="$key==$GLOBALS['config2']['nf1']"} selected=""{/if}>{$value}</option>
@@ -525,7 +525,7 @@
                   </div>
                   <div class="col-md-3 col-sm-3">
                      <div class="form-group">
-                        {function="\L::admin_home__separator_for_thousands"}
+                        {function="\L::admin_home__separator_for_thousands.\L::common__colon"}
                         <select name="nf2" class="form-control">
                            <option value="">({function="\L::common__none_male"})</option>
                            {loop="$fsc->nf1()"}
@@ -536,7 +536,7 @@
                   </div>
                   <div class="col-md-3 col-sm-3">
                      <div class="form-group">
-                        {function="\L::admin_home__currency_symbol"}
+                        {function="\L::admin_home__currency_symbol.\L::common__colon"}
                         <select name="pos_divisa" class="form-control">
                            <option value="right"{if="$GLOBALS['config2']['pos_divisa']=='right'"} selected=""{/if}>123 {$fsc->simbolo_divisa()}</option>
                            <option value="left"{if="$GLOBALS['config2']['pos_divisa']=='left'"} selected=""{/if}>{$fsc->simbolo_divisa()}123</option>
@@ -553,7 +553,7 @@
                <div class="row bg-success">
                   <div class="col-md-12 col-sm-12">
                      <h2>
-                        <i class="fa fa-language"></i>&nbsp; {function="\L::admin_home__translations"}
+                        <i class="fa fa-language"></i>&nbsp; {function="\L::admin_home__translations.\L::common__colon"}
                      </h2>
                      <p class="help-block">
                         {function="\L::admin_home__invoices_translations"}
@@ -574,7 +574,7 @@
                   <div class="col-md-12 col-sm-12">
                      <h2>
                         <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
-                        &nbsp; {function="\L::admin_home__development"}
+                        &nbsp; {function="\L::admin_home__development.\L::common__colon"}
                      </h2>
                      <p class='help-block'>
                         {function="\L::admin_home__help_development"}
@@ -584,7 +584,7 @@
                <div class="row bg-warning">
                   <div class="col-md-3 col-sm-3">
                      <div class="form-group">
-                        {function="\L::admin_home__checks_on_database"}
+                        {function="\L::admin_home__checks_on_database.\L::common__colon"}
                         <select name="check_db_types" class="form-control">
                            <option value="1"{if="$GLOBALS['config2']['check_db_types']==1"} selected=''{/if}>
                               {function="\L::admin_home__check_column_types"}
@@ -600,14 +600,14 @@
                   </div>
                   <div class="col-md-3 col-sm-3">
                      <div class="form-group">
-                        {function="\L::admin_home__integer_type"}
+                        {function="\L::admin_home__integer_type.\L::common__colon"}
                         <input class="form-control" type="text" name="db_integer" value="{$GLOBALS['config2']['db_integer']}"/>
                         <p class="help-block">{function="\L::admin_home__help_integer_type"}</p>
                      </div>
                   </div>
                   <div class="col-md-2 col-sm-2">
                      <div class="form-group{if="$GLOBALS['config2']['foreign_keys']==0"} has-warning{/if}">
-                        {function="\L::admin_home__check_foraign_keys"}
+                        {function="\L::admin_home__check_foraign_keys.\L::common__colon"}
                         <select name="foreign_keys" class="form-control">
                            <option value="1"{if="$GLOBALS['config2']['foreign_keys']==1"} selected=''{/if}>{function="\L::common__yes"}</option>
                            <option value="0"{if="$GLOBALS['config2']['foreign_keys']==0"} selected=''{/if}>{function="\L::common__no"}</option>
@@ -623,7 +623,7 @@
                   </div>
                   <div class="col-md-4 col-sm-4">
                      <div class="form-group">
-                        {function="\L::admin_home__allow_access_from_ips"}
+                        {function="\L::admin_home__allow_access_from_ips.\L::common__colon"}
                         <input class="form-control" type="text" name="ip_whitelist" value="{$GLOBALS['config2']['ip_whitelist']}"/>
                         <p class="help-block">{function="\L::admin_home__admins_can_always_access"}</p>
                      </div>
@@ -632,7 +632,7 @@
                <div class="row bg-warning">
                   <div class="col-md-3 col-sm-3">
                      <div class="form-group">
-                        {function="\L::admin_home__generate_accounting_books"}
+                        {function="\L::admin_home__generate_accounting_books.\L::common__colon"}
                         <select name="libros_contables" class="form-control">
                            <option value="1"{if="$GLOBALS['config2']['libros_contables']==1"} selected=''{/if}>{function="\L::common__yes"}</option>
                            <option value="0"{if="$GLOBALS['config2']['libros_contables']==0"} selected=''{/if}>{function="\L::common__no"}</option>
@@ -641,7 +641,7 @@
                   </div>
                   <div class="col-md-3 col-sm-3">
                      <div class="form-group">
-                        {function="\L::admin_home__new_code_algorithm"}
+                        {function="\L::admin_home__new_code_algorithm.\L::common__colon"}
                         <select name="new_codigo" class="form-control">
                            <option value="eneboo"{if="$GLOBALS['config2']['new_codigo']=='eneboo'"} selected=''{/if}>{function="\L::admin_home__algorithm_eneboo_compatible"}</option>
                            <option value="new"{if="$GLOBALS['config2']['new_codigo']=='new'"} selected=''{/if}>{function="\L::admin_home__algorithm_facturascripts"}</option>

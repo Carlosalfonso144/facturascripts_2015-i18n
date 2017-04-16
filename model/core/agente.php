@@ -156,7 +156,7 @@ class agente extends \fs_model
    {
       $this->clean_cache();
       return "INSERT INTO ".$this->table_name." (codagente,nombre,apellidos,dnicif)
-         VALUES ('1','Paco','Pepe','00000014Z');";
+         VALUES ('1','".\L::agente__default_agent_name."','".\L::agente__default_agent_surname."','".\L::agente__default_agent_dni."');";
    }
    
    /**
@@ -165,7 +165,7 @@ class agente extends \fs_model
     */
    public function get_fullname()
    {
-      return $this->nombre." ".$this->apellidos;
+      return $this->apellidos.", ".$this->nombre;
    }
    
    /**

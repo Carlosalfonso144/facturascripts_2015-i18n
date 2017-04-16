@@ -107,7 +107,7 @@ class fs_page extends fs_model
    {
       $this->clean_cache();
       return "INSERT INTO ".$this->table_name." (name,title,folder,version,show_on_menu)
-         VALUES ('admin_home','panel de control','admin',NULL,TRUE);";
+         VALUES ('admin_home','".\L::admin_home__control_panel."','admin',NULL,TRUE);";
    }
    
    public function url()

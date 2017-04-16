@@ -291,9 +291,9 @@ $system_info = str_replace('"', "'", $system_info);
 <head>
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
    <title>FacturaScripts</title>
-   <meta name="description" content="<?= \L::header__meta_description; ?>" />
+   <meta name="description" content="<?= \L::header__meta_description ?>" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <meta name="generator" content="<?= \L::common__facturascripts; ?>" />
+   <meta name="generator" content="<?= \L::common__facturascripts ?>" />
    <link rel="shortcut icon" href="view/img/favicon.ico" />
    <link rel="stylesheet" href="view/css/bootstrap-yeti.min.css" />
    <link rel="stylesheet" href="view/css/font-awesome.min.css" />
@@ -311,42 +311,42 @@ $system_info = str_replace('"', "'", $system_info);
       <div class="container-fluid">
          <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-               <span class="sr-only"><?= \L::common__menu; ?></span>
+               <span class="sr-only"><?= \L::common__menu ?></span>
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php"><?= \L::common__facturascripts; ?></a>
+            <a class="navbar-brand" href="index.php"><?= \L::common__facturascripts ?></a>
          </div>
          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                <li>
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?= \L::common__help; ?>">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?= \L::common__help ?>">
                      <span class="hidden-xs">
-                        <i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp; <?= \L::common__help; ?>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp; <?= \L::common__help ?>
                      </span>
-                     <span class="visible-xs"><?= \L::common__help; ?></span>
+                     <span class="visible-xs"><?= \L::common__help ?></span>
                   </a>
                   <ul class="dropdown-menu">
                      <li>
                         <a href="https://www.facturascripts.com/documentacion" target="_blank">
-                           <i class="fa fa-book" aria-hidden="true"></i>&nbsp; <?= \L::header__documentation; ?>
+                           <i class="fa fa-book" aria-hidden="true"></i>&nbsp; <?= \L::header__documentation ?>
                         </a>
                      </li>
                      <li>
                         <a href="https://www.facturascripts.com/contacto" target="_blank">
-                           <i class="fa fa-shield" aria-hidden="true"></i>&nbsp; <?= \L::header__official_support; ?>
+                           <i class="fa fa-shield" aria-hidden="true"></i>&nbsp; <?= \L::header__official_support ?>
                         </a>
                      </li>
                      <li>
                         <a href="https://www.facturascripts.com/errores" target="_blank">
-                           <i class="fa fa-bug" aria-hidden="true"></i>&nbsp; <?= \L::header__errors; ?>
+                           <i class="fa fa-bug" aria-hidden="true"></i>&nbsp; <?= \L::header__errors ?>
                         </a>
                      </li>
                      <li class="divider"></li>
                      <li>
                         <a href="#" id="b_feedback">
-                           <i class="fa fa-edit" aria-hidden="true"></i>&nbsp; <?= \L::header__report; ?>
+                           <i class="fa fa-edit" aria-hidden="true"></i>&nbsp; <?= \L::header__report ?>
                         </a>
                      </li>
                   </ul>
@@ -365,10 +365,10 @@ $system_info = str_replace('"', "'", $system_info);
                <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                   <h4 class="modal-title">
-                     <i class="fa fa-edit" aria-hidden="true"></i>&nbsp; <?= \L::header__report; ?>
+                     <i class="fa fa-edit" aria-hidden="true"></i>&nbsp; <?= \L::header__report ?>
                   </h4>
                   <p class="help-block">
-                     <?= \L::install__help_use_this_form_for_help; ?>
+                     <?= \L::install__help_use_this_form_for_help ?>
                   </p>
                </div>
                <div class="modal-body">
@@ -380,13 +380,13 @@ $system_info = str_replace('"', "'", $system_info);
                         <span class="input-group-addon">
                            <i class="fa fa-envelope" aria-hidden="true"></i>
                         </span>
-                        <input type="email" class="form-control" name="feedback_email" placeholder="<?= \L::header__placeholder_your_email; ?>"/>
+                        <input type="email" class="form-control" name="feedback_email" placeholder="<?= \L::header__placeholder_your_email ?>"/>
                      </div>
                   </div>
                </div>
                <div class="modal-footer">
                   <button type="submit" class="btn btn-sm btn-primary">
-                     <i class="fa fa-send" aria-hidden="true"></i>&nbsp; <?= \L::common__send; ?>
+                     <i class="fa fa-send" aria-hidden="true"></i>&nbsp; <?= \L::common__send ?>
                   </button>
                </div>
             </div>
@@ -426,27 +426,27 @@ $system_info = str_replace('"', "'", $system_info);
             },
             messages: {
                db_host: {
-                  required: "<?= \L::install__required_field; ?>",
+                  required: "<?= \L::install__required_field ?>",
                   minlength: $.validator.format("<?= \L::install__minimum_required_characters ?>")
                },
                db_port: {
-                  required: "<?= \L::install__required_field; ?>",
+                  required: "<?= \L::install__required_field ?>",
                   minlength: $.validator.format("<?= \L::install__minimum_required_characters ?>")
                },
                db_name: {
-                  required: "<?= \L::install__required_field; ?>",
+                  required: "<?= \L::install__required_field ?>",
                   minlength: $.validator.format("<?= \L::install__minimum_required_characters ?>")
                },
                db_user: {
-                  required: "<?= \L::install__required_field; ?>",
+                  required: "<?= \L::install__required_field ?>",
                   minlength: $.validator.format("<?= \L::install__minimum_required_characters ?>")
                },
                cache_host: {
-                  required: "<?= \L::install__required_field; ?>",
+                  required: "<?= \L::install__required_field ?>",
                   minlength: $.validator.format("<?= \L::install__minimum_required_characters ?>")
                },
                cache_port: {
-                  required: "<?= \L::install__required_field; ?>",
+                  required: "<?= \L::install__required_field ?>",
                   minlength: $.validator.format("<?= \L::install__minimum_required_characters ?>")
                },
             }
@@ -460,7 +460,7 @@ $system_info = str_replace('"', "'", $system_info);
             <div class="page-header">
                <h1>
                   <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-                  <?= \L::install__welcome_to_facturascripts_installer; ?>
+                  <?= \L::install__welcome_to_facturascripts_installer ?>
                   <small><?php echo file_get_contents('VERSION'); ?></small>
                </h1>
             </div>
@@ -477,30 +477,30 @@ $system_info = str_replace('"', "'", $system_info);
                   ?>
             <div class="panel panel-danger">
                <div class="panel-heading">
-                  <?= \L::install__heading_write_permissions; ?>
+                  <?= \L::install__heading_write_permissions.\L::common__colon ?>
                </div>
                <div class="panel-body">
                   <p>
-                     <?= \L::install__cant_write_on_facturascripts_folder; ?>
+                     <?= \L::install__cant_write_on_facturascripts_folder ?>
                   </p>
                   <h3>
-                     <i class="fa fa-linux" aria-hidden="true"></i>&nbsp; <?= \L::install__linux; ?>
+                     <i class="fa fa-linux" aria-hidden="true"></i>&nbsp; <?= \L::install__linux ?>
                   </h3>
                   <pre>sudo chmod -R o+w <?php echo dirname(__FILE__); ?></pre>
                   <p class="help-block">
-                     <?= \L::install__help_linux; ?>
+                     <?= \L::install__help_linux ?>
                   </p>
                   <h3>
-                     <i class="fa fa-lock" aria-hidden="true"></i>&nbsp; <?= \L::install__distributions; ?>
+                     <i class="fa fa-lock" aria-hidden="true"></i>&nbsp; <?= \L::install__distributions ?>
                   </h3>
                   <p class="help-block">
-                     <?= \L::install__help_distributions; ?>
+                     <?= \L::install__help_distributions ?>
                   </p>
                   <h3>
-                     <i class="fa fa-globe" aria-hidden="true"></i>&nbsp; <?= \L::install__hosting; ?>
+                     <i class="fa fa-globe" aria-hidden="true"></i>&nbsp; <?= \L::install__hosting ?>
                   </h3>
                   <p class="help-block">
-                     <?= \L::install__help_hosting; ?>
+                     <?= \L::install__help_hosting ?>
                   </p>
                </div>
             </div>
@@ -511,22 +511,22 @@ $system_info = str_replace('"', "'", $system_info);
                   ?>
             <div class="panel panel-danger">
                <div class="panel-heading">
-                  <?= \L::install__heading_obsolete_php; ?>
+                  <?= \L::install__heading_obsolete_php.\L::common__colon ?>
                </div>
                <div class="panel-body">
                   <p>
-                     <?= \L::install__obsolete_php( phpversion() ); ?>
+                     <?= \L::install__obsolete_php( phpversion() ) ?>
                   </p>
-                  <h3><?= \L::install__solutions; ?></h3>
+                  <h3><?= \L::install__solutions.\L::common__colon ?></h3>
                   <ul>
                      <li>
                         <p class="help-block">
-                           <?= \L::install__help_php_version_1_point; ?>
+                           <?= \L::install__help_php_version_1_point ?>
                         </p>
                      </li>
                      <li>
                         <p class="help-block">
-                           <?= \L::install__help_php_version_2_point; ?>
+                           <?= \L::install__help_php_version_2_point ?>
                         </p>
                      </li>
                   </ul>
@@ -539,23 +539,23 @@ $system_info = str_replace('"', "'", $system_info);
                   ?>
             <div class="panel panel-danger">
                <div class="panel-heading">
-                  <?= \L::install__php_mb_substr_not_found; ?>
+                  <?= \L::install__php_mb_substr_not_found.\L::common__colon ?>
                </div>
                <div class="panel-body">
                   <p>
-                     <?= \L::install__required_mbstring; ?>
+                     <?= \L::install__required_mbstring ?>
                   </p>
                   <h3>
-                     <i class="fa fa-linux" aria-hidden="true"></i>&nbsp; <?= \L::install__linux; ?>
+                     <i class="fa fa-linux" aria-hidden="true"></i>&nbsp; <?= \L::install__linux ?>
                   </h3>
                   <p class="help-block">
-                     <?= \L::install__required_mbstring_instructions; ?>
+                     <?= \L::install__required_mbstring_instructions ?>
                   </p>
                   <h3>
-                     <i class="fa fa-globe" aria-hidden="true"></i>&nbsp; <?= \L::install__hosting; ?>
+                     <i class="fa fa-globe" aria-hidden="true"></i>&nbsp; <?= \L::install__hosting ?>
                   </h3>
                   <p class="help-block">
-                     <?= \L::install__help_hosting_trimmed_php; ?>
+                     <?= \L::install__help_hosting_trimmed_php ?>
                   </p>
                </div>
             </div>
@@ -566,36 +566,36 @@ $system_info = str_replace('"', "'", $system_info);
                   ?>
             <div class="panel panel-danger">
                <div class="panel-heading">
-                  <?= \L::install__php_openssl_not_found; ?>
+                  <?= \L::install__php_openssl_not_found.\L::common__colon ?>
                </div>
                <div class="panel-body">
                   <p>
-                     <?= \L::install__help_openssl; ?>
+                     <?= \L::install__help_openssl ?>
                   </p>
                   <h3>
-                     <i class="fa fa-globe" aria-hidden="true"></i>&nbsp; <?= \L::install__hosting; ?>
+                     <i class="fa fa-globe" aria-hidden="true"></i>&nbsp; <?= \L::install__hosting ?>
                   </h3>
                   <p class="help-block">
-                     <?= \L::install__help_hosting_trimmed_php; ?>
+                     <?= \L::install__help_hosting_trimmed_php ?>
                   </p>
                   <h3>
-                     <i class="fa fa-windows" aria-hidden="true"></i>&nbsp; <?= \L::install__windows; ?>
+                     <i class="fa fa-windows" aria-hidden="true"></i>&nbsp; <?= \L::install__windows ?>
                   </h3>
                   <p class="help-block">
-                     <?= \L::install__official_package_for_windows; ?>
-                     <?= \L::install__unofficial_package_for_windows; ?>
+                     <?= \L::install__official_package_for_windows ?>
+                     <?= \L::install__unofficial_package_for_windows ?>
                   </p>
                   <h3>
-                     <i class="fa fa-linux" aria-hidden="true"></i>&nbsp; <?= \L::install__linux; ?>
+                     <i class="fa fa-linux" aria-hidden="true"></i>&nbsp; <?= \L::install__linux ?>
                   </h3>
                   <p class="help-block">
-                     <?= \L::install__help_openssl_linux; ?>
+                     <?= \L::install__help_openssl_linux ?>
                   </p>
                   <h3>
-                     <i class="fa fa-apple" aria-hidden="true"></i>&nbsp; <?= \L::install__mac; ?>
+                     <i class="fa fa-apple" aria-hidden="true"></i>&nbsp; <?= \L::install__mac ?>
                   </h3>
                   <p class="help-block">
-                     <?= \L::install__help_openssl_mac; ?>
+                     <?= \L::install__help_openssl_mac ?>
                   </p>
                </div>
             </div>
@@ -606,21 +606,21 @@ $system_info = str_replace('"', "'", $system_info);
                   ?>
             <div class="panel panel-danger">
                <div class="panel-heading">
-                  <?= \L::install__php_ziparchive_not_found; ?>
+                  <?= \L::install__php_ziparchive_not_found.\L::common__colon ?>
                </div>
                <div class="panel-body">
                   <p>
-                     <?= \L::install__help_ziparchive; ?>
+                     <?= \L::install__help_ziparchive ?>
                   </p>
                   <h3>
-                     <i class="fa fa-linux" aria-hidden="true"></i>&nbsp; <?= \L::install__linux; ?>
+                     <i class="fa fa-linux" aria-hidden="true"></i>&nbsp; <?= \L::install__linux ?>
                   </h3>
-                  <p class="help-block"><?= \L::install__help_ziparchive_linux; ?></p>
+                  <p class="help-block"><?= \L::install__help_ziparchive_linux ?></p>
                   <h3>
-                     <i class="fa fa-globe" aria-hidden="true"></i>&nbsp; <?= \L::install__hosting; ?>
+                     <i class="fa fa-globe" aria-hidden="true"></i>&nbsp; <?= \L::install__hosting ?>
                   </h3>
                   <p class="help-block">
-                     <?= \L::install__help_hosting_trimmed_php; ?>
+                     <?= \L::install__help_hosting_trimmed_php ?>
                   </p>
                </div>
             </div>
@@ -631,7 +631,7 @@ $system_info = str_replace('"', "'", $system_info);
                   ?>
             <div class="panel panel-danger">
                <div class="panel-heading">
-                  <?= \L::install__database_access_mysql; ?>
+                  <?= \L::install__database_access_mysql.\L::common__colon ?>
                </div>
                <div class="panel-body">
                   <ul>
@@ -649,7 +649,7 @@ $system_info = str_replace('"', "'", $system_info);
                   ?>
             <div class="panel panel-danger">
                <div class="panel-heading">
-                  <?= \L::install__database_access_psql; ?>
+                  <?= \L::install__database_access_psql.\L::common__colon ?>
                </div>
                <div class="panel-body">
                   <ul>
@@ -667,7 +667,7 @@ $system_info = str_replace('"', "'", $system_info);
                   ?>
             <div class="panel panel-danger">
                <div class="panel-heading">
-                  <?= \L::install__error; ?>
+                  <?= \L::common__error.\L::common__colon ?>
                </div>
                <div class="panel-body">
                   <ul>
@@ -696,12 +696,12 @@ $system_info = str_replace('"', "'", $system_info);
       
       <div class="row">
          <div class="col-sm-12">
-            <b><?= \L::install__before_start; ?></b>
+            <b><?= \L::install__before_start ?></b>
             <p class="help-block">
-               <?= \L::install__help_us; ?>
+               <?= \L::install__help_us ?>
             </p>
             <a href="https://www.facturascripts.com/documentacion#instalacion" target="_blank" class="btn btn-sm btn-info">
-               <i class="fa fa-book"></i>&nbsp; <?= \L::header__documentation; ?>
+               <i class="fa fa-book"></i>&nbsp; <?= \L::header__documentation ?>
             </a>
             <br/>
             <br/>
@@ -715,19 +715,19 @@ $system_info = str_replace('"', "'", $system_info);
                   <li role="presentation" class="active">
                      <a href="#db" aria-controls="db" role="tab" data-toggle="tab">
                         <i class="fa fa-database"></i>&nbsp;
-                        <?= \L::common__database; ?>
+                        <?= \L::common__database ?>
                      </a>
                   </li>
                   <li role="presentation">
                      <a href="#cache" aria-controls="cache" role="tab" data-toggle="tab">
                         <i class="fa fa-wrench"></i>&nbsp;
-                        <?= \L::common__advanced; ?>
+                        <?= \L::common__advanced ?>
                      </a>
                   </li>
                   <li role="presentation">
                      <a href="#licencia" aria-controls="licencia" role="tab" data-toggle="tab">
                         <i class="fa fa-file-text-o"></i>&nbsp;
-                        <?= \L::install__license; ?>
+                        <?= \L::install__license ?>
                      </a>
                   </li>
                </ul>
@@ -739,22 +739,22 @@ $system_info = str_replace('"', "'", $system_info);
                <div class="row">
                   <div class="col-sm-4">
                      <div class="form-group">
-                        <?= \L::install__type_database_server . \L::common__colon; ?>
+                        <?= \L::install__type_database_server . \L::common__colon ?>
                         <select name="db_type" class="form-control" onchange="change_db_type()">
-                           <option value="MYSQL"<?php if($db_type=='MYSQL') { echo ' selected=""'; } ?>><?= \L::install__mysql; ?></option>
-                           <option value="POSTGRESQL"<?php if($db_type=='POSTGRESQL') { echo ' selected=""'; } ?>><?= \L::install__postgresql; ?></option>
+                           <option value="MYSQL"<?php if($db_type=='MYSQL') { echo ' selected=""'; } ?>><?= \L::install__mysql ?></option>
+                           <option value="POSTGRESQL"<?php if($db_type=='POSTGRESQL') { echo ' selected=""'; } ?>><?= \L::install__postgresql ?></option>
                         </select>
                      </div>
                   </div>
                   <div class="col-sm-4">
                      <div class="form-group">
-                        <?= \L::install__server . \L::common__colon; ?>
+                        <?= \L::install__server . \L::common__colon ?>
                         <input class="form-control" type="text" name="db_host" value="<?php echo $db_host; ?>" autocomplete="off"/>
                      </div>
                   </div>
                   <div class="col-sm-4">
                      <div class="form-group">
-                        <?= \L::common__port . \L::common__colon; ?>
+                        <?= \L::common__port . \L::common__colon ?>
                         <input class="form-control" type="number" name="db_port" value="<?php echo $db_port; ?>" autocomplete="off"/>
                      </div>
                   </div>
@@ -762,19 +762,19 @@ $system_info = str_replace('"', "'", $system_info);
                <div class="row">
                   <div class="col-sm-4">
                      <div class="form-group">
-                        <?= \L::install__database_name . \L::common__colon; ?>
+                        <?= \L::install__database_name . \L::common__colon ?>
                         <input class="form-control" type="text" name="db_name" value="<?php echo $db_name; ?>" autocomplete="off"/>
                      </div>
                   </div>
                   <div class="col-sm-4">
                      <div class="form-group">
-                        <?= \L::install__database_username . \L::common__colon; ?>
+                        <?= \L::install__database_username . \L::common__colon ?>
                         <input class="form-control" type="text" name="db_user" value="<?php echo $db_user; ?>" autocomplete="off"/>
                      </div>
                   </div>
                   <div class="col-sm-4">
                      <div class="form-group">
-                        <?= \L::install__database_password . \L::common__colon; ?>
+                        <?= \L::default__database_password.\L . \L::common__colon ?>
                         <input class="form-control" type="password" name="db_pass" value="" autocomplete="off"/>
                      </div>
                   </div>
@@ -782,10 +782,10 @@ $system_info = str_replace('"', "'", $system_info);
                <div class="row">
                   <div class="col-sm-4">
                      <div id="mysql_socket" class="form-group">
-                        <?= \L::install__database_socket . \L::common__colon; ?>
-                        <input class="form-control" type="text" name="mysql_socket" value="" placeholder="<?= \L::install__optional; ?>" autocomplete="off"/>
+                        <?= \L::install__database_socket . \L::common__colon ?>
+                        <input class="form-control" type="text" name="mysql_socket" value="" placeholder="<?= \L::install__optional ?>" autocomplete="off"/>
                         <p class="help-block">
-                           <?= \L::install__help_database_socket; ?>
+                           <?= \L::install__help_database_socket ?>
                         </p>
                      </div>
                   </div>
@@ -796,28 +796,28 @@ $system_info = str_replace('"', "'", $system_info);
                   <div class="col-sm-12">
                      <div class="panel panel-default">
                         <div class="panel-heading">
-                           <h3 class="panel-title"><?= \L::install__memcached; ?></h3>
+                           <h3 class="panel-title"><?= \L::install__memcached ?></h3>
                         </div>
                         <div class="panel-body">
                            <p class="help-block">
-                              <?= \L::install__help_memcached; ?>
+                              <?= \L::install__help_memcached ?>
                            </p>
                            <div class="row">
                               <div class="col-sm-4">
                                  <div class="form-group">
-                                    <?= \L::install__server . \L::common__colon; ?>
+                                    <?= \L::install__server . \L::common__colon ?>
                                     <input class="form-control" type="text" name="cache_host" value="localhost" autocomplete="off"/>
                                  </div>
                               </div>
                               <div class="col-sm-4">
                                  <div class="form-group">
-                                    <?= \L::common__port . \L::common__colon; ?>
+                                    <?= \L::common__port . \L::common__colon ?>
                                     <input class="form-control" type="number" name="cache_port" value="11211" autocomplete="off"/>
                                  </div>
                               </div>
                               <div class="col-sm-4">
                                  <div class="form-group">
-                                    <?= \L::install__prefix . \L::common__colon; ?>
+                                    <?= \L::install__prefix . \L::common__colon ?>
                                     <input class="form-control" type="text" name="cache_prefix" value="<?php echo random_string(8); ?>_" autocomplete="off"/>
                                  </div>
                               </div>
@@ -826,31 +826,31 @@ $system_info = str_replace('"', "'", $system_info);
                      </div>
                      <div class="panel panel-default">
                         <div class="panel-heading">
-                           <h3 class="panel-title"><?= \L::install__proxy; ?></h3>
+                           <h3 class="panel-title"><?= \L::install__proxy ?></h3>
                         </div>
                         <div class="panel-body">
                            <div class="row">
                               <div class="col-sm-4">
                                  <div class="form-group">
-                                    <?= \L::install__type_proxy . \L::common__colon; ?>
+                                    <?= \L::install__type_proxy . \L::common__colon ?>
                                     <select class='form-control' name="proxy_type">
-                                       <option value=""><?= \L::install__without_proxy; ?></option>
-                                       <option value=""><?= \L::common__option_separator; ?></option>
-                                       <option value="HTTP"><?= \L::install__http; ?></option>
-                                       <option value="HTTPS"><?= \L::install__https; ?></option>
-                                       <option value="SOCKS5"><?= \L::install__socks5; ?></option>
+                                       <option value=""><?= \L::install__without_proxy ?></option>
+                                       <option value=""><?= \L::common__option_separator ?></option>
+                                       <option value="HTTP"><?= \L::install__http ?></option>
+                                       <option value="HTTPS"><?= \L::install__https ?></option>
+                                       <option value="SOCKS5"><?= \L::install__socks5 ?></option>
                                     </select>
                                  </div>
                               </div>
                               <div class="col-sm-4">
                                  <div class="form-group">
-                                    <?= \L::install__server . \L::common__colon; ?>
+                                    <?= \L::install__server . \L::common__colon ?>
                                     <input class="form-control" type="text" name="proxy_host" placeholder="192.168.1.1" autocomplete="off"/>
                                  </div>
                               </div>
                               <div class="col-sm-4">
                                  <div class="form-group">
-                                    <?= \L::common__port . \L::common__colon; ?>
+                                    <?= \L::common__port . \L::common__colon ?>
                                     <input class="form-control" type="number" name="proxy_port" placeholder="8080" autocomplete="off"/>
                                  </div>
                               </div>
@@ -866,7 +866,7 @@ $system_info = str_replace('"', "'", $system_info);
                      <div class="form-group">
                         <pre><?php echo file_get_contents('COPYING'); ?></pre>
                         <p>
-                           <?= \L::install__help_license; ?>
+                           <?= \L::install__help_license ?>
                         </p>
                      </div>
                   </div>
@@ -876,7 +876,7 @@ $system_info = str_replace('"', "'", $system_info);
          <div class="row">
             <div class="col-sm-12 text-right">
                <button id="submit_button" class="btn btn-sm btn-primary" type="submit">
-                  <i class="fa fa-check" aria-hidden="true"></i>&nbsp; <?= \L::install__accept; ?>
+                  <i class="fa fa-check" aria-hidden="true"></i>&nbsp; <?= \L::install__accept ?>
                </button>
             </div>
          </div>
@@ -886,7 +886,7 @@ $system_info = str_replace('"', "'", $system_info);
          <div class="col-sm-12 text-center">
             <hr/>
             <small>
-               <?= \L::install__copyright; ?>
+               <?= \L::install__copyright ?>
             </small>
          </div>
       </div>

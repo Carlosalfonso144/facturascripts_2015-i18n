@@ -141,7 +141,7 @@ class fs_mysql
       }
       else
       {
-         self::$errors[] = \L::fscontroller__ext_mysql_not_installed;
+         self::$errors[] = \L::install__php_mysql_not_found;
       }
       
       return $connected;

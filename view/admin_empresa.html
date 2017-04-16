@@ -34,15 +34,15 @@
                </div>
                <div class="panel-body">
                   <div class="form-group">
-                     {function="\L::common__name"}
+                     {function="\L::common__tradename.\L::common__colon"}
                      <input class="form-control" type="text" name="nombre" value="{$fsc->empresa->nombre}" autocomplete="off" autofocus />
                   </div>
                   <div class="form-group">
-                     {function="\L::admin_empresa__short_name"}
+                     {function="\L::admin_empresa__short_name.\L::common__colon"}
                      <input class="form-control" type="text" name="nombrecorto" value="{$fsc->empresa->nombrecorto}" autocomplete="off"/>
                   </div>
                   <div class="form-group">
-                     {function="\L::admin_empresa__web"}
+                     {function="\L::admin_empresa__web.\L::common__colon"}
                      <input class="form-control" type="text" name="web" value="{$fsc->empresa->web}" autocomplete="off"/>
                   </div>
                </div>
@@ -79,7 +79,7 @@
                               <span class="input-group-addon">
                                  <span class="glyphicon glyphicon-eye-close"></span>
                               </span>
-                              <input class="form-control" type="password" name="mail_password" value="{$fsc->empresa->email_config['mail_password']}" placeholder='{function="\L::admin_empresa__placeholder_password"}'/>
+                              <input class="form-control" type="password" name="mail_password" value="{$fsc->empresa->email_config['mail_password']}" placeholder='{function="\L::common__password"}'/>
                            </div>
                         </div>
                      </div>
@@ -98,7 +98,7 @@
                   <div class="row">
                      <div class="col-sm-12">
                         <div class="form-group">
-                           {function="\L::admin_empresa__signature"}
+                           {function="\L::admin_empresa__signature.\L::common__colon"}
                            <textarea class="form-control" name="mail_firma" rows="4">{$fsc->empresa->email_config['mail_firma']}</textarea>
                         </div>
                      </div>
@@ -119,7 +119,7 @@
                   <div class="row">
                      <div class="col-sm-4">
                         <div class="form-group">
-                           {function="\L::admin_empresa__host"}
+                           {function="\L::admin_empresa__host.\L::common__colon"}
                            <div class="input-group">
                               <span class="input-group-addon">
                                  <span class="glyphicon glyphicon-globe"></span>
@@ -130,13 +130,13 @@
                      </div>
                      <div class="col-sm-2">
                         <div class="form-group">
-                           {function="\L::common__port"}{function="\L::common__colon"}
+                           {function="\L::common__port.\L::common__colon"}
                            <input class="form-control" type="number" name="mail_port" value="{$fsc->empresa->email_config['mail_port']}" autocomplete="off"/>
                         </div>
                      </div>
                      <div class="col-sm-2">
                         <div class="form-group">
-                           {function="\L::admin_empresa__encryption"}
+                           {function="\L::admin_empresa__encryption.\L::common__colon"}
                            <select name="mail_enc" class="form-control">
                            {loop="$fsc->encriptaciones()"}
                               {if="$key==$fsc->empresa->email_config['mail_enc']"}
@@ -150,7 +150,7 @@
                      </div>
                      <div class="col-sm-2">
                         <div class="form-group">
-                           {function="\L::admin_empresa__sended_by"}
+                           {function="\L::admin_empresa__sended_by.\L::common__colon"}
                            <select name="mail_mailer" class="form-control">
                            {loop="$fsc->mailers()"}
                               {if="$key==$fsc->empresa->email_config['mail_mailer']"}
@@ -164,7 +164,7 @@
                      </div>
                      <div class="col-sm-2">
                         <div class="form-group">
-                           {function="\L::common__user"}
+                           {function="\L::common__user.\L::common__colon"}
                            <input class="form-control" type="text" name="mail_user" value="{$fsc->empresa->email_config['mail_user']}" autocomplete="off"/>
                         </div>
                      </div>

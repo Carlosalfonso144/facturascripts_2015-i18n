@@ -16,7 +16,7 @@
       </div>
       <div class="row">
          <div class="col-sm-3">
-            <b>{function="\L::footer__installed_plugins"}</b>
+            <b>{function="\L::footer__installed_plugins.\L::common__colon"}</b>
             <ul>
                {loop="$GLOBALS['plugins']"}
                <li>
@@ -26,7 +26,7 @@
             </ul>
          </div>
          <div class="col-sm-6">
-            <b>{function="\L::footer__advantatges"}</b>
+            <b>{function="\L::footer__advantatges.\L::common__colon"}</b>
             <ul>
                <li>{function="\L::footer__list_work_anywhere"}</li>
                <li>{function="\L::footer__simply_forms"}</li>
@@ -61,7 +61,7 @@
             {if="FS_DB_HISTORY"}
                <div class="panel panel-default hidden-print">
                   <div class="panel-heading">
-                     <h3 class="panel-title">{function="\L::footer__sql_queries"}{function="\L::common__colon"}</h3>
+                     <h3 class="panel-title">{function="\L::footer__sql_queries.\L::common__colon"}</h3>
                   </div>
                   <div class="panel-body">
                      <ol style="font-size: 11px; margin: 0px; padding: 0px 0px 0px 20px;">
@@ -97,8 +97,8 @@
          </div>
          <div class="col-sm-4 col-xs-6 text-right">
             <span class="label label-default">
-               <i class="fa fa-clock" aria-hidden="true" title='{function="\L::footer__page_processed_in( $fsc->duration() )"}"'></i>
-               &nbsp; {$fsc->duration()}
+               <i class="fa fa-clock-o" aria-hidden="true" title='{function="\L::footer__page_processed_in( $fsc->duration() )"}"'></i>
+               &nbsp;{$fsc->duration()}
             </span>
          </div>
       </div>

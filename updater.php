@@ -759,10 +759,10 @@ $updater = new fs_updater();
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es" >
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <title><?php echo \L::updater__facturascripts_updater; ?></title>
-      <meta name="description" content="<?php echo \L::updater__meta_description; ?>" />
+      <title><?= \L::updater__facturascripts_updater ?></title>
+      <meta name="description" content="<?= \L::updater__meta_description ?>" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="generator" content="<?php echo \L::common__facturascripts; ?>" />
+      <meta name="generator" content="<?= \L::common__facturascripts ?>" />
       <link rel="shortcut icon" href="view/img/favicon.ico" />
       <link rel="stylesheet" href="view/css/bootstrap-yeti.min.css" />
       <link rel="stylesheet" href="view/css/font-awesome.min.css" />
@@ -774,17 +774,17 @@ $updater = new fs_updater();
       <div class="container-fluid">
          <div class="row">
             <div class="col-sm-12">
-               <a href="index.php?page=admin_home&updated=TRUE" class="btn btn-sm btn-default" title="<?php echo \L::admin_home__control_panel; ?>">
+               <a href="index.php?page=admin_home&updated=TRUE" class="btn btn-sm btn-default" title="<?= \L::admin_home__control_panel ?>">
                   <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-                  <span class="hidden-xs">&nbsp; <?php echo \L::admin_home__control_panel; ?></span>
+                  <span class="hidden-xs">&nbsp; <?= \L::admin_home__control_panel ?></span>
                </a>
-               <a href="https://www.facturascripts.com/comm3/index.php?page=community_tus_plugins" target="_blank" class="btn btn-sm btn-default" title="<?php echo \L::updater__keys; ?>">
+               <a href="https://www.facturascripts.com/comm3/index.php?page=community_tus_plugins" target="_blank" class="btn btn-sm btn-default" title="<?= \L::updater__keys ?>">
                   <i class="fa fa-key" aria-hidden="true"></i>
-                  <span class="hidden-xs">&nbsp; <?php echo \L::updater__keys; ?></span>
+                  <span class="hidden-xs">&nbsp; <?= \L::updater__keys ?></span>
                </a>
                <div class="page-header">
                   <h1>
-                     <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp; <?php echo \L::updater__facturascripts_updater;?>
+                     <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp; <?= \L::updater__facturascripts_updater?>
                   </h1>
                </div>
                <?php
@@ -809,20 +809,20 @@ $updater = new fs_updater();
          <div class="row">
             <div class="col-sm-9">
                <p class="help-block">
-                  <?php echo \L::updater__help_updater; ?>
+                  <?= \L::updater__help_updater ?>
                </p>
                <br/>
                <ul class="nav nav-tabs" role="tablist">
                   <li role="presentation" class="active">
                      <a href="#actualizaciones" aria-controls="actualizaciones" role="tab" data-toggle="tab">
                         <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
-                        <span class="hidden-xs">&nbsp; <?php echo \L::common__updates; ?></span>
+                        <span class="hidden-xs">&nbsp; <?= \L::common__updates ?></span>
                      </a>
                   </li>
                   <li role="presentation">
                      <a href="#opciones" aria-controls="opciones" role="tab" data-toggle="tab">
                         <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
-                        <span class="hidden-xs">&nbsp; <?php echo \L::updater__options; ?></span>
+                        <span class="hidden-xs">&nbsp; <?= \L::updater__options ?></span>
                      </a>
                   </li>
                </ul>
@@ -832,10 +832,10 @@ $updater = new fs_updater();
                         <table class="table table-hover">
                            <thead>
                               <tr>
-                                 <th class="text-left"><?php echo \L::common__name; ?></th>
-                                 <th class="text-left"><?php echo \L::common__description; ?></th>
-                                 <th class="text-right"><?php echo \L::common__version; ?></th>
-                                 <th class="text-right"><?php echo \L::updater__new_version; ?></th>
+                                 <th class="text-left"><?= \L::common__name ?></th>
+                                 <th class="text-left"><?= \L::common__description ?></th>
+                                 <th class="text-right"><?= \L::common__version ?></th>
+                                 <th class="text-right"><?= \L::updater__new_version ?></th>
                                  <th></th>
                               </tr>
                            </thead>
@@ -848,11 +848,11 @@ $updater = new fs_updater();
                         <table class="table table-hover">
                            <thead>
                               <tr>
-                                 <th class="text-left"><?php echo \L::updater__option; ?></th>
+                                 <th class="text-left"><?= \L::updater__option ?></th>
                                  <th></th>
                               </tr>
                            </thead>
-                           <?php echo $updater->tr_options; ?>
+                           <?php echo $updater->tr_options ?>
                         </table>
                      </div>
                   </div>
@@ -864,15 +864,15 @@ $updater = new fs_updater();
                   <img src='https://i.imgur.com/5XRa2Cm.png' alt="adminlte"/>
                </a>
                <p class="help-block">
-                  <?php echo \L::updater__help_adminlte; ?>
+                  <?= \L::updater__help_adminlte ?>
                </p>
                <br/>
                <a href="https://www.facturascripts.com/ideas#mejoras" target="_blank" class="btn btn-block btn-default">
                   <i class="fa fa-trophy fa-3x" aria-hidden="true"></i>
-                  <br/><?php echo \L::updater__improvements; ?>
+                  <br/><?= \L::updater__improvements ?>
                </a>
                <p class="help-block">
-                  <?php echo \L::updater__help_improvements; ?>
+                  <?= \L::updater__help_improvements ?>
                </p>
             </div>
          </div>
@@ -894,13 +894,13 @@ $updater = new fs_updater();
                <div class="modal-dialog" role="document">
                   <div class="modal-content">
                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo \L::common__close; ?>">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="<?= \L::common__close ?>">
                            <span aria-hidden="true">&times;</span>
                         </button>
                         <h4 class="modal-title">
-                           <i class="fa fa-key" aria-hidden="true"></i> <?php echo \L::updater__add_update_key; ?>
+                           <i class="fa fa-key" aria-hidden="true"></i> <?= \L::updater__add_update_key ?>
                         </h4>
-                        <p class="help-block"><?php echo \L::updater__required_for_update( $plug['name'] ) ?></p>
+                        <p class="help-block"><?= \L::updater__required_for_update( $plug['name'] ) ?></p>
                      </div>
                      <div class="modal-body">
                         <div class="row">
@@ -909,7 +909,7 @@ $updater = new fs_updater();
                                  Clave:
                                  <input type="text" name="key" class="form-control" autocomplete="off" autofocus=""/>
                                  <p class="help-block">
-                                    <?php echo \L::updater__dont_know_your_keys; ?>
+                                    <?= \L::updater__dont_know_your_keys ?>
                                  </p>
                               </div>
                            </div>
@@ -918,13 +918,13 @@ $updater = new fs_updater();
                            <div class="col-xs-6">
                               <a href="https://www.facturascripts.com/comm3/index.php?page=community_tus_plugins" target="_blank" class="btn btn-sm btn-warning">
                                  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                                 <span class="hidden-xs">&nbsp; <?php echo \L::updater__my_keys; ?></span>
+                                 <span class="hidden-xs">&nbsp; <?= \L::updater__my_keys ?></span>
                               </a>
                            </div>
                            <div class="col-xs-6 text-right">
                               <button type="submit" class="btn btn-sm btn-primary">
                                  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                 <span class="hidden-xs">&nbsp; <?php echo \L::updater__add_key; ?></span>
+                                 <span class="hidden-xs">&nbsp; <?= \L::updater__add_key ?></span>
                               </button>
                            </div>
                         </div>
@@ -948,7 +948,7 @@ $updater = new fs_updater();
          <div class="row">
             <div class="col-xs-6">
                <small>
-                  <?php echo \L::footer__created_with; ?>
+                  <?= \L::footer__created_with ?>
                </small>
             </div>
             <div class="col-xs-6 text-right">
