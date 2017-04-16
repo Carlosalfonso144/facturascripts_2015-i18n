@@ -126,7 +126,11 @@
          </div>
          <div class="col-sm-2">
             <div class="form-group">
-               <a href="{$fsc->agente->url()}">{function="\L::common__employee"}</a>:
+               {if condition="in_array('facturacion_base',$GLOBALS['plugins'])"}
+               <a href="{$fsc->agente->url()}">{function="\L::common__employee"}</a>{function="\L::common__colon"}
+               {else}
+               {function="\L::common__employee.\L::common__colon"}
+               {/if}
                <select name="scodagente" class="form-control">
                {if="$fsc->user->admin"}
                   <option value="">{function="\L::common__none_male"}</option>
@@ -171,7 +175,7 @@
          </div>
          <div class="col-sm-2">
             <div class="form-group">
-               Estilo visual:
+               {function="\L::admin_user__css_style.\L::common__colon"}
                <select name="css" class="form-control">
                   {loop="$fsc->extensions"}
                      {if="$value->type=='css'"}
@@ -384,31 +388,31 @@
             </div>
             <div class="modal-body">
                <div class="form-group">
-                  <label for="nnombre" class="col-sm-2 control-label">{function="\L::common__firstname"}</label>
+                  <label for="nnombre" class="col-sm-2 control-label">{function="\L::common__firstname.\L::common__colon"}</label>
                   <div class="col-sm-10">
                      <input class="form-control" type="text" name="nnombre" autocomplete="off" required=""/>
                   </div>
                </div>
                <div class="form-group">
-                  <label for="napellidos" class="col-sm-2 control-label">{function="\L::admin_user__surname"}</label>
+                  <label for="napellidos" class="col-sm-2 control-label">{function="\L::admin_user__surname.\L::common__colon"}</label>
                   <div class="col-sm-10">
                      <input class="form-control" type="text" name="napellidos" autocomplete="off"/>
                   </div>
                </div>
                <div class="form-group">
-                  <label for="ndnicif" class="col-sm-2 control-label">{function="\L::common__cifnif"}</label>
+                  <label for="ndnicif" class="col-sm-2 control-label">{function="\L::common__cifnif.\L::common__colon"}</label>
                   <div class="col-sm-10">
                      <input class="form-control" type="text" name="ndnicif" autocomplete="off"/>
                   </div>
                </div>
                <div class="form-group">
-                  <label for="ntelefono" class="col-sm-2 control-label">{function="\L::common__phone"}</label>
+                  <label for="ntelefono" class="col-sm-2 control-label">{function="\L::common__phone.\L::common__colon"}</label>
                   <div class="col-sm-10">
                      <input class="form-control" type="text" name="ntelefono" autocomplete="off"/>
                   </div>
                </div>
                <div class="form-group">
-                  <label for="nemail" class="col-sm-2 control-label">{function="\L::common__email"}</label>
+                  <label for="nemail" class="col-sm-2 control-label">{function="\L::common__email.\L::common__colon"}</label>
                   <div class="col-sm-10">
                      <input class="form-control" type="text" name="nemail" autocomplete="off"/>
                   </div>
