@@ -11,6 +11,8 @@ https://www.facturascripts.com
 
 TODO
 =====
+
+- Permitir escoger idioma desde admin_home y desde install.php
 - Bootbox que dependa del idioma asignado (view/header.html y view/header.html)
 - Archivos de idioma en formato XX_YY para soportar idioma y país
 

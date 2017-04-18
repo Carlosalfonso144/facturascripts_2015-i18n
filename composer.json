@@ -1,0 +1,37 @@
+{
+    "name": "facturascripts-i18n",
+    "homepage": "https://www.facturascripts.com/",
+    "authors": [
+        {
+            "name": "Carlos García Gómez",
+            "email": "carlos@facturascripts.com"
+        },
+        {
+            "name": "FacturaScripts Contributors",
+            "homepage": "https://github.com/NeoRazorX/facturascripts_2015/graphs/contributors"
+        }
+    ],
+    "description": "MVC Framework, this version is a fork from original project to add multilingual support",
+    "type": "library",
+    "keywords": [
+		"framework",
+		"mvc",
+		"php",
+		"mysql",
+		"postgresql",
+		"multilingual",
+		"i18n"
+	],
+    "license": "MIT",
+    "require": {
+        "php": ">=5.3",
+    },
+    "minimum-stability": "master",
+    "ignore": [
+		"/.*",
+		"node_modules",
+		"bower_components",
+		"composer.json",
+		"documentation"
+	]
+}
