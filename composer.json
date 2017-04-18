@@ -30,7 +30,12 @@
     "require": {
         "php": ">=5.3"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
+    "stable": {
+        "branch-alias": {
+            "stable-master": "master"
+        }
+    }
     "ignore": [
 		"/.*",
 		"node_modules",
