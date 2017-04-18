@@ -36,6 +36,11 @@
             "stable-master": "master"
         }
     },
+    "dev": {
+        "branch-alias": {
+            "dev-master": "master"
+        }
+    },
     "ignore": [
 		"/.*",
 		"node_modules",
