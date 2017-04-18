@@ -28,7 +28,7 @@
 	],
     "license": "MIT",
     "require": {
-        "php": ">=5.3",
+        "php": ">=5.3"
     },
     "minimum-stability": "master",
     "ignore": [
