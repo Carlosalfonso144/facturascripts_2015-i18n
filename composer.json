@@ -9,7 +9,11 @@
         {
             "name": "FacturaScripts Contributors",
             "homepage": "https://github.com/NeoRazorX/facturascripts_2015/graphs/contributors"
-        }
+        },
+        {
+			"name": "Translators",
+			"homepage": "https://poeditor.com/join/project/UT9peHDgUA"
+		}
     ],
     "description": "MVC Framework, this version is a fork from original project to add multilingual support",
     "type": "library",
