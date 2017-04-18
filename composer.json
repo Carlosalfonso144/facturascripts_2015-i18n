@@ -26,11 +26,11 @@
 		"multilingual",
 		"i18n"
 	],
-    "license": "MIT",
+    "license": "LGPL",
     "require": {
         "php": ">=5.3"
     },
-    "minimum-stability": "master",
+    "minimum-stability": "dev",
     "ignore": [
 		"/.*",
 		"node_modules",
