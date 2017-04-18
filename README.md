@@ -15,4 +15,11 @@ TODO
 - Permitir escoger idioma desde admin_home y desde install.php
 - Bootbox que dependa del idioma asignado (view/header.html y view/header.html)
 - Archivos de idioma en formato XX_YY para soportar idioma y país
+- Seguir manteniendolo actualizado con la rama principal
 
+Composer
+=====
+
+Para descargar con composer:
+
+`composer require "facturascripts/facturascripts-i18n:dev-master"`
